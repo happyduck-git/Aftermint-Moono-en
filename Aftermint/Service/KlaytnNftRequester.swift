@@ -16,6 +16,7 @@ class KlaytnNftRequester {
     private static let TOKEN_PARAMS__KEY__SIZE = "size"
     private static let TOKEN_PARAMS__VALUE__SIZE_MAX = "1000"
     private static let CONTRACT_ADDRESS__BELLY_GOM = "0xce70eef5adac126c37c8bc0c1228d48b70066d03"
+    private static let CONTRACT_ADDRESS__MOONO = "0x29421a3c92075348fcbcb04de965e802ed187302"
     
     // MARK: Commons
     public static func requestSimple(
@@ -232,6 +233,110 @@ class KlaytnNftRequester {
             special: attributeMap[BellyGomNft.TraitType.special_string.rawValue] as! String,
             rank: attributeMap[BellyGomNft.TraitType.rank_int.rawValue] as! Int,
             grade: BellyGomNft.GradeType(rawValue: attributeMap[BellyGomNft.TraitType.grade_gradeType.rawValue] as! String)!
+        )
+    }
+    
+    // MARK: for asdf
+    public static func requestToGetMoonoNfts(
+        walletAddress: String,
+        nftsHandler: @escaping ([MoonoNft]) -> Void
+    ) -> Bool {
+        return requestToGetNfts(
+            contractAddress: KlaytnNftRequester.CONTRACT_ADDRESS__MOONO,
+            walletAddress: walletAddress
+        ) { nfts, error in
+            guard let rawNfts = nfts else {
+                LLog.w("rawNfts is nil : error: \(String(describing: error)).")
+                return
+            }
+            
+            requestToGetMoonoNfts(rawNfts: rawNfts) { moonoNfts in
+                return nftsHandler(moonoNfts)
+            }
+        }
+    }
+    
+    public static func requestToGetMoonoNfts(
+        rawNfts: KlaytnNfts,
+        nftsHandler: @escaping ([MoonoNft]) -> Void
+    ) {
+        var bellyGomNfts: [MoonoNft] = []
+        var taskCount = rawNfts.items.count
+        
+        let taskLock = NSRecursiveLock()
+        let dispatchQueue = DispatchQueue.global(qos: .utility)
+        
+        func discountTaskSafely() {
+            taskLock.lock()
+            taskCount -= 1
+            taskLock.unlock()
+        }
+        
+        rawNfts.items.forEach { rawItem in
+            let convertedTokenUri = rawItem.tokenUri.replace(target: "ipfs://", withString: "https://ipfs.io/ipfs/")
+            _ = requestSimple(urlToken: convertedTokenUri) { data, response, error in
+                dispatchQueue.async {
+                    guard processResponse(data: data, response: response, error: error),
+                          let data = data else {
+                        discountTaskSafely()
+                        LLog.w("Invalid result.")
+                        return
+                    }
+                    
+                    guard let metadata = convertTo(type: MoonoNftMetadata.self, data: data) else {
+                        discountTaskSafely()
+                        LLog.w("metadata is nil.")
+                        return
+                    }
+                    
+                    taskLock.lock()
+                    bellyGomNfts.append(createMoonoNft(rawNft: rawItem, metadata: metadata))
+                    discountTaskSafely()
+                    taskLock.unlock()
+                }
+            }
+        }
+        
+        while true {
+            taskLock.lock()
+            if taskCount == 0 {
+                break
+            }
+            taskLock.unlock()
+        }
+        
+        nftsHandler(bellyGomNfts)
+        taskLock.unlock()
+    }
+    
+    private static func createMoonoNft(rawNft: KlaytnNft, metadata: MoonoNftMetadata) -> MoonoNft {
+        return MoonoNft(
+            name: metadata.name,
+            description: metadata.description,
+            imageUrl: metadata.image,
+            tokenId: rawNft.tokenId,
+            updateAt: rawNft.updatedAt,
+            previousOwnerAddress: rawNft.previousOwner,
+            traits: createMoonoTraits(metadata: metadata)
+        )
+    }
+    
+    private static func createMoonoTraits(metadata: MoonoNftMetadata) -> MoonoNft.Traits {
+        var attributeMap: [String:Any] = [:]
+        attributeMap = metadata.attributes
+            .reduce(into: attributeMap) { result, attribute in
+                result[attribute.trait_type] = attribute.value
+            }
+        
+        // We expect a error with app-crash if wrong key-value exists.
+        return MoonoNft.Traits(
+            background: attributeMap[MoonoNft.TraitType.background_string.rawValue] as! String,
+            effect: attributeMap[MoonoNft.TraitType.effect_string.rawValue] as! String,
+            body: attributeMap[MoonoNft.TraitType.body_string.rawValue] as! String,
+            day: attributeMap[MoonoNft.TraitType.day_string.rawValue] as! String,
+            expression: attributeMap[MoonoNft.TraitType.expression_string.rawValue] as! String,
+            accessories: attributeMap[MoonoNft.TraitType.accessories_string.rawValue] as! String,
+            hair: attributeMap[MoonoNft.TraitType.hair_string.rawValue] as! String
         )
     }
 }

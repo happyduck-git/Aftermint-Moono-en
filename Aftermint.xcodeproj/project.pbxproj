@@ -361,6 +361,8 @@
 		3619B22F297912440051C387 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 3619B22E297912440051C387 /* RxRelay */; };
 		3619B2312979125D0051C387 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3619B2302979125D0051C387 /* SnapKit */; };
 		3619B233297920C50051C387 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3619B232297920C50051C387 /* GoogleService-Info.plist */; };
+		3620690629B88699008764BE /* MoonoNftMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3620690529B88699008764BE /* MoonoNftMetadata.swift */; };
+		3620690829B88789008764BE /* MoonoNft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3620690729B88789008764BE /* MoonoNft.swift */; };
 		3690783C297A6FEF0066530D /* HomeViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3690783B297A6FEF0066530D /* HomeViewController2.swift */; };
 		3690783E297A70050066530D /* HomeViewReactor2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3690783D297A70050066530D /* HomeViewReactor2.swift */; };
 		36907840297A70320066530D /* TemplateShareViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3690783F297A70320066530D /* TemplateShareViewController2.swift */; };
@@ -748,6 +750,8 @@
 		3619B0C429790AC50051C387 /* FilesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesManager.swift; sourceTree = "<group>"; };
 		3619B0C529790AC50051C387 /* ImageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRenderer.swift; sourceTree = "<group>"; };
 		3619B232297920C50051C387 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3620690529B88699008764BE /* MoonoNftMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonoNftMetadata.swift; sourceTree = "<group>"; };
+		3620690729B88789008764BE /* MoonoNft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonoNft.swift; sourceTree = "<group>"; };
 		3690783B297A6FEF0066530D /* HomeViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController2.swift; sourceTree = "<group>"; };
 		3690783D297A70050066530D /* HomeViewReactor2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewReactor2.swift; sourceTree = "<group>"; };
 		3690783F297A70320066530D /* TemplateShareViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateShareViewController2.swift; sourceTree = "<group>"; };
@@ -2178,6 +2182,8 @@
 				24DDC999298175A2007A3F63 /* UtilityModel.swift */,
 				24097B2C298FC61100F92366 /* BellygomEventModel.swift */,
 				24097B33298FD99700F92366 /* BellygomUtilityModel.swift */,
+				3620690529B88699008764BE /* MoonoNftMetadata.swift */,
+				3620690729B88789008764BE /* MoonoNft.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2441,6 +2447,7 @@
 				3619B1F929790AC60051C387 /* TemplateCreateViewReactor.swift in Sources */,
 				3619B11729790AC60051C387 /* ExportButtonView.swift in Sources */,
 				3619B15D29790AC60051C387 /* ImageLayer.swift in Sources */,
+				3620690629B88699008764BE /* MoonoNftMetadata.swift in Sources */,
 				24097B80299154E200F92366 /* UtilityClaimBottomSheet.swift in Sources */,
 				36A8CEE72983B5FC007BF65A /* KlaytnRawNft.swift in Sources */,
 				93A4B7FD2990CB8F00146FD8 /* EventCell.swift in Sources */,
@@ -2470,6 +2477,7 @@
 				93A4B8142990EAD700146FD8 /* UIScrollViewSuperTaps.swift in Sources */,
 				3619B1C629790AC60051C387 /* Bundle.swift in Sources */,
 				3619B15529790AC60051C387 /* SizeValueProvider.swift in Sources */,
+				3620690829B88789008764BE /* MoonoNft.swift in Sources */,
 				3619B0DB29790AC50051C387 /* MediaType.swift in Sources */,
 				24097B7929913C2E00F92366 /* MarketDetailViewController.swift in Sources */,
 				24097B22298D515E00F92366 /* MarketViewReactor.swift in Sources */,
