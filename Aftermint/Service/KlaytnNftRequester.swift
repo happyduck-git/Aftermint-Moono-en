@@ -236,7 +236,7 @@ class KlaytnNftRequester {
         )
     }
     
-    // MARK: for asdf
+    // MARK: for Moono
     public static func requestToGetMoonoNfts(
         walletAddress: String,
         nftsHandler: @escaping ([MoonoNft]) -> Void
@@ -260,7 +260,7 @@ class KlaytnNftRequester {
         rawNfts: KlaytnNfts,
         nftsHandler: @escaping ([MoonoNft]) -> Void
     ) {
-        var bellyGomNfts: [MoonoNft] = []
+        var moonoNfts: [MoonoNft] = []
         var taskCount = rawNfts.items.count
         
         let taskLock = NSRecursiveLock()
@@ -273,6 +273,11 @@ class KlaytnNftRequester {
         }
         
         rawNfts.items.forEach { rawItem in
+            if (rawItem.tokenUri.isEmpty) {
+                discountTaskSafely()
+                return
+            }
+            
             let convertedTokenUri = rawItem.tokenUri.replace(target: "ipfs://", withString: "https://ipfs.io/ipfs/")
             _ = requestSimple(urlToken: convertedTokenUri) { data, response, error in
                 dispatchQueue.async {
@@ -290,7 +295,7 @@ class KlaytnNftRequester {
                     }
                     
                     taskLock.lock()
-                    bellyGomNfts.append(createMoonoNft(rawNft: rawItem, metadata: metadata))
+                    moonoNfts.append(createMoonoNft(rawNft: rawItem, metadata: metadata))
                     discountTaskSafely()
                     taskLock.unlock()
                 }
@@ -305,7 +310,7 @@ class KlaytnNftRequester {
             taskLock.unlock()
         }
         
-        nftsHandler(bellyGomNfts)
+        nftsHandler(moonoNfts)
         taskLock.unlock()
     }
     

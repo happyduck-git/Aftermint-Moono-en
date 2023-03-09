@@ -51,8 +51,6 @@ class KlaytnHomeViewController: UIViewController {
         print("KHVC will appear")
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {
