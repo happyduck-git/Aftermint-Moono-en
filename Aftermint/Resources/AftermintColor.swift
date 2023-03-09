@@ -9,8 +9,25 @@ import UIKit
 
 struct AftermintColor {
     
+    /* Moono Color */
+    static let backgroundNavy: UIColor = UIColor(hex: 0x131C36)
+    static let tabBarNavy: UIColor = UIColor(hex: 0x212A45)
+    static let buttonNavy: UIColor = UIColor(hex: 0x242D50)
+
+    static let backgroundBlue: UIColor = UIColor(hex: 0x002040)
+    static let backgroundLightBlue: UIColor = UIColor(red: 29, green: 76, blue: 146)
+    static let titleBlue: UIColor = UIColor(hex: 0x6387FE)
+    static let moonoBlue: UIColor = UIColor(hex: 0x69DCFE)
+    
+    
+    static let moonoYellow: UIColor = UIColor(hex: 0xFFEC6D)
+    
+    static let moonoGrey: UIColor = UIColor(hex: 0x444E67)
+    static let titleGrey: UIColor = UIColor(hex: 0xB3B3B3)
+    
+    
+    /* BellyGom Color (Will be removed) */
     static let backgroundPink: UIColor = UIColor(hex: 0xFFE3EA)
-    static let backgroundBlue: UIColor = UIColor(hex: 0xD1F5FE)
     
     static let bellyPink: UIColor = UIColor(hex: 0xFF5F98)
     static let lightPink: UIColor = UIColor(hex: 0xFFA1B8)

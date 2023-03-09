@@ -22,7 +22,7 @@ class VoteCell: UICollectionViewCell {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        contentView.backgroundColor = AftermintColor.backgroundNavy
         setUI()
         setLayout()
     }

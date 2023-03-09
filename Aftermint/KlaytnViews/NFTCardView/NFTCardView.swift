@@ -39,7 +39,7 @@ class NFTCardView: UIView {
         let label = UILabel()
         label.text = "3"
         label.font = BellyGomFont.header03
-        label.textColor = AftermintColor.lightPink
+        label.textColor = AftermintColor.moonoBlue
         return label
     }()
     
@@ -47,7 +47,7 @@ class NFTCardView: UIView {
         let label = UILabel()
         label.text = "개의 벨리곰 NFT"
         label.font = BellyGomFont.header06
-        label.textColor = AftermintColor.bellyTitleGrey
+        label.textColor = .white
         return label
     }()
     
@@ -60,7 +60,7 @@ class NFTCardView: UIView {
         collectionView.accessibilityIdentifier = "nftCollectionView"
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = AftermintColor.backgroundNavy
         collectionView.alpha = 0.0
         return collectionView
         
@@ -223,7 +223,7 @@ extension NFTCardView: UICollectionViewDataSource, UICollectionViewDelegate, UIC
     private func makeCellRadius(of cell: UICollectionViewCell) {
         cell.layer.cornerRadius = 20.0
         cell.layer.borderWidth = 1.0
-        cell.layer.borderColor = UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1).cgColor
+        cell.layer.borderColor = UIColor(ciColor: .black).cgColor
     }
     
     private func makeCellShadow(of cell: UICollectionViewCell) {

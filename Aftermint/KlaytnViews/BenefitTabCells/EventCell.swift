@@ -28,7 +28,7 @@ class EventCell: UICollectionViewCell {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        contentView.backgroundColor = AftermintColor.backgroundNavy
         setUI()
         setLayout()
     }

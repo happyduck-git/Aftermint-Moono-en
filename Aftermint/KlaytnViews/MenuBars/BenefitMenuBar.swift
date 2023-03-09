@@ -30,25 +30,17 @@ class BenefitMenuBar: UIView {
         let button = UIButton()
         button.setTitle("이벤트", for: .normal)
         //font 설정하기
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(eventButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    private lazy var utilityButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("유틸리티", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(utilityButtonTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
     
     private lazy var voteButton: UIButton = {
         let button = UIButton()
         button.setTitle("투표", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(voteButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -56,12 +48,12 @@ class BenefitMenuBar: UIView {
     
     private let indicator: UILabel = {
         let label = UILabel()
-        label.backgroundColor = AftermintColor.bellyPink
+        label.backgroundColor = AftermintColor.moonoYellow
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private lazy var buttons: [UIButton] = [eventButton, utilityButton, voteButton]
+    private lazy var buttons: [UIButton] = [eventButton, voteButton]
     //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -83,7 +75,6 @@ class BenefitMenuBar: UIView {
     private func setUI() {
         self.addSubview(buttonStack)
         buttonStack.addArrangedSubview(eventButton)
-        buttonStack.addArrangedSubview(utilityButton)
         buttonStack.addArrangedSubview(voteButton)
         self.addSubview(indicator)
     }
@@ -110,12 +101,8 @@ class BenefitMenuBar: UIView {
         delegate?.didSelectItemAt(index: 0)
     }
     
-    @objc private func utilityButtonTapped() {
-        delegate?.didSelectItemAt(index: 1)
-    }
-    
     @objc private func voteButtonTapped() {
-        delegate?.didSelectItemAt(index: 2)
+        delegate?.didSelectItemAt(index: 1)
     }
     
 }
@@ -132,8 +119,6 @@ extension BenefitMenuBar {
         case 0:
             button = eventButton
         case 1:
-            button = utilityButton
-        case 2:
             button = voteButton
         default:
             button = eventButton
@@ -148,7 +133,6 @@ extension BenefitMenuBar {
     
     private func setAlpha(for button: UIButton) {
         eventButton.alpha = 0.5
-        utilityButton.alpha = 0.5
         voteButton.alpha = 0.5
         button.alpha = 1.0
     }

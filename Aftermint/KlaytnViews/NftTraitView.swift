@@ -72,7 +72,7 @@ class NftTraitView: UIView {
         let label = UILabel()
         label.text = "6"
         label.font = BellyGomFont.header05
-        label.textColor = AftermintColor.bellyPink
+        label.textColor = AftermintColor.moonoBlue
         return label
     }()
     
@@ -118,7 +118,7 @@ class NftTraitView: UIView {
         let label = UILabel()
         label.text = "D+ 291"
         label.font = BellyGomFont.header05
-        label.textColor = AftermintColor.bellyGreen
+        label.textColor = AftermintColor.titleBlue
         return label
     }()
     

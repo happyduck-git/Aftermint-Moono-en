@@ -53,7 +53,6 @@ class BookmarkViewController: UIViewController {
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         
         setUI()
         setLayout()
@@ -119,6 +118,7 @@ class BookmarkViewController: UIViewController {
         let leftBar = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backToPreviousVC))
         self.parent?.tabBarController?.navigationItem.leftBarButtonItem = leftBar
         self.parent?.tabBarController?.navigationItem.title = "북마크"
+        self.parent?.tabBarController?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(ciColor: .white)]
         
         /* Right bar item */
         self.parent?.tabBarController?.navigationItem.rightBarButtonItems = nil

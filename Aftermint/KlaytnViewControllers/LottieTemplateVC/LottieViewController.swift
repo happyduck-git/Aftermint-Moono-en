@@ -44,7 +44,7 @@ class LottieViewController: UIViewController, View {
         let view = UIView()
         view.layer.cornerRadius = 20
         view.layer.masksToBounds = true
-        view.backgroundColor = AftermintColor.bellyPink
+        view.backgroundColor = .secondaryLabel
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -52,7 +52,7 @@ class LottieViewController: UIViewController, View {
     private var previewAnimationView: AnimationView = {
         var view = AnimationView()
         view.layer.masksToBounds = true
-        view.backgroundColor = AftermintColor.bellyPink
+        view.backgroundColor = .secondaryLabel
         view.layer.cornerRadius = 20
         view.translatesAutoresizingMaskIntoConstraints = false
         view.loopMode = .loop
@@ -63,29 +63,29 @@ class LottieViewController: UIViewController, View {
     
     private let horizontalLine1: UIView = {
         let view = UIView()
-        view.backgroundColor = AftermintColor.backgroundGrey
+        view.backgroundColor = AftermintColor.moonoGrey
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    lazy var descriptionLabel: GradientLabel = {
+    lazy var descriptionLabel: UILabel = {
         
-        let label = GradientLabel()
+        let label = UILabel()
         label.textAlignment = .center
         label.font = BellyGomFont.header05
         label.numberOfLines = 0
         label.text = """
-                    불타는고구마 님의 NFT를 가장 중요한 정보와 함께 자랑하세요!
+                    월요병아리님의 NFT를 가장 중요한 정보와 함께 자랑하세요!
                     모두가 주목할 거에요. 🗝️
                     """
-
+        label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     private let horizontalLine2: UIView = {
         let view = UIView()
-        view.backgroundColor = AftermintColor.backgroundGrey
+        view.backgroundColor = AftermintColor.moonoGrey
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -120,7 +120,7 @@ class LottieViewController: UIViewController, View {
         collection.showsHorizontalScrollIndicator = false
         collection.register(LottieTemplateCell.self, forCellWithReuseIdentifier: LottieTemplateCell.identifier)
         collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.backgroundColor = .white
+        collection.backgroundColor = AftermintColor.backgroundNavy
         return collection
     }()
 
@@ -140,7 +140,7 @@ class LottieViewController: UIViewController, View {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = AftermintColor.backgroundNavy
         
         templateCollectionView.delegate = self
         templateCollectionView.dataSource = self

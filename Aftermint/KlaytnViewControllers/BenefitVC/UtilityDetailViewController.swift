@@ -27,7 +27,7 @@ class UtilityDetailViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = AftermintColor.backgroundNavy
         setUI()
         setLayout()
         
@@ -45,7 +45,6 @@ class UtilityDetailViewController: UIViewController {
     
     // MARK: - Set UI & Layout
     private func setUI() {
-        view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubview(wholeImageView)
     }
