@@ -40,6 +40,7 @@ class CalendarViewController: UIViewController {
     private lazy var calendar: FSCalendar = {
         let calendar = FSCalendar()
         calendar.scope = .week
+        // TODO: Calendar color traits
         calendar.backgroundColor = AftermintColor.lightBackgroundGrey
         calendar.appearance.headerTitleColor = AftermintColor.bellyTitleGrey
         calendar.appearance.weekdayTextColor = AftermintColor.lightGrey
@@ -122,8 +123,7 @@ class CalendarViewController: UIViewController {
     
     // MARK: - Set up UI & Layout
     private func setUI() {
-        view.backgroundColor = AftermintColor.lightBackgroundGrey
-        
+        view.backgroundColor = AftermintColor.backgroundNavy
         view.addSubview(scrollView)
         scrollView.addSubview(calendar)
         scrollView.addSubview(toggleButton)
