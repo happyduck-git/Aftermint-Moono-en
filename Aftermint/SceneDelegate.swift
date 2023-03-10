@@ -39,17 +39,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             var rootNaviVC: UINavigationController?
             
             /* Temp Comment: LogincVC */
-//            if token == nil {
-//                let reactor: LoginViewReactor = LoginViewReactor()
-//                let loginVC = LoginViewController(reactor: reactor)
-//                rootNaviVC = UINavigationController(rootViewController: loginVC)
-//            } else {
-//                let homeVC = KlaytnTabViewController()
-//                rootNaviVC = UINavigationController(rootViewController: homeVC)
-//            }
+            if token == nil {
+                let reactor: LoginViewReactor = LoginViewReactor()
+                let loginVC = LoginViewController(reactor: reactor)
+                rootNaviVC = UINavigationController(rootViewController: loginVC)
+            } else {
+                let homeVC = KlaytnTabViewController()
+                rootNaviVC = UINavigationController(rootViewController: homeVC)
+            }
             
             /* Temp: StartVC */
-            rootNaviVC = UINavigationController(rootViewController: KlaytnTabViewController())
+//            rootNaviVC = UINavigationController(rootViewController: KlaytnTabViewController())
            
             
 //            rootNaviVC?.setNavigationBarHidden(true, animated: false)
