@@ -274,8 +274,9 @@ class KlaytnNftRequester {
         
         rawNfts.items.forEach { rawItem in
             
-            guard let tokenUri = rawItem.tokenUri else {
-                print("Token uri found to be nil")
+            guard let tokenUri = rawItem.tokenUri, !tokenUri.isEmpty else {
+                discountTaskSafely()
+                LLog.w("Token uri found to be nil")
                 return
             }
             
