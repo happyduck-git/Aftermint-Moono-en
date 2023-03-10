@@ -45,7 +45,7 @@ class NFTCardView: UIView {
     
     private let numbersOfNftDescription: UILabel = {
         let label = UILabel()
-        label.text = "개의 벨리곰 NFT"
+        label.text = "개의 무너 NFT"
         label.font = BellyGomFont.header06
         label.textColor = .white
         return label
@@ -75,7 +75,7 @@ class NFTCardView: UIView {
         setDelegate()
         
         bind()
-        fetchBellyGomNft()
+        fetchMoonoNft()
     }
     
     required init?(coder: NSCoder) {
@@ -120,11 +120,12 @@ class NFTCardView: UIView {
 extension NFTCardView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
       
-        guard let numberOfNfts = viewModel.bellyGomNfts.value?.count else { return 0 }
-        
+        guard let numberOfNfts = viewModel.moonoNfts.value?.count else { return 0 }
         
         self.numbersOfNft.text = String(numberOfNfts)
         nftSelected = Array(repeating: false, count: numberOfNfts)
+        
+        print("numberofNfts: \(numberOfNfts)")
         
         return numberOfNfts
 
@@ -133,7 +134,7 @@ extension NFTCardView: UICollectionViewDataSource, UICollectionViewDelegate, UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         
-        guard let nft = viewModel.bellyGomNfts.value?[indexPath.row] else {
+        guard let nft = viewModel.moonoNfts.value?[indexPath.row] else {
             fatalError("No nft value found")
         }
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NftCardCell.identifier, for: indexPath) as? NftCardCell else {
@@ -149,7 +150,6 @@ extension NFTCardView: UICollectionViewDataSource, UICollectionViewDelegate, UIC
         cell.delegate = self
         
         cell.backgroundColor = .white
-        
         makeCellRadius(of: cell)
         makeCellShadow(of: cell)
         
@@ -170,20 +170,16 @@ extension NFTCardView: UICollectionViewDataSource, UICollectionViewDelegate, UIC
                 self.nftCollectionView.alpha = 1.0
             }
             
-            cell.configure(
-                backgroundDesc: nft.traits.background,
-                bodyDesc: nft.traits.body,
-                clothesDesc: nft.traits.clothes,
-                headDesc: nft.traits.head,
-                accDesc: nft.traits.acc,
-                specialDesc: nft.traits.special,
-                
-                name: nft.name,
-                rank: nft.traits.rank,
-                score: nft.score,
-                updatedAt: nft.updateAt,
-                grade: nft.traits.grade
-            )
+            cell.configure(accDesc: nft.traits.accessories,
+                           backgroundDesc: nft.traits.background,
+                           bodyDesc: nft.traits.body,
+                           dayDesc: nft.traits.day,
+                           effectDesc: nft.traits.effect,
+                           expressionDesc: nft.traits.expression,
+                           hairDesc: nft.traits.hair,
+                           name: nft.name,
+                           updatedAt: nft.updateAt
+                           )
             
         }
         
@@ -245,19 +241,20 @@ extension NFTCardView: UICollectionViewDataSource, UICollectionViewDelegate, UIC
 extension NFTCardView {
     
     private func bind() {
-        viewModel.bellyGomNfts.bind { [weak self] _ in
+        viewModel.moonoNfts.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.nftCollectionView.reloadData()
             }
         }
     }
     
-    private func fetchBellyGomNft() {
+    private func fetchMoonoNft() {
         let tempAddress: String = K.Wallet.temporaryAddress
         self.viewModel.getNfts(of: tempAddress) { nfts in
-            self.viewModel.bellyGomNfts.value = nfts
+            self.viewModel.moonoNfts.value = nfts
         }
     }
+    
 }
 
 //MARK: - NftCardCellDelegate

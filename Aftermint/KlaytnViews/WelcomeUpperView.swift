@@ -139,8 +139,6 @@ class WelcomeUpperView: UIView {
             
             walletConnectStackView.topAnchor.constraint(equalTo: welcomeStackView.bottomAnchor, constant: 8.0),
             walletConnectStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            walletConnectStackView.widthAnchor.constraint(equalToConstant: 132.0),
-//            walletConnectStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -199.0),
             walletConnectStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
         

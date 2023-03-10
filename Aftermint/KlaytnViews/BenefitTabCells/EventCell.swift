@@ -12,7 +12,8 @@ class EventCell: UICollectionViewCell {
     // MARK: - UI Elements
     private let scrollView: UIScrollViewSuperTaps = {
         let scrollView = UIScrollViewSuperTaps()
-        scrollView.showsVerticalScrollIndicator = false
+        scrollView.contentInset = UIEdgeInsets(top: 40.0, left: 0, bottom: 30.0, right: 0)
+        scrollView.showsVerticalScrollIndicator = true
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
@@ -20,7 +21,7 @@ class EventCell: UICollectionViewCell {
     private lazy var wholeImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "benefit_event")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()

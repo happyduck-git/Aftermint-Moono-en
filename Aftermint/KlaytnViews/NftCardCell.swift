@@ -86,8 +86,8 @@ class NftCardCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             
             cardBackView.topAnchor.constraint(equalTo: self.topAnchor),
-            cardBackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
-            cardBackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),
+            cardBackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            cardBackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             cardBackView.heightAnchor.constraint(equalToConstant: self.frame.size.width),
             
             cardFrontView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -97,7 +97,8 @@ class NftCardCell: UICollectionViewCell {
             
             traitView.topAnchor.constraint(equalTo: cardBackView.bottomAnchor, constant: 10),
             traitView.topAnchor.constraint(equalTo: cardFrontView.bottomAnchor, constant: 10),
-            traitView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            traitView.leadingAnchor.constraint(equalToSystemSpacingAfter: cardBackView.leadingAnchor, multiplier: 2),
+            cardBackView.trailingAnchor.constraint(equalToSystemSpacingAfter: traitView.trailingAnchor, multiplier: 2),
             traitView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20)
             
         ])
@@ -105,31 +106,30 @@ class NftCardCell: UICollectionViewCell {
     }
     
     //MARK: - Configuration
-    public func configure(backgroundDesc: String,
+    public func configure(accDesc: String,
+                          backgroundDesc: String,
                           bodyDesc: String,
-                          clothesDesc: String,
-                          headDesc: String,
-                          accDesc: String,
-                          specialDesc: String,
+                          dayDesc: String,
+                          effectDesc: String,
+                          expressionDesc: String,
+                          hairDesc: String,
                           
                           name: String,
-                          rank: Int,
-                          score: Int,
-                          updatedAt: Int64,
-                          grade: BellyGomNft.GradeType
+                          updatedAt: Int64
+                         
     ) {
-        self.cardBackView.propertyView.configure(backgroundDesc: backgroundDesc,
-                                    bodyDesc: bodyDesc,
-                                    clothesDesc: clothesDesc,
-                                    headDesc: headDesc,
-                                    accDesc: accDesc,
-                                    specialDesc: specialDesc)
+        self.cardBackView.propertyView.configure(accDesc: accDesc,
+                                                 backgroundDesc: backgroundDesc,
+                                                 bodyDesc: bodyDesc,
+                                                 dayDesc: dayDesc,
+                                                 effectDesc: effectDesc,
+                                                 expressionDesc: expressionDesc,
+                                                 hairDesc: hairDesc)
+        
         
         self.traitView.configure(name: name,
-                                 rank: rank,
-                                 score: score,
-                                 updatedAt: updatedAt,
-                                 grade: grade)
+                                 updatedAt: updatedAt
+                              )
     }
     
     internal func configureImage(image: UIImage) {
@@ -143,8 +143,15 @@ class NftCardCell: UICollectionViewCell {
     }
     
     internal func resetCell() {
-        self.cardBackView.propertyView.configure(backgroundDesc: nil, bodyDesc: nil, clothesDesc: nil, headDesc: nil, accDesc: nil, specialDesc: nil)
-        self.traitView.configure(name: nil, rank: nil, score: nil, updatedAt: nil, grade: nil)
+        self.cardBackView.propertyView.configure(accDesc: nil,
+                                                 backgroundDesc: nil,
+                                                 bodyDesc: nil,
+                                                 dayDesc: nil,
+                                                 effectDesc: nil,
+                                                 expressionDesc: nil,
+                                                 hairDesc: nil)
+        self.traitView.configure(name: nil,
+                                 updatedAt: nil)
         self.traitView.cardButton.imageView?.image = UIImage(named: "front_deco_button")
         self.cardFrontView.image = nil
         

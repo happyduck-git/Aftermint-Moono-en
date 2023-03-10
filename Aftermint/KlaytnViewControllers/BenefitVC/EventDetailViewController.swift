@@ -13,6 +13,7 @@ class EventDetailViewController: UIViewController {
     // MARK: - UI Elements
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()

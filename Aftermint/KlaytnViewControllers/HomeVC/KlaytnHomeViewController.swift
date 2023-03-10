@@ -26,7 +26,7 @@ class KlaytnHomeViewController: UIViewController {
     
     private let collectNewNFTButton: CollectNewNFTButton = {
         let button = CollectNewNFTButton()
-        button.backgroundColor = AftermintColor.buttonNavy
+        button.backgroundColor = AftermintColor.secondaryBackgroundNavy
         button.layer.cornerRadius = 8
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

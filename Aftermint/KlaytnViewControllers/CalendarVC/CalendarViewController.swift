@@ -22,7 +22,8 @@ class CalendarViewController: UIViewController {
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.showsVerticalScrollIndicator = false
+        scrollView.backgroundColor = AftermintColor.backgroundNavy
+        scrollView.showsVerticalScrollIndicator = true
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
@@ -40,10 +41,12 @@ class CalendarViewController: UIViewController {
     private lazy var calendar: FSCalendar = {
         let calendar = FSCalendar()
         calendar.scope = .week
-        calendar.backgroundColor = AftermintColor.lightBackgroundGrey
-        calendar.appearance.headerTitleColor = AftermintColor.bellyTitleGrey
+        calendar.backgroundColor = AftermintColor.backgroundNavy
+        calendar.appearance.headerTitleColor = .white
         calendar.appearance.weekdayTextColor = AftermintColor.lightGrey
-        calendar.appearance.todayColor = AftermintColor.bellyPink
+        calendar.appearance.todayColor = AftermintColor.titleBlue
+        calendar.appearance.weekdayTextColor = .white
+        calendar.appearance.titleDefaultColor = AftermintColor.lightGrey
         calendar.appearance.headerMinimumDissolvedAlpha = 0.0
         calendar.appearance.headerDateFormat = "YYYY.M"
         calendar.appearance.headerTitleFont = .systemFont(ofSize: 14, weight: .heavy)
@@ -122,8 +125,6 @@ class CalendarViewController: UIViewController {
     
     // MARK: - Set up UI & Layout
     private func setUI() {
-        view.backgroundColor = AftermintColor.lightBackgroundGrey
-        
         view.addSubview(scrollView)
         scrollView.addSubview(calendar)
         scrollView.addSubview(toggleButton)
@@ -171,6 +172,7 @@ class CalendarViewController: UIViewController {
         leftBar.customView?.isUserInteractionEnabled = true
         self.parent?.tabBarController?.navigationItem.leftBarButtonItem = leftBar
         self.parent?.tabBarController?.navigationItem.title = "캘린더"
+        self.parent?.tabBarController?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(ciColor: .white)]
         
         /* Right bar item */
         self.parent?.tabBarController?.navigationItem.rightBarButtonItems = nil
@@ -184,11 +186,15 @@ class CalendarViewController: UIViewController {
     
     
     private func tapToEventVC() {
+        
+        // Temporarily deactivated
+        /*
         let eventDetailVC: EventDetailViewController = EventDetailViewController()
         let pulleyVC = PulleyViewController(contentViewController: eventDetailVC, drawerViewController: bottomSheetVC)
         
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.pushViewController(pulleyVC, animated: true)
+         */
     }
     
     private func tapToUtilityVC() {
@@ -285,7 +291,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
     }
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillSelectionColorFor date: Date) -> UIColor? {
-        return AftermintColor.bellyPink
+        return AftermintColor.titleBlue
     }
     
     

@@ -11,7 +11,7 @@ struct K {
     
     /* Wallet related data */
     struct Wallet {
-        static let temporaryAddress = "0xBEeBb41496BE8385291886928725d1c2bD9aBA42"
+        static let temporaryAddress = "0x6a5fe8B4718bC147ba13BD8Dfb31eC6097bfabcB"
     }
 
 }

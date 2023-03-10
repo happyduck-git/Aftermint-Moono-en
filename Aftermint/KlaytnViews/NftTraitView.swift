@@ -53,52 +53,6 @@ class NftTraitView: UIView {
     }()
     
     //nft traits
-    private let rankingStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    private let rankingLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Ranking"
-        label.font = BellyGomFont.header06
-        label.textColor = AftermintColor.traitGrey
-        return label
-    }()
-    
-    private let rankingNumLabel: UILabel = {
-        let label = UILabel()
-        label.text = "6"
-        label.font = BellyGomFont.header05
-        label.textColor = AftermintColor.moonoBlue
-        return label
-    }()
-    
-    private let scoreStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    private let scoreLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Score"
-        label.font = BellyGomFont.header06
-        label.textColor = AftermintColor.traitGrey
-        return label
-    }()
-    
-    private let scoreNumLabel: UILabel = {
-        let label = UILabel()
-        label.text = "2594"
-        label.font = BellyGomFont.header05
-        label.textColor = AftermintColor.bellyBlue
-        return label
-    }()
-    
     private let withMeStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -123,13 +77,6 @@ class NftTraitView: UIView {
     }()
     
     private let verticalLine1: UIView = {
-        let view = UIView()
-        view.backgroundColor = AftermintColor.backgroundGrey
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private let verticalLine2: UIView = {
         let view = UIView()
         view.backgroundColor = AftermintColor.backgroundGrey
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -163,21 +110,11 @@ class NftTraitView: UIView {
         nameAndLevelStack.addArrangedSubview(levelImageView)
         nameAndLevelStack.addArrangedSubview(nftName)
 
-        self.addSubview(rankingStackView)
-        rankingStackView.addArrangedSubview(rankingLabel)
-        rankingStackView.addArrangedSubview(rankingNumLabel)
-
-        self.addSubview(verticalLine1)
-
-        self.addSubview(scoreStackView)
-        scoreStackView.addArrangedSubview(scoreLabel)
-        scoreStackView.addArrangedSubview(scoreNumLabel)
-
-        self.addSubview(verticalLine2)
-
         self.addSubview(withMeStackView)
         withMeStackView.addArrangedSubview(withMeLabel)
         withMeStackView.addArrangedSubview(withMeNumLabel)
+        
+        self.addSubview(verticalLine1)
         
     }
     
@@ -193,36 +130,20 @@ class NftTraitView: UIView {
             cardButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             cardButton.bottomAnchor.constraint(equalTo: nameAndLevelStack.bottomAnchor),
 
-            rankingStackView.topAnchor.constraint(equalTo: nameAndLevelStack.bottomAnchor, constant: 15),
-            rankingStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            rankingStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-
+            withMeStackView.topAnchor.constraint(equalTo: nameAndLevelStack.bottomAnchor, constant: 15),
+            withMeStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            withMeStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            
             verticalLine1.topAnchor.constraint(equalTo: nameAndLevelStack.bottomAnchor, constant: 23),
             verticalLine1.widthAnchor.constraint(equalToConstant: 1),
-            verticalLine1.leadingAnchor.constraint(equalTo: rankingStackView.trailingAnchor, constant: 11.5),
+            verticalLine1.leadingAnchor.constraint(equalTo: withMeStackView.trailingAnchor, constant: 11.5),
             verticalLine1.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),
 
-            scoreStackView.topAnchor.constraint(equalTo: rankingStackView.topAnchor),
-            scoreStackView.leadingAnchor.constraint(equalTo: verticalLine1.trailingAnchor, constant: 11.5),
-            scoreStackView.bottomAnchor.constraint(equalTo: rankingStackView.bottomAnchor),
-
-            verticalLine2.topAnchor.constraint(equalTo: verticalLine1.topAnchor),
-            verticalLine2.widthAnchor.constraint(equalToConstant: 1),
-            verticalLine2.leadingAnchor.constraint(equalTo: scoreStackView.trailingAnchor, constant: 11.5),
-            verticalLine2.bottomAnchor.constraint(equalTo: verticalLine1.bottomAnchor),
-
-            withMeStackView.topAnchor.constraint(equalTo: rankingStackView.topAnchor),
-            withMeStackView.leadingAnchor.constraint(equalTo: verticalLine2.trailingAnchor, constant: 11.5),
-            withMeStackView.bottomAnchor.constraint(equalTo: rankingStackView.bottomAnchor),
-            withMeStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
         
-        rankingLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
-        scoreLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
         withMeLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
         
         verticalLine1.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        verticalLine2.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
     }
     
@@ -231,17 +152,12 @@ class NftTraitView: UIView {
     }
     
     public func configure(name: String?,
-                          rank: Int?,
-                          score: Int?,
-                          updatedAt: Int64?,
-                          grade: BellyGomNft.GradeType?) {
+                          updatedAt: Int64?
+                       ) {
         
         self.nftName.text = name ?? "N/A"
-        self.rankingNumLabel.text = String(rank ?? 0)
-        self.scoreNumLabel.text = String(score ?? 0)
         self.withMeNumLabel.text = "D+ " + String(calculateNumberOfDays(since: updatedAt ?? 0))
-        guard let grade = grade else { return }
-        self.levelImageView.image = UIImage(named: grade.rawValue) ?? UIImage(named: "level_belly")    
+        self.levelImageView.image = UIImage(named: "level_image")
         
     }
     

@@ -46,6 +46,7 @@ class KlaytnTabViewController: UITabBarController, UITabBarControllerDelegate {
         marketVC.tabBarItem.selectedImage = UIImage(named: "market_on")?.withRenderingMode(.alwaysOriginal)
 
         let gameVC = GameViewController()
+        
         gameVC.tabBarItem.image = UIImage(named: "game_off")?.withRenderingMode(.alwaysOriginal)
         gameVC.tabBarItem.selectedImage = UIImage(named: "game_on")?.withRenderingMode(.alwaysOriginal)
         
@@ -73,8 +74,8 @@ class KlaytnTabViewController: UITabBarController, UITabBarControllerDelegate {
         
     private func setUpTabBarShadow() {
         tabBar.layer.masksToBounds = false
-        tabBar.layer.shadowColor = UIColor.black.cgColor
-        tabBar.layer.shadowOpacity = 0.2
+        tabBar.layer.shadowColor = UIColor.white.cgColor
+        tabBar.layer.shadowOpacity = 0.1
         tabBar.layer.shadowOffset = CGSize(width: 0, height: -3)
         tabBar.layer.shadowRadius = 16
     }

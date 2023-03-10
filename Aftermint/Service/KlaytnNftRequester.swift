@@ -168,7 +168,7 @@ class KlaytnNftRequester {
         }
         
         rawNfts.items.forEach { rawItem in
-            _ = requestSimple(urlToken: rawItem.tokenUri) { data, response, error in
+            _ = requestSimple(urlToken: rawItem.tokenUri ?? "N/A") { data, response, error in
                 dispatchQueue.async {
                     guard processResponse(data: data, response: response, error: error),
                           let data = data else {
@@ -236,7 +236,7 @@ class KlaytnNftRequester {
         )
     }
     
-    // MARK: for asdf
+    // MARK: - for Moono
     public static func requestToGetMoonoNfts(
         walletAddress: String,
         nftsHandler: @escaping ([MoonoNft]) -> Void
@@ -260,7 +260,7 @@ class KlaytnNftRequester {
         rawNfts: KlaytnNfts,
         nftsHandler: @escaping ([MoonoNft]) -> Void
     ) {
-        var bellyGomNfts: [MoonoNft] = []
+        var moonoNfts: [MoonoNft] = []
         var taskCount = rawNfts.items.count
         
         let taskLock = NSRecursiveLock()
@@ -273,7 +273,14 @@ class KlaytnNftRequester {
         }
         
         rawNfts.items.forEach { rawItem in
-            let convertedTokenUri = rawItem.tokenUri.replace(target: "ipfs://", withString: "https://ipfs.io/ipfs/")
+            
+            guard let tokenUri = rawItem.tokenUri else {
+                print("Token uri found to be nil")
+                return
+            }
+            
+            let convertedTokenUri = tokenUri.replace(target: "ipfs://", withString: "https://ipfs.io/ipfs/")
+        
             _ = requestSimple(urlToken: convertedTokenUri) { data, response, error in
                 dispatchQueue.async {
                     guard processResponse(data: data, response: response, error: error),
@@ -290,7 +297,7 @@ class KlaytnNftRequester {
                     }
                     
                     taskLock.lock()
-                    bellyGomNfts.append(createMoonoNft(rawNft: rawItem, metadata: metadata))
+                    moonoNfts.append(createMoonoNft(rawNft: rawItem, metadata: metadata))
                     discountTaskSafely()
                     taskLock.unlock()
                 }
@@ -305,15 +312,24 @@ class KlaytnNftRequester {
             taskLock.unlock()
         }
         
-        nftsHandler(bellyGomNfts)
+        nftsHandler(moonoNfts)
         taskLock.unlock()
     }
     
     private static func createMoonoNft(rawNft: KlaytnNft, metadata: MoonoNftMetadata) -> MoonoNft {
+        
+        let imageMetadata = metadata.image
+        let lastIndex = imageMetadata.lastIndex(of: "/")!
+        let startIndex = imageMetadata.index(after: lastIndex)
+        let endIndex = imageMetadata.lastIndex(of: ".")!
+        let imageNumber = imageMetadata[startIndex..<endIndex]
+        
+        let convertedImageUrl: String =  "https://firebasestorage.googleapis.com/v0/b/moono-aftermint-storage.appspot.com/o/Moono%23" + "\(imageNumber)" + ".jpeg?alt=media"
+    
         return MoonoNft(
             name: metadata.name,
             description: metadata.description,
-            imageUrl: metadata.image,
+            imageUrl: convertedImageUrl,
             tokenId: rawNft.tokenId,
             updateAt: rawNft.updatedAt,
             previousOwnerAddress: rawNft.previousOwner,

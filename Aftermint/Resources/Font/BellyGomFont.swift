@@ -22,7 +22,9 @@ struct BellyGomFont {
     static let header04 = UIFont(name: NanumFont.ExtraBold.rawValue, size: 16)
     static let header05 = UIFont(name: NanumFont.ExtraBold.rawValue, size: 12)
     static let header06 = UIFont(name: NanumFont.Regular.rawValue, size: 12)
+    static let header07 = UIFont(name: NanumFont.Regular.rawValue, size: 14)
     
     static let tag = UIFont(name: NanumFont.ExtraBold.rawValue, size: 10)
+    
 }
 

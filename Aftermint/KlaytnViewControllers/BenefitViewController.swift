@@ -26,9 +26,7 @@ class BenefitViewController: UIViewController {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.register(EventCell.self, forCellWithReuseIdentifier: EventCell.identifier)
-        collection.register(UtilityCell.self, forCellWithReuseIdentifier: UtilityCell.identifier)
         collection.register(VoteCell.self, forCellWithReuseIdentifier: VoteCell.identifier)
-        
         
         collection.backgroundColor = AftermintColor.backgroundNavy
         collection.showsHorizontalScrollIndicator = false
@@ -146,12 +144,10 @@ extension BenefitViewController: UICollectionViewDataSource, UICollectionViewDel
         switch indexPath {
         case IndexPath(item: 0, section: 0):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EventCell.identifier, for: indexPath) as? EventCell else { return UICollectionViewCell() }
-            cell.backgroundColor = AftermintColor.backgroundGrey
             return cell
             
         case IndexPath(item: 1, section: 0):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VoteCell.identifier, for: indexPath) as? VoteCell else { return UICollectionViewCell() }
-            cell.backgroundColor = AftermintColor.backgroundGrey
             return cell
             
         default:
@@ -162,7 +158,8 @@ extension BenefitViewController: UICollectionViewDataSource, UICollectionViewDel
         
     }
 
-    
+    // Temporarily deactivated
+    /*
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         switch indexPath {
@@ -179,7 +176,7 @@ extension BenefitViewController: UICollectionViewDataSource, UICollectionViewDel
             return
         }
     }
-    
+    */
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: collectionView.frame.height)

@@ -35,11 +35,10 @@ class BasicTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     //TabBar Items
     private func setTabBarItems() {
-        tabBar.backgroundColor = .white
         
         let marketNftViewContoller = MarketDetailViewController()
         marketNftViewContoller.tabBarItem.image = UIImage(named: "bottom")?.withRenderingMode(.alwaysOriginal)
-        
+        marketNftViewContoller.tabBarController?.tabBar.tintColor = AftermintColor.backgroundNavy
         self.viewControllers = [marketNftViewContoller]
         
     }

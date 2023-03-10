@@ -9,6 +9,7 @@ import UIKit
 
 class MarketViewController: UIViewController {
     
+    // TODO: Move dummy lists to other file
     private let dummyImageList: [UIImage?] = [
         UIImage(named: "nftimage1"),
         UIImage(named: "nftimage2"),
@@ -135,6 +136,7 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let marketNftVC: BasicTabBarController = BasicTabBarController()
+        navigationItem.titleView?.tintColor = AftermintColor.backgroundNavy
         navigationController?.pushViewController(marketNftVC, animated: true)
         
     }
