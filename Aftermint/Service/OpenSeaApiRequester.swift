@@ -75,8 +75,6 @@ class OpenSeaApiRequester {
     ) -> Bool {
         let urlSession = URLSession(configuration: .default)
         
-        LLog.d("UInt32(tokenId.dropFirst(2), radix: 16) ?? 0: \(UInt32(tokenId.dropFirst(2), radix: 16) ?? 0)")
-        
         let urlToken = String(
             format: OpenSeaApiRequester.url__retrieve_an_asset__params_2,
             contractAddress,
