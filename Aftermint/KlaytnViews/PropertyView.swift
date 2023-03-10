@@ -27,12 +27,12 @@ class PropertyView: UIView {
         return stack
     }()
     
-    private let background: TitleAndDescriptionView = {
+    private let accessories: TitleAndDescriptionView = {
         let view = TitleAndDescriptionView()
         return view
     }()
     
-    private let body: TitleAndDescriptionView = {
+    private let background: TitleAndDescriptionView = {
         let view = TitleAndDescriptionView()
         return view
     }()
@@ -45,12 +45,12 @@ class PropertyView: UIView {
         return stack
     }()
     
-    private let clothes: TitleAndDescriptionView = {
+    private let body: TitleAndDescriptionView = {
         let view = TitleAndDescriptionView()
         return view
     }()
     
-    private let head: TitleAndDescriptionView = {
+    private let day: TitleAndDescriptionView = {
         let view = TitleAndDescriptionView()
         return view
     }()
@@ -63,13 +63,19 @@ class PropertyView: UIView {
         return stack
     }()
     
-    private let acc: TitleAndDescriptionView = {
+    private let effect: TitleAndDescriptionView = {
         let view = TitleAndDescriptionView()
         return view
     }()
     
-    private let special: TitleAndDescriptionView = {
+    private let expression: TitleAndDescriptionView = {
         let view = TitleAndDescriptionView()
+        return view
+    }()
+    
+    private let hair: TitleAndDescriptionView = {
+        let view = TitleAndDescriptionView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -90,17 +96,18 @@ class PropertyView: UIView {
     //MARK: - Set UI and Layout
     private func setUI() {
         self.addSubview(wholeViewStack)
+        self.addSubview(hair)
         
         wholeViewStack.addArrangedSubview(firstRowStack)
         wholeViewStack.addArrangedSubview(secondRowStack)
         wholeViewStack.addArrangedSubview(thirdRowStack)
         
+        firstRowStack.addArrangedSubview(accessories)
         firstRowStack.addArrangedSubview(background)
-        firstRowStack.addArrangedSubview(body)
-        secondRowStack.addArrangedSubview(clothes)
-        secondRowStack.addArrangedSubview(head)
-        thirdRowStack.addArrangedSubview(acc)
-        thirdRowStack.addArrangedSubview(special)
+        secondRowStack.addArrangedSubview(body)
+        secondRowStack.addArrangedSubview(day)
+        thirdRowStack.addArrangedSubview(effect)
+        thirdRowStack.addArrangedSubview(expression)
     }
     
     private func setLayout() {
@@ -108,26 +115,32 @@ class PropertyView: UIView {
             wholeViewStack.topAnchor.constraint(equalTo: self.topAnchor),
             wholeViewStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
             wholeViewStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
-            wholeViewStack.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            wholeViewStack.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            hair.topAnchor.constraint(equalTo: wholeViewStack.bottomAnchor),
+            hair.leadingAnchor.constraint(equalTo: wholeViewStack.leadingAnchor),
+            hair.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
 
     }
     
     //MARK: - Configure
     public func configure(
+                          accDesc: String?,
                           backgroundDesc: String?,
                           bodyDesc: String?,
-                          clothesDesc: String?,
-                          headDesc: String?,
-                          accDesc: String?,
-                          specialDesc: String?)
+                          dayDesc: String?,
+                          effectDesc: String?,
+                          expressionDesc: String?,
+                          hairDesc: String?
+                          )
     {
+        accessories.configure(title: "Accessories", desc: accDesc ?? "N/A")
         background.configure(title: "Background", desc: backgroundDesc ?? "N/A")
         body.configure(title: "Body", desc: bodyDesc ?? "N/A")
-        clothes.configure(title: "Clothes", desc: clothesDesc ?? "N/A")
-        head.configure(title: "Head", desc: headDesc ?? "N/A")
-        acc.configure(title: "Acc", desc: accDesc ?? "N/A")
-        special.configure(title: "Special", desc: specialDesc ?? "N/A")
+        day.configure(title: "Day", desc: dayDesc ?? "N/A")
+        effect.configure(title: "Effect", desc: effectDesc ?? "N/A")
+        expression.configure(title: "Expression", desc: expressionDesc ?? "N/A")
+        hair.configure(title: "Hair", desc: hairDesc ?? "N/A")
     }
 }
 
@@ -137,7 +150,7 @@ private class TitleAndDescriptionView: UIView {
     //MARK: - UI Elements
     let backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = AftermintColor.backgroundGrey
+        view.backgroundColor = AftermintColor.secondaryBackgroundNavy
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -160,7 +173,7 @@ private class TitleAndDescriptionView: UIView {
         let label = UILabel()
         label.font = BellyGomFont.header05
         label.numberOfLines = 0
-        label.textColor = AftermintColor.bellyTitleGrey
+        label.textColor = .white
         return label
     }()
     

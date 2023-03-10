@@ -9,20 +9,19 @@ import Foundation
 
 struct NFTCardViewModel {
     
-    var bellyGomNfts: Box<[BellyGomNft]> = Box([])
+    var moonoNfts: Box<[MoonoNft]> = Box([])
     
     func numberOfItems() -> Int {
         return 0
     }
     
-    func getNfts(of wallet: String, completion: @escaping ([BellyGomNft])->()) {
-
-        _ = KlaytnNftRequester.requestToGetBellyGomNfts(
-            walletAddress: wallet
-        ) { nfts in
+    func getNfts(of wallet: String, completion: @escaping ([MoonoNft])->()) {
+        
+        _ = KlaytnNftRequester.requestToGetMoonoNfts(walletAddress: wallet,
+                                                     nftsHandler: { nfts in
             completion(nfts)
-            
-        }
+        })
+        
     }
     
 }

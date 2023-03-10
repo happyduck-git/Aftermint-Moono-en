@@ -27,27 +27,19 @@ final class MarketCell: UICollectionViewCell {
         return stack
     }()
     
-    private let rankLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Belly"
-        label.font = BellyGomFont.header05
-        label.textColor = AftermintColor.bellyPink
-        return label
-    }()
-    
     private let nftNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Bellygom #6517"
+        label.text = "Moono #108"
         label.font = BellyGomFont.header05
-        label.textColor = AftermintColor.traitGrey
+        label.textColor = AftermintColor.titleGrey
         return label
     }()
     
     private let priceLabel: UILabel = {
         let label = UILabel()
-        label.text = "1,651,699 KLAY"
+        label.text = "50,000 KLAY"
         label.font = BellyGomFont.header04
-        label.textColor = AftermintColor.bellyTitleGrey
+        label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -68,7 +60,6 @@ final class MarketCell: UICollectionViewCell {
         self.addSubview(nftImageView)
         self.addSubview(nameStackView)
         self.addSubview(priceLabel)
-        nameStackView.addArrangedSubview(rankLabel)
         nameStackView.addArrangedSubview(nftNameLabel)
     }
     
@@ -89,7 +80,6 @@ final class MarketCell: UICollectionViewCell {
             priceLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
         
-        rankLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         priceLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
     }
     

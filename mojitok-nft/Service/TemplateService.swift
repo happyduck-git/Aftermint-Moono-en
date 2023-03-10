@@ -118,17 +118,17 @@ final class TemplateService {
         }
     }
     
+    private var _templates: [Template?] = Array(repeating: nil, count: 4)
     private func addTemplate(template: Template, index: Int, fileData: Data?, thumbnailData: Data) {
         if let fileData = fileData {
             try? fileData.write(to: template.fileURL)
         }
         try? thumbnailData.write(to: template.thumbnailURL)
         templateQueue.sync {
-            if templates.count > index {
-                templates.insert(template, at: index)
-            } else {
-                templates.append(template)
-            }
+            _templates[index] = template
+            templates = _templates
+                .filter { $0 != nil }
+                .map { $0! }
         }
     }
     

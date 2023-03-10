@@ -26,14 +26,15 @@ class WelcomeUpperView: UIView {
     private let usernameLabel: UILabel = {
         let label = UILabel()
         label.font = BellyGomFont.header03
-        label.textColor = AftermintColor.bellyPink
-        label.text = "불타는고구마"
+        label.textColor = AftermintColor.moonoBlue
+        label.text = "월요병아리"
         return label
     }()
     
     private let courtesyTitleLabel: UILabel = {
         let label = UILabel()
         label.font = BellyGomFont.header03
+        label.textColor = .white
         label.text = "님,"
         return label
     }()
@@ -48,15 +49,15 @@ class WelcomeUpperView: UIView {
     private let welcomeLabel: UILabel = {
         let label = UILabel()
         label.font = BellyGomFont.header03
+        label.textColor = .white
         label.text = "환영합니다!"
-        label.textColor = AftermintColor.bellyTitleGrey
         return label
     }()
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "bellygom_logo")
+        imageView.image = UIImage(named: "moono_logo")
         return imageView
     }()
     
@@ -80,7 +81,7 @@ class WelcomeUpperView: UIView {
         let label = UILabel()
         label.text = "카이카스"
         label.font = .systemFont(ofSize: 12, weight: .bold)
-        label.textColor = AftermintColor.bellyGrey
+        label.textColor = .white
         return label
     }()
     
@@ -88,7 +89,7 @@ class WelcomeUpperView: UIView {
         let label = UILabel()
         label.text = "NFT 지갑"
         label.textColor = AftermintColor.bellyGrey
-        label.font = .systemFont(ofSize: 12)
+        label.textColor = .white
         return label
     }()
     
@@ -138,8 +139,6 @@ class WelcomeUpperView: UIView {
             
             walletConnectStackView.topAnchor.constraint(equalTo: welcomeStackView.bottomAnchor, constant: 8.0),
             walletConnectStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            walletConnectStackView.widthAnchor.constraint(equalToConstant: 132.0),
-//            walletConnectStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -199.0),
             walletConnectStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
         

@@ -30,7 +30,7 @@ class BookmarkMenuBar: UIView {
         let button = UIButton()
         button.setTitle("이벤트", for: .normal)
         //font 설정하기
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(eventButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -39,7 +39,7 @@ class BookmarkMenuBar: UIView {
     private lazy var utilityButton: UIButton = {
         let button = UIButton()
         button.setTitle("유틸리티", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(utilityButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -47,7 +47,7 @@ class BookmarkMenuBar: UIView {
     
     private let indicator: UILabel = {
         let label = UILabel()
-        label.backgroundColor = AftermintColor.bellyPink
+        label.backgroundColor = AftermintColor.moonoYellow
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

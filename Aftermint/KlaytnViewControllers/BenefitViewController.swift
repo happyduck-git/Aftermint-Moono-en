@@ -26,9 +26,9 @@ class BenefitViewController: UIViewController {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.register(EventCell.self, forCellWithReuseIdentifier: EventCell.identifier)
-        collection.register(UtilityCell.self, forCellWithReuseIdentifier: UtilityCell.identifier)
         collection.register(VoteCell.self, forCellWithReuseIdentifier: VoteCell.identifier)
         
+        collection.backgroundColor = AftermintColor.backgroundNavy
         collection.showsHorizontalScrollIndicator = false
         collection.isPagingEnabled = true
         collection.dataSource = self
@@ -44,14 +44,12 @@ class BenefitViewController: UIViewController {
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        view.backgroundColor = .white
         navigationBarSetup()
         setUI()
         setLayout()
-        
-        
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,9 +110,9 @@ class BenefitViewController: UIViewController {
         self.tabBarController?.navigationItem.leftBarButtonItem = leftBar
         
         /* Right bar item */
-        let rightBarBookmark: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "bookmark_black_empty_24")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(bookmarkTapped))
+        let rightBarBookmark: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "bookmark_white_empty_24")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(bookmarkTapped))
         
-        let rightBarCalendar: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "calendar_badgeon")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(calendarTapped))
+        let rightBarCalendar: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "calendar_white_empty_24")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(calendarTapped))
         
         self.tabBarController?.navigationItem.rightBarButtonItems = [rightBarCalendar, rightBarBookmark]
         
@@ -138,7 +136,7 @@ class BenefitViewController: UIViewController {
 extension BenefitViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -146,17 +144,10 @@ extension BenefitViewController: UICollectionViewDataSource, UICollectionViewDel
         switch indexPath {
         case IndexPath(item: 0, section: 0):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EventCell.identifier, for: indexPath) as? EventCell else { return UICollectionViewCell() }
-            cell.backgroundColor = AftermintColor.backgroundGrey
             return cell
             
         case IndexPath(item: 1, section: 0):
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UtilityCell.identifier, for: indexPath) as? UtilityCell else { return UICollectionViewCell() }
-            cell.backgroundColor = AftermintColor.backgroundGrey
-            return cell
-            
-        case IndexPath(item: 2, section: 0):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VoteCell.identifier, for: indexPath) as? VoteCell else { return UICollectionViewCell() }
-            cell.backgroundColor = AftermintColor.backgroundGrey
             return cell
             
         default:
@@ -167,7 +158,8 @@ extension BenefitViewController: UICollectionViewDataSource, UICollectionViewDel
         
     }
 
-    
+    // Temporarily deactivated
+    /*
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         switch indexPath {
@@ -179,19 +171,12 @@ extension BenefitViewController: UICollectionViewDataSource, UICollectionViewDel
             self.tabBarController?.tabBar.isHidden = true
             self.navigationController?.pushViewController(pulleyVC, animated: true)
 
-        case IndexPath(item: 1, section: 0):
-            let utilityDetailVC: UtilityDetailViewController = UtilityDetailViewController()
-            bottomSheetVC.configure(image: "claim")
-            pulleyVC = PulleyViewController(contentViewController: utilityDetailVC, drawerViewController: bottomSheetVC)
-            guard let pulleyVC = pulleyVC else { return }
-            self.tabBarController?.tabBar.isHidden = true
-            self.navigationController?.pushViewController(pulleyVC, animated: true)
             
         default:
             return
         }
     }
-    
+    */
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: collectionView.frame.height)

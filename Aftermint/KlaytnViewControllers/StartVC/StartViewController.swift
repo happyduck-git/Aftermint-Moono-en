@@ -27,7 +27,7 @@ class StartViewController: UIViewController, View {
     // MARK: - UI Elements
     private let walletConnectImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "kaikas_connected_button")
+        imageView.image = UIImage(named: "kaikas_connected_info")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -43,8 +43,8 @@ class StartViewController: UIViewController, View {
     
     private let mainTitle: UILabel = {
         let label = UILabel()
-        label.text = "More Belly, More surprise"
-        label.textColor = AftermintColor.lightPink
+        label.text = "어떤일에도 무너지지 않는 Moono Story"
+        label.textColor = AftermintColor.moonoBlue
         label.font = BellyGomFont.header04
         label.textAlignment = .center
         
@@ -55,10 +55,10 @@ class StartViewController: UIViewController, View {
         let label = UILabel()
         label.text = """
                         계속 업데이트 될,
-                        NFT만으로 누릴 수 있는 Belly Benefit
+                        NFT만으로 누릴 수 있는 Moono Benefit
                      """
         label.textAlignment = .center
-        label.textColor = AftermintColor.traitGrey
+        label.textColor = .white
         label.font = BellyGomFont.header05
         label.numberOfLines = 2
         return label
@@ -75,7 +75,7 @@ class StartViewController: UIViewController, View {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = AftermintColor.backgroundNavy
         
         setUI()
         setLayout()

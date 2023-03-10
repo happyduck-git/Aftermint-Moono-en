@@ -13,6 +13,7 @@ class EventDetailViewController: UIViewController {
     // MARK: - UI Elements
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
@@ -28,7 +29,7 @@ class EventDetailViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = AftermintColor.backgroundNavy
         setUI()
         setLayout()
 
@@ -43,7 +44,6 @@ class EventDetailViewController: UIViewController {
     
     // MARK: - Set UI & Layout
     private func setUI() {
-        view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubview(wholeImageView)
     }
@@ -64,17 +64,6 @@ class EventDetailViewController: UIViewController {
             
         ])
     }
-
-    /* Erase these codes if unnecessary*/
-//    private func setBarButtonItem() {
-//        let backButtonImage: UIImage? = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal)
-//        let buttonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backToHomeVC))
-//        self.navigationController?.navigationItem.leftBarButtonItem = buttonItem
-//    }
-//
-//    @objc private func backToHomeVC() {
-//        self.parent?.navigationController?.popViewController(animated: true)
-//    }
     
     
     private func navigationBarSetup() {

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "status=off,type=fyi.png",
+      "filename" : "fyi_off.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "status=off,type=fyi@2x.png",
+      "filename" : "fyi_off@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "status=off,type=fyi@3x.png",
+      "filename" : "fyi_off@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

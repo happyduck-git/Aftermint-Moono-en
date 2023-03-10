@@ -16,7 +16,7 @@ struct KlaytnNft: Decodable {
     let owner: String
     let previousOwner: String
     let tokenId: String
-    let tokenUri: String
+    let tokenUri: String?
     let transactionHash: String
     let createdAt: Int64
     let updatedAt: Int64

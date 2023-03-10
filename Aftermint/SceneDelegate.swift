@@ -29,7 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
              */
             
             let window = UIWindow(windowScene: windowScene)
-            
+            window.backgroundColor = AftermintColor.backgroundNavy
             UINavigationBar.appearance().backIndicatorImage = UIImage(named: "back")
             UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(named: "back")
             
@@ -38,6 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let token = UserDefaults.standard.string(forKey: KasWalletRepository.shared.getWalletKey())
             var rootNaviVC: UINavigationController?
             
+            /* Temp Comment: LogincVC */
             if token == nil {
                 let reactor: LoginViewReactor = LoginViewReactor()
                 let loginVC = LoginViewController(reactor: reactor)
@@ -46,7 +47,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let homeVC = KlaytnTabViewController()
                 rootNaviVC = UINavigationController(rootViewController: homeVC)
             }
-
+            
+            /* Temp: StartVC */
+//            rootNaviVC = UINavigationController(rootViewController: KlaytnTabViewController())
+           
+            
 //            rootNaviVC?.setNavigationBarHidden(true, animated: false)
             
             window.rootViewController = rootNaviVC

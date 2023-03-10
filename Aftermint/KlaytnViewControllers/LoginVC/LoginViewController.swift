@@ -27,31 +27,14 @@ class LoginViewController: UIViewController, View, Coordinating {
     
     
     // MARK: - UI Elements
-    private let gradientLayer: CAGradientLayer = {
-        let layer = CAGradientLayer()
-        layer.colors = [
-            AftermintColor.backgroundBlue.cgColor,
-            AftermintColor.backgroundPink.cgColor,
-        ]
-        layer.startPoint = CGPoint(x: 0.5, y: 0.0)
-        layer.endPoint = CGPoint(x: 0.5, y: 0.45)
-        return layer
-    }()
-    
-    private let bellygomImageLogo: UIImageView = {
+    private let moonoLoginBackgroundImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "bellygom_image")
+        imageView.image = UIImage(named: "moono_login_image")
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
-    private let bellygomTextLogo: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "bellygom_title")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
+
     private let loginDescription: UILabel = {
         let label = UILabel()
         label.text = "멤버십 서비스 이용을 위해 NFT 지갑을 연결해주세요."
@@ -86,8 +69,6 @@ class LoginViewController: UIViewController, View, Coordinating {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setBackgroundGradient()
-        
         setUI()
         setLayout()
     }
@@ -99,9 +80,9 @@ class LoginViewController: UIViewController, View, Coordinating {
     
     // MARK: - Set UI & Layout
     private func setUI() {
+        view.backgroundColor = AftermintColor.backgroundBlue
         
-        view.addSubview(bellygomImageLogo)
-        view.addSubview(bellygomTextLogo)
+        view.addSubview(moonoLoginBackgroundImageView)
         view.addSubview(loginDescription)
         view.addSubview(walletStackView)
         
@@ -115,13 +96,12 @@ class LoginViewController: UIViewController, View, Coordinating {
         
         NSLayoutConstraint.activate([
             
-            bellygomImageLogo.topAnchor.constraint(equalTo: view.topAnchor, constant: viewHeight / 8.28),
-            bellygomImageLogo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-
-            bellygomTextLogo.topAnchor.constraint(equalTo: bellygomImageLogo.bottomAnchor, constant: viewHeight / 25.37),
-            bellygomTextLogo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            moonoLoginBackgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            moonoLoginBackgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            moonoLoginBackgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            moonoLoginBackgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            loginDescription.topAnchor.constraint(equalTo: bellygomTextLogo.bottomAnchor, constant: viewHeight / 5.1),
+            loginDescription.topAnchor.constraint(equalTo: moonoLoginBackgroundImageView.bottomAnchor, constant: 59),
             loginDescription.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             walletStackView.topAnchor.constraint(equalTo: loginDescription.bottomAnchor, constant: viewHeight / 67.66),
@@ -137,13 +117,7 @@ class LoginViewController: UIViewController, View, Coordinating {
         navigationController?.pushViewController(startVC, animated: true)
         
     }
-    
-    // MARK: - Gradient
-    private func setBackgroundGradient() {
-        self.gradientLayer.frame = view.bounds
-        self.view.layer.addSublayer(gradientLayer)
-    }
-    
+
 }
 
 //MARK: - Bind Action and State

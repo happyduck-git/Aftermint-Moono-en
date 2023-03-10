@@ -43,19 +43,11 @@ class MarketDetailViewController: UIViewController {
         return stack
     }()
     
-    private let levelLabel: UILabel = {
-        let label = UILabel()
-        label.font = BellyGomFont.header04
-        label.text = "Belly"
-        label.textColor = AftermintColor.bellyPink
-        return label
-    }()
-    
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = BellyGomFont.header03
-        label.text = "Bellygom #6517"
-        label.textColor = AftermintColor.bellyTitleGrey
+        label.text = "Moono #108"
+        label.textColor = .white
         return label
     }()
     
@@ -71,15 +63,15 @@ class MarketDetailViewController: UIViewController {
     private let priceLabel: UILabel = {
         let label = UILabel()
         label.font = BellyGomFont.header02
-        label.textColor = AftermintColor.bellyGreen
-        label.text = "1,651,699 KLAY"
+        label.textColor = AftermintColor.moonoBlue
+        label.text = "50,000 KLAY"
         return label
     }()
     
     private let onSaleLabel: UILabel = {
         let label = UILabel()
         label.font = BellyGomFont.header04
-        label.textColor = AftermintColor.bellyGreen
+        label.textColor = AftermintColor.moonoBlue
         label.text = "에 판매 중"
         return label
     }()
@@ -98,7 +90,7 @@ class MarketDetailViewController: UIViewController {
         let label = UILabel()
         label.textColor = AftermintColor.traitGrey
         label.font = UIFont.systemFont(ofSize: 12.0)
-        label.text = "$346,468.64"
+        label.text = "$11,617.65"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -114,7 +106,7 @@ class MarketDetailViewController: UIViewController {
         let label = UILabel()
         label.textColor = AftermintColor.traitGrey
         label.font = UIFont.systemFont(ofSize: 12.0)
-        label.text = "₩425,913,899"
+        label.text = "₩15,181,033"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -144,38 +136,8 @@ class MarketDetailViewController: UIViewController {
     private let rankingNumLabel: UILabel = {
         let label = UILabel()
         label.text = "6"
-        label.font = BellyGomFont.header05
-        label.textColor = AftermintColor.bellyPink
-        return label
-    }()
-    
-    private let verticalLineLong2: UIView = {
-        let view = UIView()
-        view.backgroundColor = AftermintColor.backgroundGrey
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private let scoreStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
-    private let scoreLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Score"
         label.font = BellyGomFont.header06
-        label.textColor = AftermintColor.traitGrey
-        return label
-    }()
-    
-    private let scoreNumLabel: UILabel = {
-        let label = UILabel()
-        label.text = "2594"
-        label.font = BellyGomFont.header05
-        label.textColor = AftermintColor.bellyBlue
+        label.textColor = AftermintColor.moonoBlue
         return label
     }()
     
@@ -186,7 +148,7 @@ class MarketDetailViewController: UIViewController {
         stack.layoutMargins = UIEdgeInsets(top: 24.0, left: 20.0, bottom: 24.0, right: 20.0)
         stack.isLayoutMarginsRelativeArrangement = true
         stack.distribution = .fillProportionally
-        stack.backgroundColor = AftermintColor.backgroundGrey
+        stack.backgroundColor = AftermintColor.backgroundNavy
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -194,8 +156,7 @@ class MarketDetailViewController: UIViewController {
     private let propertyLabel: UILabel = {
         let label = UILabel()
         label.text = "Properties"
-        
-        label.textColor = AftermintColor.bellyTitleGrey
+        label.textColor = .white
         return label
     }()
     
@@ -210,18 +171,19 @@ class MarketDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = AftermintColor.backgroundNavy
         
         setUI()
         setLayout()
         setBarButtonItem()
         
-        propertyView.configure(backgroundDesc: "Aurora",
-                               bodyDesc: "Belly Pink",
-                               clothesDesc: "None",
-                               headDesc: "None",
-                               accDesc: "None",
-                               specialDesc: "Shark")
+        propertyView.configure(accDesc: "None",
+                               backgroundDesc: "Cappuccino",
+                               bodyDesc: "Inverse",
+                               dayDesc: "Monday",
+                               effectDesc: "Red question mark",
+                               expressionDesc: "Uneasy",
+                               hairDesc: "Soy sauce")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -243,11 +205,8 @@ class MarketDetailViewController: UIViewController {
         contentView.addSubview(monetaryStackView)
         contentView.addSubview(verticalLineLong1)
         contentView.addSubview(rankingStack)
-        contentView.addSubview(verticalLineLong2)
-        contentView.addSubview(scoreStack)
         contentView.addSubview(propertyStackView)
         
-        nameStackView.addArrangedSubview(levelLabel)
         nameStackView.addArrangedSubview(nameLabel)
         priceStackView.addArrangedSubview(priceLabel)
         priceStackView.addArrangedSubview(onSaleLabel)
@@ -256,8 +215,6 @@ class MarketDetailViewController: UIViewController {
         monetaryStackView.addArrangedSubview(wonLabel)
         rankingStack.addArrangedSubview(rankingLabel)
         rankingStack.addArrangedSubview(rankingNumLabel)
-        scoreStack.addArrangedSubview(scoreLabel)
-        scoreStack.addArrangedSubview(scoreNumLabel)
         propertyStackView.addArrangedSubview(propertyLabel)
         propertyStackView.addArrangedSubview(propertyView)
         
@@ -306,14 +263,6 @@ class MarketDetailViewController: UIViewController {
             
             rankingStack.topAnchor.constraint(equalTo: verticalLineLong1.topAnchor),
             rankingStack.leadingAnchor.constraint(equalTo: verticalLineLong1.trailingAnchor, constant: 16.0),
-            
-            verticalLineLong2.topAnchor.constraint(equalTo: verticalLineLong1.topAnchor),
-            verticalLineLong2.widthAnchor.constraint(equalToConstant: 1.0),
-            verticalLineLong2.leadingAnchor.constraint(equalTo: rankingStack.trailingAnchor, constant: 115.0),
-            verticalLineLong2.heightAnchor.constraint(equalTo: verticalLineLong1.heightAnchor),
-            
-            scoreStack.topAnchor.constraint(equalTo: verticalLineLong1.topAnchor),
-            scoreStack.leadingAnchor.constraint(equalTo: verticalLineLong2.trailingAnchor, constant: 16.0),
             
             propertyStackView.topAnchor.constraint(equalTo: rankingStack.bottomAnchor, constant: 24.0),
             propertyStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

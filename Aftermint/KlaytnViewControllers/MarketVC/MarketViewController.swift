@@ -9,6 +9,7 @@ import UIKit
 
 class MarketViewController: UIViewController {
     
+    // TODO: Move dummy lists to other file
     private let dummyImageList: [UIImage?] = [
         UIImage(named: "nftimage1"),
         UIImage(named: "nftimage2"),
@@ -35,6 +36,7 @@ class MarketViewController: UIViewController {
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = view.frame.width / 15
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.backgroundColor = AftermintColor.backgroundNavy
         collection.register(MarketCell.self, forCellWithReuseIdentifier: MarketCell.identifier)
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.showsVerticalScrollIndicator = false
@@ -45,7 +47,6 @@ class MarketViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         navigationBarSetup()
         setUI()
         setLayout()
@@ -107,9 +108,7 @@ class MarketViewController: UIViewController {
         self.tabBarController?.navigationItem.leftBarButtonItem = leftBar
         
         /* Right bar item */
-        let rightBar: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "magnifier_default_24")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: nil)
-        self.tabBarController?.navigationItem.rightBarButtonItems = [rightBar]
-        
+        self.tabBarController?.navigationItem.rightBarButtonItems = nil
     }
 }
 
@@ -137,6 +136,7 @@ extension MarketViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let marketNftVC: BasicTabBarController = BasicTabBarController()
+        navigationItem.titleView?.tintColor = AftermintColor.backgroundNavy
         navigationController?.pushViewController(marketNftVC, animated: true)
         
     }
