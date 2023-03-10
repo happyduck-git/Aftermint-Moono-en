@@ -96,7 +96,7 @@ extension KlaytnHomeViewController: NFTCardViewDelegate {
     
     func didTapTemplateButton() {
         
-        let templateVC: LottieViewController = LottieViewController(reactor: makeMockReactorByGall3ry3())
+        let templateVC: LottieViewController = LottieViewController(reactor: makeMockMoonoReactorByGall3ry3())
         navigationController?.pushViewController(templateVC, animated: true)
         
     }
@@ -192,6 +192,46 @@ extension KlaytnHomeViewController {
             tokenID: "6438",
             description: "BELLYGOM NFT is a project created and developed from the partnership between Lotte Home Shopping and a FSN's affiliate, 'FingerVerse.' With a total of 10,000 PFPs, various experiences with the BELLYGOM IP such as shopping, hotels, exhibitions, and movies etc, are in store for you. We plan to design a new roadmap with the community members, to expand the BELLYGOM Universe through private membership benefits and events such as renting the entire Lotte World just for our community. Join us and enjoy these amazing IRL experiences with BELLYGOM NFT now!",
             imageURLString: "https://i.seadn.io/gae/-sBB9Ac4c-IZhv7SHeVIC3LZNCGA1yg_BBBqYPI8Z6AgoPLbje-ryLS8ygcGgLUBI9Vp-JNTkoDF7-GBHXtdq-5DaaRgoPOkAuxna-8?auto=format&w=1000"
+        )
+    }
+    
+    private func makeMockMoonoReactorByGall3ry3() -> LottieViewReactor {
+        let appDependency = AppDependency.resolve()
+        return appDependency.homeViewReactor.dependency
+            .lottieViewReactorFactory.create(
+                payload: .init(nft: makeMockOpenSeaMoonoNftByGall3ry3(), format: .video)
+            )
+    }
+    
+    private func makeMockOpenSeaMoonoNftByGall3ry3() -> OpenSeaNFT {
+        let openSeaPaymentToken = OpenSeaPaymentToken(
+            eth_price: "1.000000000000000"
+        )
+        let openSeaNftLastSale = OpenSeaNFTLastSale(
+            total_price: "31000000000000000",
+            payment_token: openSeaPaymentToken
+        )
+        let openSeaNftCollection = OpenSearNFTCollection(
+            name: "Moono Week",
+            image_url: "https://i.seadn.io/gae/cB8JeJwP76w_GGSvQe-WpwfzA31aQZF2fVLA0FmvcsrISfe9e7HDQ_DE9QhilMaCW88vFo_EfBA6ItrNrUOxmbWlbq6suY0v8Sln?auto=format&w=256",
+            slug: "MOONO"
+        )
+        let openSeaCreator = OpenSeaCreator(
+            user: OpenseaUser(username: "2B14DA")
+        )
+        return OpenSeaNFT(
+            id: 994262845,
+            owner: nil,
+            name: "Moono#1183",
+            permalink: "https://opensea.io/assets/klaytn/0x29421a3c92075348fcbcb04de965e802ed187302/1183",
+            sell_orders: nil,
+            last_sale: openSeaNftLastSale,
+            collection: openSeaNftCollection,
+            creator: openSeaCreator,
+            price: nil,
+            tokenID: "1183",
+            description: "Meet the unique generative NFT art of Moono and join the exclusive membership!",
+            imageURLString: "https://i.seadn.io/gae/Aa6TaAL9HxsTUVCbOfBXKqLzM5dEGQz4Oioo7PBRM4aUmBy5Jxzel9doCM8eGH5NRfH_taxqnFYUK05QtaA-tqNGOVSrApvSRI6A?auto=format&w=1000"
         )
     }
 }
