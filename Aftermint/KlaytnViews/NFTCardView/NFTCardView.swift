@@ -120,12 +120,11 @@ class NFTCardView: UIView {
 extension NFTCardView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
       
-        guard let numberOfNfts = viewModel.moonoNfts.value?.count else { return 0 }
+//        guard let numberOfNfts = viewModel.moonoNfts.value?.count else { return 0 }
+        let numberOfNfts = self.viewModel.numberOfItemsInSection()
         
         self.numbersOfNft.text = String(numberOfNfts)
         nftSelected = Array(repeating: false, count: numberOfNfts)
-        
-        print("numberofNfts: \(numberOfNfts)")
         
         return numberOfNfts
 
@@ -133,14 +132,15 @@ extension NFTCardView: UICollectionViewDataSource, UICollectionViewDelegate, UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
-        guard let nft = viewModel.moonoNfts.value?[indexPath.row] else {
+        guard let nft = self.viewModel.itemAtIndex(indexPath.row) else {
             fatalError("No nft value found")
         }
+
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NftCardCell.identifier, for: indexPath) as? NftCardCell else {
             fatalError("Unsupported cell")
         }
         
+        // nftSelected 도 ViewModel로 옮기고, NftCardCell용 ViewModel 만들어서 cell.configure시에 vm을 argument로 넘겨줄 수 있도록 logic 수정하기
         if nftSelected[indexPath.row] == false {
             cell.resetCell()
         } else {

@@ -41,14 +41,8 @@ class CalendarViewController: UIViewController {
     private lazy var calendar: FSCalendar = {
         let calendar = FSCalendar()
         calendar.scope = .week
-<<<<<<< HEAD
         calendar.backgroundColor = AftermintColor.backgroundNavy
         calendar.appearance.headerTitleColor = .white
-=======
-        // TODO: Calendar color traits
-        calendar.backgroundColor = AftermintColor.lightBackgroundGrey
-        calendar.appearance.headerTitleColor = AftermintColor.bellyTitleGrey
->>>>>>> b7bd12c6f1aadb2c71dd5596e5a07c5474c9f75c
         calendar.appearance.weekdayTextColor = AftermintColor.lightGrey
         calendar.appearance.todayColor = AftermintColor.titleBlue
         calendar.appearance.weekdayTextColor = .white

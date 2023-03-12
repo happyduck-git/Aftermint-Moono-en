@@ -73,7 +73,7 @@ class KlaytnNftRequester {
         return jsonData
     }
     
-    // MARK: Get Nfts
+    //MARK: - Get Nfts
     public static func requestToGetNfts(
         contractAddress: String,
         walletAddress: String,
@@ -84,7 +84,7 @@ class KlaytnNftRequester {
         var urlComponents = URLComponents(string: urlToken)
         urlComponents?.queryItems = [URLQueryItem(name: TOKEN_PARAMS__KEY__SIZE, value: TOKEN_PARAMS__VALUE__SIZE_MAX)]
         
-        guard var url = urlComponents?.url else {
+        guard let url = urlComponents?.url else {
             let errorMessage = "Url is nil : urlToken: \(urlToken), contractAddress: \(contractAddress), walletAddress: \(walletAddress)."
             completionHandler(nil, nil, NSError(domain: errorMessage, code: -1))
             LLog.w(errorMessage)
@@ -131,111 +131,6 @@ class KlaytnNftRequester {
         }
     }
     
-    // MARK: for BellyGom
-    public static func requestToGetBellyGomNfts(
-        walletAddress: String,
-        nftsHandler: @escaping ([BellyGomNft]) -> Void
-    ) -> Bool {
-        return requestToGetNfts(
-            contractAddress: KlaytnNftRequester.CONTRACT_ADDRESS__BELLY_GOM,
-            walletAddress: walletAddress
-        ) { nfts, error in
-            guard let rawNfts = nfts else {
-                LLog.w("rawNfts is nil : error: \(String(describing: error)).")
-                return
-            }
-            
-            requestToGetBellyGomNfts(rawNfts: rawNfts) { bellyGomNfts in
-                return nftsHandler(bellyGomNfts)
-            }
-        }
-    }
-    
-    public static func requestToGetBellyGomNfts(
-        rawNfts: KlaytnNfts,
-        nftsHandler: @escaping ([BellyGomNft]) -> Void
-    ) {
-        var bellyGomNfts: [BellyGomNft] = []
-        var taskCount = rawNfts.items.count
-        
-        let taskLock = NSRecursiveLock()
-        let dispatchQueue = DispatchQueue.global(qos: .utility)
-        
-        func discountTaskSafely() {
-            taskLock.lock()
-            taskCount -= 1
-            taskLock.unlock()
-        }
-        
-        rawNfts.items.forEach { rawItem in
-            _ = requestSimple(urlToken: rawItem.tokenUri ?? "N/A") { data, response, error in
-                dispatchQueue.async {
-                    guard processResponse(data: data, response: response, error: error),
-                          let data = data else {
-                        discountTaskSafely()
-                        LLog.w("Invalid result.")
-                        return
-                    }
-                    
-                    guard let metadata = convertTo(type: BellyGomNftMetadata.self, data: data) else {
-                        discountTaskSafely()
-                        LLog.w("metadata is nil.")
-                        return
-                    }
-                    
-                    taskLock.lock()
-                    bellyGomNfts.append(createBellyGomNft(rawNft: rawItem, metadata: metadata))
-                    discountTaskSafely()
-                    taskLock.unlock()
-                }
-            }
-        }
-        
-        while true {
-            taskLock.lock()
-            if taskCount == 0 {
-                break
-            }
-            taskLock.unlock()
-        }
-        
-        nftsHandler(bellyGomNfts)
-        taskLock.unlock()
-    }
-    
-    private static func createBellyGomNft(rawNft: KlaytnNft, metadata: BellyGomNftMetadata) -> BellyGomNft {
-        return BellyGomNft(
-            name: metadata.name,
-            description: metadata.description,
-            imageUrl: metadata.image,
-            score: metadata.score,
-            tokenId: rawNft.tokenId,
-            updateAt: rawNft.updatedAt,
-            previousOwnerAddress: rawNft.previousOwner,
-            traits: createBellyGomNftTraits(metadata: metadata)
-        )
-    }
-    
-    private static func createBellyGomNftTraits(metadata: BellyGomNftMetadata) -> BellyGomNft.Traits {
-        var attributeMap: [String:Any] = [:]
-        attributeMap = metadata.attributes
-            .reduce(into: attributeMap) { result, attribute in
-                result[attribute.trait_type] = attribute.value
-            }
-        
-        // We expect a error with app-crash if wrong key-value exists.
-        return BellyGomNft.Traits(
-            background: attributeMap[BellyGomNft.TraitType.background_string.rawValue] as! String,
-            body: attributeMap[BellyGomNft.TraitType.body_string.rawValue] as! String,
-            clothes: attributeMap[BellyGomNft.TraitType.clothes_string.rawValue] as! String,
-            head: attributeMap[BellyGomNft.TraitType.head_string.rawValue] as! String,
-            acc: attributeMap[BellyGomNft.TraitType.acc_string.rawValue] as! String,
-            special: attributeMap[BellyGomNft.TraitType.special_string.rawValue] as! String,
-            rank: attributeMap[BellyGomNft.TraitType.rank_int.rawValue] as! Int,
-            grade: BellyGomNft.GradeType(rawValue: attributeMap[BellyGomNft.TraitType.grade_gradeType.rawValue] as! String)!
-        )
-    }
-    
     // MARK: - for Moono
     public static func requestToGetMoonoNfts(
         walletAddress: String,
@@ -279,8 +174,9 @@ class KlaytnNftRequester {
                 return
             }
             
-            let convertedTokenUri = tokenUri.replace(target: "ipfs://", withString: "https://ipfs.io/ipfs/")
-        
+            // https://ipfs.io/ipfs/ -> https://gateway.pinata.cloud/
+            let convertedTokenUri = tokenUri.replace(target: "ipfs://", withString: "https://gateway.pinata.cloud/ipfs/")
+     
             _ = requestSimple(urlToken: convertedTokenUri) { data, response, error in
                 dispatchQueue.async {
                     guard processResponse(data: data, response: response, error: error),
@@ -319,12 +215,17 @@ class KlaytnNftRequester {
     private static func createMoonoNft(rawNft: KlaytnNft, metadata: MoonoNftMetadata) -> MoonoNft {
         
         let imageMetadata = metadata.image
-        let lastIndex = imageMetadata.lastIndex(of: "/")!
-        let startIndex = imageMetadata.index(after: lastIndex)
-        let endIndex = imageMetadata.lastIndex(of: ".")!
-        let imageNumber = imageMetadata[startIndex..<endIndex]
         
-        let convertedImageUrl: String =  "https://firebasestorage.googleapis.com/v0/b/moono-aftermint-storage.appspot.com/o/Moono%23" + "\(imageNumber)" + ".jpeg?alt=media"
+        /* pinata gateway test */
+        let convertedImageUrl = imageMetadata.replace(target: "ipfs://", withString: "https://gateway.pinata.cloud/ipfs/")
+        
+        /* when using original gateway */
+//        let lastIndex = imageMetadata.lastIndex(of: "/")!
+//        let startIndex = imageMetadata.index(after: lastIndex)
+//        let endIndex = imageMetadata.lastIndex(of: ".")!
+//        let imageNumber = imageMetadata[startIndex..<endIndex]
+//
+//        let convertedImageUrl: String =  "https://firebasestorage.googleapis.com/v0/b/moono-aftermint-storage.appspot.com/o/Moono%23" + "\(imageNumber)" + ".jpeg?alt=media"
     
         return MoonoNft(
             name: metadata.name,
