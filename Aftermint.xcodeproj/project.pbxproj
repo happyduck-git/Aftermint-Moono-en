@@ -33,6 +33,8 @@
 		24DDC99829817576007A3F63 /* PropertyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DDC99729817576007A3F63 /* PropertyView.swift */; };
 		24DDC99A298175A2007A3F63 /* UtilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DDC999298175A2007A3F63 /* UtilityModel.swift */; };
 		24DDC99C298175ED007A3F63 /* NftCardUtilityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DDC99B298175ED007A3F63 /* NftCardUtilityCell.swift */; };
+		24ED33AC29BEBCDD00C2D4E1 /* NukeImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ED33AB29BEBCDD00C2D4E1 /* NukeImageLoader.swift */; };
+		24ED33AF29BF29E700C2D4E1 /* NftCardCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ED33AE29BF29E700C2D4E1 /* NftCardCellViewModel.swift */; };
 		24F9FFB329841DEC00E534A1 /* GradientLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F9FFB229841DEC00E534A1 /* GradientLabel.swift */; };
 		24F9FFB5298424DF00E534A1 /* LottieTemplateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F9FFB4298424DF00E534A1 /* LottieTemplateCell.swift */; };
 		24F9FFB82986615E00E534A1 /* LottieViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F9FFB72986615E00E534A1 /* LottieViewReactor.swift */; };
@@ -443,6 +445,8 @@
 		24DDC99729817576007A3F63 /* PropertyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyView.swift; sourceTree = "<group>"; };
 		24DDC999298175A2007A3F63 /* UtilityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityModel.swift; sourceTree = "<group>"; };
 		24DDC99B298175ED007A3F63 /* NftCardUtilityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftCardUtilityCell.swift; sourceTree = "<group>"; };
+		24ED33AB29BEBCDD00C2D4E1 /* NukeImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NukeImageLoader.swift; sourceTree = "<group>"; };
+		24ED33AE29BF29E700C2D4E1 /* NftCardCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftCardCellViewModel.swift; sourceTree = "<group>"; };
 		24F9FFB229841DEC00E534A1 /* GradientLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLabel.swift; sourceTree = "<group>"; };
 		24F9FFB4298424DF00E534A1 /* LottieTemplateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieTemplateCell.swift; sourceTree = "<group>"; };
 		24F9FFB72986615E00E534A1 /* LottieViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieViewReactor.swift; sourceTree = "<group>"; };
@@ -874,13 +878,13 @@
 		2481E1CC297A870000187BB9 /* KlaytnViews */ = {
 			isa = PBXGroup;
 			children = (
+				24ED33AD29BF29D100C2D4E1 /* NftCardCell */,
 				93A4B8122990E71B00146FD8 /* MenuBars */,
 				93A4B7FB2990CB8000146FD8 /* BenefitTabCells */,
 				93199EF5298A370B008D532B /* NFTCardView */,
 				2481E1CF297A878900187BB9 /* WelcomeUpperView.swift */,
 				2481E1D4297A998F00187BB9 /* CollectNewNFTButton.swift */,
 				2481E1D8297BDDE400187BB9 /* NftTraitView.swift */,
-				2481E1DD297D125D00187BB9 /* NftCardCell.swift */,
 				24DDC99729817576007A3F63 /* PropertyView.swift */,
 				24DDC99B298175ED007A3F63 /* NftCardUtilityCell.swift */,
 				935E6A7F2982462B00D94DA6 /* CustomeSegmentedControl.swift */,
@@ -914,6 +918,15 @@
 				93A4B8132990EAD700146FD8 /* UIScrollViewSuperTaps.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		24ED33AD29BF29D100C2D4E1 /* NftCardCell */ = {
+			isa = PBXGroup;
+			children = (
+				2481E1DD297D125D00187BB9 /* NftCardCell.swift */,
+				24ED33AE29BF29E700C2D4E1 /* NftCardCellViewModel.swift */,
+			);
+			path = NftCardCell;
 			sourceTree = "<group>";
 		};
 		24F9FFB62986612500E534A1 /* LottieTemplateVC */ = {
@@ -2109,6 +2122,7 @@
 				36A8CEEF2983CB9C007BF65A /* LLog.swift */,
 				245AC14F29A9348E00CE7857 /* Box.swift */,
 				245AC15129A934DC00CE7857 /* Constants.swift */,
+				24ED33AB29BEBCDD00C2D4E1 /* NukeImageLoader.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -2607,6 +2621,7 @@
 				3619B17B29790AC60051C387 /* NullCompositionLayer.swift in Sources */,
 				3619B1A829790AC60051C387 /* ShapeContainerLayer.swift in Sources */,
 				3619B14229790AC60051C387 /* BundleImageProvider.swift in Sources */,
+				24ED33AF29BF29E700C2D4E1 /* NftCardCellViewModel.swift in Sources */,
 				3619B10E29790AC50051C387 /* MarketPlaceEvent.swift in Sources */,
 				3619B11629790AC60051C387 /* TemplateListView.swift in Sources */,
 				3619B18929790AC60051C387 /* CompositionLayersInitializer.swift in Sources */,
@@ -2713,6 +2728,7 @@
 				3619B0EC29790AC50051C387 /* AccessTokenWithSecret.swift in Sources */,
 				9329778929879F4400C76AB5 /* StartViewReactor.swift in Sources */,
 				93C32FC129BAC2DD00DB3CB3 /* LeaderBoardBottomSheetViewController.swift in Sources */,
+				24ED33AC29BEBCDD00C2D4E1 /* NukeImageLoader.swift in Sources */,
 				2481E1DC297C48E700187BB9 /* UIImage.swift in Sources */,
 				3619B15029790AC60051C387 /* LottieLogger.swift in Sources */,
 				3619B15C29790AC60051C387 /* MaskCompositionLayer.swift in Sources */,

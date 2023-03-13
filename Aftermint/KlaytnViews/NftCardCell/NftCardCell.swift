@@ -106,35 +106,28 @@ class NftCardCell: UICollectionViewCell {
     }
     
     //MARK: - Configuration
-    public func configure(accDesc: String,
-                          backgroundDesc: String,
-                          bodyDesc: String,
-                          dayDesc: String,
-                          effectDesc: String,
-                          expressionDesc: String,
-                          hairDesc: String,
-                          
-                          name: String,
-                          updatedAt: Int64
-                         
-    ) {
-        self.cardBackView.propertyView.configure(accDesc: accDesc,
-                                                 backgroundDesc: backgroundDesc,
-                                                 bodyDesc: bodyDesc,
-                                                 dayDesc: dayDesc,
-                                                 effectDesc: effectDesc,
-                                                 expressionDesc: expressionDesc,
-                                                 hairDesc: hairDesc)
+    public func configure(with viewModel: NftCardCellViewModel) {
+        
+        //TODO: PropertyView, TraitView, CardFrontView => ViewModel 만들기
+        
+        self.cardBackView.propertyView.configure(accDesc: viewModel.accDesc,
+                                                 backgroundDesc: viewModel.backgroundDesc,
+                                                 bodyDesc: viewModel.bodyDesc,
+                                                 dayDesc: viewModel.dayDesc,
+                                                 effectDesc: viewModel.effectDesc,
+                                                 expressionDesc: viewModel.expressionDesc,
+                                                 hairDesc: viewModel.hairDesc)
         
         
-        self.traitView.configure(name: name,
-                                 updatedAt: updatedAt
-                              )
+        self.traitView.configure(name: viewModel.name,
+                                 updatedAt: viewModel.updatedAt)
+        
+        guard let url = URL(string: viewModel.imageUrl) else { return }
+        NukeImageLoader.loadImageUsingNuke(url: url) { image in
+            self.cardFrontView.image = image
+        }
     }
     
-    internal func configureImage(image: UIImage) {
-        self.cardFrontView.image = image
-    }
     
     internal func selectViewToHide(cardBackView hideCardBackView: Bool, nftImageView hideNftImageView: Bool) {
         self.cardBackView.isHidden = hideCardBackView
