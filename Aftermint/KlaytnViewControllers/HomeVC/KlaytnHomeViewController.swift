@@ -150,7 +150,7 @@ extension KlaytnHomeViewController {
             id: Int(bellyGomNft.tokenId) ?? -1,
             owner: openSeaNftOwner,
             name: bellyGomNft.name,
-            permalink: "https://opensea.io/assets/klaytn/0xce70eef5adac126c37c8bc0c1228d48b70066d03/\(bellyGomNft.tokenId)",
+            permalink: "https://opensea.io/assets/klaytn/0xce70eef5adac126c37c8bc0c1228d48b70066d03/\(bellyGomNft.tokenIdInteger)",
             sell_orders: nil,
             last_sale: openSeaNftLastSale,
             collection: openSeaNftCollection,
@@ -194,12 +194,62 @@ extension KlaytnHomeViewController {
         )
     }
     
+    private func makeReactorByGall3ry3(nft: MoonoNft) -> LottieViewReactor {
+        let appDependency = AppDependency.resolve()
+        return appDependency.homeViewReactor.dependency
+            .lottieViewReactorFactory.create(
+                payload: .init(nft: makeOpenSeaNftByGall3ry3(moonoNft: nft), format: .video)
+            )
+    }
+    
     private func makeMockMoonoReactorByGall3ry3() -> LottieViewReactor {
         let appDependency = AppDependency.resolve()
         return appDependency.homeViewReactor.dependency
             .lottieViewReactorFactory.create(
                 payload: .init(nft: makeMockOpenSeaMoonoNftByGall3ry3(), format: .video)
             )
+    }
+    
+    private func makeOpenSeaNftByGall3ry3(moonoNft: MoonoNft) -> OpenSeaNFT {
+        let collectionTitle = "Moono Week"
+        let collectionProfileImageUrl = "https://i.seadn.io/gae/cB8JeJwP76w_GGSvQe-WpwfzA31aQZF2fVLA0FmvcsrISfe9e7HDQ_DE9QhilMaCW88vFo_EfBA6ItrNrUOxmbWlbq6suY0v8Sln?auto=format&w=256"
+        let nftOwnerAddress = "0x3961eA20e28A30bCB25E130bec3378d0C248030C"
+        
+        let openSeaPaymentToken = OpenSeaPaymentToken(
+            eth_price: "1.000000000000000"
+        )
+        let openSeaNftLastSale = OpenSeaNFTLastSale(
+            total_price: "31000000000000000",
+            payment_token: openSeaPaymentToken
+        )
+        let openSeaNftCollection = OpenSearNFTCollection(
+            name: collectionTitle,
+            image_url: collectionProfileImageUrl,
+            slug: "MOONO"
+        )
+        let openSeaCreator = OpenSeaCreator(
+            user: OpenseaUser(username: collectionTitle)
+        )
+        let openSeaNftOwner = OpenSeaNFTOwner(
+            user: OpenSeaNFTOwner.OpenSeaNFTUser(username: nftOwnerAddress),
+            profile_img_url: "https://storage.googleapis.com/opensea-static/opensea-profile/11.png",
+            address: nftOwnerAddress
+        )
+        
+        return OpenSeaNFT(
+            id: Int(moonoNft.tokenId) ?? -1,
+            owner: openSeaNftOwner,
+            name: moonoNft.name,
+            permalink: "https://opensea.io/assets/klaytn/0x29421a3c92075348fcbcb04de965e802ed187302/\(moonoNft.tokenIdInteger)",
+            sell_orders: nil,
+            last_sale: openSeaNftLastSale,
+            collection: openSeaNftCollection,
+            creator: openSeaCreator,
+            price: nil,
+            tokenID: moonoNft.tokenId,
+            description: moonoNft.description,
+            imageURLString: "https://firebasestorage.googleapis.com/v0/b/moono-aftermint-storage.appspot.com/o/Moono%23\(moonoNft.tokenIdInteger).jpeg?alt=media"
+        )
     }
     
     private func makeMockOpenSeaMoonoNftByGall3ry3() -> OpenSeaNFT {
