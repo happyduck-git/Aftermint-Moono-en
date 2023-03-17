@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "white_test.png",
+      "filename" : "1st_place_medal.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "1st_place_medal@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "1st_place_medal@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

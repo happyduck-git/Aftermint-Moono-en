@@ -377,6 +377,8 @@
 		36A8CEEB2983BE7B007BF65A /* BellyGomNft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A8CEEA2983BE7B007BF65A /* BellyGomNft.swift */; };
 		36A8CEED2983C238007BF65A /* KlaytnNftRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A8CEEC2983C238007BF65A /* KlaytnNftRequester.swift */; };
 		36A8CEF02983CB9C007BF65A /* LLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A8CEEF2983CB9C007BF65A /* LLog.swift */; };
+		9300BB1B29C3FFE600C67A29 /* LeaderBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB1A29C3FFE600C67A29 /* LeaderBoardTableViewCell.swift */; };
+		9300BB1F29C4057200C67A29 /* LeaderBoardTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB1E29C4057200C67A29 /* LeaderBoardTableViewCellViewModel.swift */; };
 		93199EF12989EDE1008D532B /* KASConnectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93199EF02989EDE1008D532B /* KASConnectService.swift */; };
 		93199EF4298A06A4008D532B /* KasWalletRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93199EF3298A06A4008D532B /* KasWalletRepository.swift */; };
 		932977862987990700C76AB5 /* LoginViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932977852987990700C76AB5 /* LoginViewReactor.swift */; };
@@ -773,6 +775,8 @@
 		36A8CEEA2983BE7B007BF65A /* BellyGomNft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellyGomNft.swift; sourceTree = "<group>"; };
 		36A8CEEC2983C238007BF65A /* KlaytnNftRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlaytnNftRequester.swift; sourceTree = "<group>"; };
 		36A8CEEF2983CB9C007BF65A /* LLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLog.swift; sourceTree = "<group>"; };
+		9300BB1A29C3FFE600C67A29 /* LeaderBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardTableViewCell.swift; sourceTree = "<group>"; };
+		9300BB1E29C4057200C67A29 /* LeaderBoardTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		93199EF02989EDE1008D532B /* KASConnectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KASConnectService.swift; sourceTree = "<group>"; };
 		93199EF3298A06A4008D532B /* KasWalletRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KasWalletRepository.swift; sourceTree = "<group>"; };
 		932977852987990700C76AB5 /* LoginViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewReactor.swift; sourceTree = "<group>"; };
@@ -878,6 +882,7 @@
 		2481E1CC297A870000187BB9 /* KlaytnViews */ = {
 			isa = PBXGroup;
 			children = (
+				9300BB1929C3FFAE00C67A29 /* LeaderBoardCell */,
 				24ED33AD29BF29D100C2D4E1 /* NftCardCell */,
 				93A4B8122990E71B00146FD8 /* MenuBars */,
 				93A4B7FB2990CB8000146FD8 /* BenefitTabCells */,
@@ -2127,6 +2132,15 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		9300BB1929C3FFAE00C67A29 /* LeaderBoardCell */ = {
+			isa = PBXGroup;
+			children = (
+				9300BB1A29C3FFE600C67A29 /* LeaderBoardTableViewCell.swift */,
+				9300BB1E29C4057200C67A29 /* LeaderBoardTableViewCellViewModel.swift */,
+			);
+			path = LeaderBoardCell;
+			sourceTree = "<group>";
+		};
 		93199EF2298A0685008D532B /* Repository */ = {
 			isa = PBXGroup;
 			children = (
@@ -2688,12 +2702,14 @@
 				3619B14E29790AC60051C387 /* LRUAnimationCache.swift in Sources */,
 				24F9FFB5298424DF00E534A1 /* LottieTemplateCell.swift in Sources */,
 				939DE054297A242500EFA71E /* BenefitViewController.swift in Sources */,
+				9300BB1F29C4057200C67A29 /* LeaderBoardTableViewCellViewModel.swift in Sources */,
 				3619B1B829790AC60051C387 /* Rectangle.swift in Sources */,
 				3619B16129790AC60051C387 /* AnimationLayer.swift in Sources */,
 				3619B19A29790AC60051C387 /* StrokeNode.swift in Sources */,
 				3619B0CD29790AC50051C387 /* UITableViewCell.swift in Sources */,
 				3619B1FD29790AC60051C387 /* FilesManager.swift in Sources */,
 				3690783C297A6FEF0066530D /* HomeViewController2.swift in Sources */,
+				9300BB1B29C3FFE600C67A29 /* LeaderBoardTableViewCell.swift in Sources */,
 				2481E1D5297A998F00187BB9 /* CollectNewNFTButton.swift in Sources */,
 				3619B0E129790AC50051C387 /* ImageTemplate.swift in Sources */,
 				3619B11529790AC60051C387 /* NFTCellReactor.swift in Sources */,

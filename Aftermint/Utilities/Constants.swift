@@ -15,3 +15,8 @@ struct K {
     }
 
 }
+
+enum LeaderBoard: String {
+    case title = "Leader board"
+    case markImageName = "leader-board-mark"
+}
