@@ -379,6 +379,9 @@
 		36A8CEF02983CB9C007BF65A /* LLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A8CEEF2983CB9C007BF65A /* LLog.swift */; };
 		9300BB1B29C3FFE600C67A29 /* LeaderBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB1A29C3FFE600C67A29 /* LeaderBoardTableViewCell.swift */; };
 		9300BB1F29C4057200C67A29 /* LeaderBoardTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB1E29C4057200C67A29 /* LeaderBoardTableViewCellViewModel.swift */; };
+		9300BB2829C44AD400C67A29 /* MoonoGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB2729C44AD400C67A29 /* MoonoGameScene.swift */; };
+		9300BB2B29C44C6400C67A29 /* SparkParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9300BB2929C44C6400C67A29 /* SparkParticle.sks */; };
+		9300BB2C29C44C6400C67A29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9300BB2A29C44C6400C67A29 /* Assets.xcassets */; };
 		93199EF12989EDE1008D532B /* KASConnectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93199EF02989EDE1008D532B /* KASConnectService.swift */; };
 		93199EF4298A06A4008D532B /* KasWalletRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93199EF3298A06A4008D532B /* KasWalletRepository.swift */; };
 		932977862987990700C76AB5 /* LoginViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932977852987990700C76AB5 /* LoginViewReactor.swift */; };
@@ -777,6 +780,9 @@
 		36A8CEEF2983CB9C007BF65A /* LLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLog.swift; sourceTree = "<group>"; };
 		9300BB1A29C3FFE600C67A29 /* LeaderBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardTableViewCell.swift; sourceTree = "<group>"; };
 		9300BB1E29C4057200C67A29 /* LeaderBoardTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		9300BB2729C44AD400C67A29 /* MoonoGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonoGameScene.swift; sourceTree = "<group>"; };
+		9300BB2929C44C6400C67A29 /* SparkParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SparkParticle.sks; sourceTree = "<group>"; };
+		9300BB2A29C44C6400C67A29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93199EF02989EDE1008D532B /* KASConnectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KASConnectService.swift; sourceTree = "<group>"; };
 		93199EF3298A06A4008D532B /* KasWalletRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KasWalletRepository.swift; sourceTree = "<group>"; };
 		932977852987990700C76AB5 /* LoginViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewReactor.swift; sourceTree = "<group>"; };
@@ -975,6 +981,7 @@
 		3619AF11297908F90051C387 /* Aftermint */ = {
 			isa = PBXGroup;
 			children = (
+				9300BB2429C44A8C00C67A29 /* GameScene */,
 				240121A829A7B48100F60BDA /* Coordinator */,
 				93199EF2298A0685008D532B /* Repository */,
 				360D73A12987D1D800D109C3 /* Service */,
@@ -2141,6 +2148,16 @@
 			path = LeaderBoardCell;
 			sourceTree = "<group>";
 		};
+		9300BB2429C44A8C00C67A29 /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
+				9300BB2729C44AD400C67A29 /* MoonoGameScene.swift */,
+				9300BB2929C44C6400C67A29 /* SparkParticle.sks */,
+				9300BB2A29C44C6400C67A29 /* Assets.xcassets */,
+			);
+			path = GameScene;
+			sourceTree = "<group>";
+		};
 		93199EF2298A0685008D532B /* Repository */ = {
 			isa = PBXGroup;
 			children = (
@@ -2410,7 +2427,9 @@
 				3619B12C29790AC60051C387 /* just_bought.json in Resources */,
 				3619AF1F297908FA0051C387 /* LaunchScreen.storyboard in Resources */,
 				3619B12F29790AC60051C387 /* basic.png in Resources */,
+				9300BB2B29C44C6400C67A29 /* SparkParticle.sks in Resources */,
 				3619B1EC29790AC60051C387 /* respect.png in Resources */,
+				9300BB2C29C44C6400C67A29 /* Assets.xcassets in Resources */,
 				3619B12E29790AC60051C387 /* vector_test_0509.json in Resources */,
 				3619B1EB29790AC60051C387 /* background.png in Resources */,
 				3619B1E529790AC60051C387 /* Icon_Coin.png in Resources */,
@@ -2703,6 +2722,7 @@
 				24F9FFB5298424DF00E534A1 /* LottieTemplateCell.swift in Sources */,
 				939DE054297A242500EFA71E /* BenefitViewController.swift in Sources */,
 				9300BB1F29C4057200C67A29 /* LeaderBoardTableViewCellViewModel.swift in Sources */,
+				9300BB2829C44AD400C67A29 /* MoonoGameScene.swift in Sources */,
 				3619B1B829790AC60051C387 /* Rectangle.swift in Sources */,
 				3619B16129790AC60051C387 /* AnimationLayer.swift in Sources */,
 				3619B19A29790AC60051C387 /* StrokeNode.swift in Sources */,

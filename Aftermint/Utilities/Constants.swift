@@ -20,3 +20,8 @@ enum LeaderBoard: String {
     case title = "Leader board"
     case markImageName = "leader-board-mark"
 }
+
+enum GameSceneAsset: String {
+    case particles = "SparkParticle.sks"
+    case moonoImage = "game_moono_mock"
+}

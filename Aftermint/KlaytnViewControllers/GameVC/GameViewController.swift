@@ -6,16 +6,11 @@
 //
 
 import UIKit
+import SpriteKit
 
 final class GameViewController: UIViewController {
     
     private let leaderBoardBottomSheetVC = LeaderBoardBottomSheetViewController()
-    
-    private let backgroundImageView: UIImageView = {
-        let imageView = UIImageView()
-        
-        return imageView
-    }()
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -24,21 +19,22 @@ final class GameViewController: UIViewController {
         return imageView
     }()
     
-    private lazy var gameImageView: UIImageView = {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
-        
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "game_moono_mock")
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(tapGestureRecognizer)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
+    private lazy var gameSKView: SKView = {
+       let view = SKView()
+        view.backgroundColor = AftermintColor.secondaryBackgroundNavy
+        view.showsFPS = false
+        view.showsNodeCount = false
+        view.ignoresSiblingOrder = true
+        return view
     }()
     
+    
+    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
         setLayout()
+        setGameScene()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,30 +67,32 @@ final class GameViewController: UIViewController {
     // MARK: - Set UI & Layout
     private func setUI() {
         view.backgroundColor = AftermintColor.backgroundLightBlue
+        view.addSubview(gameSKView)
         view.addSubview(profileImageView)
-        view.addSubview(gameImageView)
     }
     
     private func setLayout() {
+        gameSKView.frame = view.bounds
         NSLayoutConstraint.activate([
             self.profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             self.profileImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.0),
-            self.gameImageView.topAnchor.constraint(equalTo: self.profileImageView.bottomAnchor, constant: 100.0),
-            self.gameImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            
         ])
     }
-    
-    // MARK: - Other functions
-    
-    /// Action when NftBackgroundImage is tapped
-    @objc private func imageTapped() {
 
-        UIView.animate(withDuration: 0.1) {
-            self.gameImageView.alpha = 0.3
-            self.gameImageView.alpha = 1.0
-        }
+}
+
+// MARK: - Set GameScene
+extension GameViewController {
+    
+    private func setGameScene() {
+        let width = view.frame.size.width
+        let height = view.frame.size.height
+        let scene = MoonoGameScene(size: CGSize(width: width, height: height))
+        scene.backgroundColor = AftermintColor.backgroundLightBlue
+        scene.scaleMode = .aspectFit
+        gameSKView.presentScene(scene)
     }
+    
 }
 
 extension GameViewController {
@@ -102,21 +100,24 @@ extension GameViewController {
     private func showLeaderBoardBottomSheetVC() {
         
         if #available(iOS 16.0, *) {
-
+            let navVC = UINavigationController(rootViewController: self.leaderBoardBottomSheetVC)
+            navVC.modalPresentationStyle = .pageSheet
+            
+            /// custom size
             let small = UISheetPresentationController.Detent.custom { context in
                 return 300.0
             }
             
-            if let sheet = self.leaderBoardBottomSheetVC.sheetPresentationController {
+            if let sheet = navVC.sheetPresentationController {
                 
                 sheet.detents = [.large(), small]
-                sheet.largestUndimmedDetentIdentifier = .medium
+                sheet.largestUndimmedDetentIdentifier = .large
                 sheet.prefersScrollingExpandsWhenScrolledToEdge = false
                 sheet.prefersEdgeAttachedInCompactHeight = true
                 sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
             }
             
-            present(self.leaderBoardBottomSheetVC, animated: true, completion: nil)
+            present(navVC, animated: true, completion: nil)
             
         } else {
             
