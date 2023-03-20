@@ -28,6 +28,13 @@ final class GameViewController: UIViewController {
         return view
     }()
     
+    private let bottomSheetView: BottomSheetView = {
+        let bottomSheet = BottomSheetView()
+        bottomSheet.bottomSheetColor = AftermintColor.backgroundNavy
+        bottomSheet.barViewColor = .darkGray
+        bottomSheet.translatesAutoresizingMaskIntoConstraints = false
+        return bottomSheet
+    }()
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -40,7 +47,7 @@ final class GameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationBarSetup()
-        self.showLeaderBoardBottomSheetVC()
+//        self.showLeaderBoardBottomSheetVC()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -69,6 +76,7 @@ final class GameViewController: UIViewController {
         view.backgroundColor = AftermintColor.backgroundLightBlue
         view.addSubview(gameSKView)
         view.addSubview(profileImageView)
+        view.addSubview(bottomSheetView)
     }
     
     private func setLayout() {
@@ -76,6 +84,10 @@ final class GameViewController: UIViewController {
         NSLayoutConstraint.activate([
             self.profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             self.profileImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.0),
+            self.bottomSheetView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            self.bottomSheetView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            self.bottomSheetView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            self.bottomSheetView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 
@@ -99,6 +111,7 @@ extension GameViewController {
     
     private func showLeaderBoardBottomSheetVC() {
         
+     
         if #available(iOS 16.0, *) {
             let navVC = UINavigationController(rootViewController: self.leaderBoardBottomSheetVC)
             navVC.modalPresentationStyle = .pageSheet
@@ -122,6 +135,7 @@ extension GameViewController {
         } else {
             
         }
+        
     }
     
     private func hideBottomVC() {
