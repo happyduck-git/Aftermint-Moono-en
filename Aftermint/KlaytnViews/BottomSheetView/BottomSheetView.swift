@@ -103,7 +103,18 @@ final class BottomSheetView: PassThroughView {
         setUI()
         setLayout()
         setDelegate()
-        dummyViewModelGenerator()
+        
+        self.viewModel.getAllNftRankCellViewModels { result in
+            switch result {
+            case .success(let viewModels):
+                self.viewModel.viewModelList = viewModels
+                DispatchQueue.main.async {
+                    self.leaderBoardTableView.reloadData()
+                }
+            case .failure(let failure):
+                print("Error getting viewmodels : \(failure)")
+            }
+        }
     }
     
     override func layoutSubviews() {
@@ -135,11 +146,11 @@ final class BottomSheetView: PassThroughView {
             self.bottomSheetView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
 
             self.barView.topAnchor.constraint(equalTo: self.bottomSheetView.topAnchor, constant: Const.barViewTopSpacing),
-            self.barView.widthAnchor.constraint(equalToConstant: 100),
-            self.barView.heightAnchor.constraint(equalToConstant: Const.barViewSize),
+            self.barView.widthAnchor.constraint(equalToConstant: Const.barViewWidth),
+            self.barView.heightAnchor.constraint(equalToConstant: Const.barViewHeight),
             self.barView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            self.leaderBoardStackView.topAnchor.constraint(equalToSystemSpacingBelow: barView.bottomAnchor, multiplier: 4),
+            self.leaderBoardStackView.topAnchor.constraint(equalToSystemSpacingBelow: barView.bottomAnchor, multiplier: 2),
             self.leaderBoardStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
             self.leaderBoardTableView.topAnchor.constraint(equalToSystemSpacingBelow: self.leaderBoardStackView.bottomAnchor, multiplier: 2),
@@ -205,6 +216,13 @@ extension BottomSheetView: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: LeaderBoardTableViewCell.identifier) as? LeaderBoardTableViewCell else { fatalError("Unsupported Cell") }
         
         let vm = self.viewModel.modelAt(indexPath.row)
+        
+        if indexPath.row <= 2 {
+            vm.setRankImage(with: cellRankImageAt(indexPath.row))
+        } else {
+            cell.switchRankImageToLabel()
+        }
+        
         cell.configure(with: vm)
         return cell
         
@@ -214,19 +232,16 @@ extension BottomSheetView: UITableViewDelegate, UITableViewDataSource {
         return 60
     }
     
-    
-    /* TEMP */
-    private func dummyViewModelGenerator() {
-        let vm = LeaderBoardTableViewCellViewModel(rankImage: "1st_place_medal",
-                                                   nftImage: "nftimage1",
-                                                   nftName: "Moono #100",
-                                                   touchScore: 10)
-        for _ in 0...10 {
-            self.viewModel.viewModelList.append(vm)
-        }
-        
-        DispatchQueue.main.async {
-            self.leaderBoardTableView.reloadData()
+    private func cellRankImageAt(_ indexPathRow: Int) -> UIImage? {
+        switch indexPathRow {
+        case 0:
+            return UIImage(named: RankImage.firstPlace.rawValue)
+        case 1:
+            return UIImage(named: RankImage.secondPlace.rawValue)
+        case 2:
+            return UIImage(named: RankImage.thirdPlace.rawValue)
+        default:
+            return UIImage(named: RankImage.others.rawValue)
         }
     }
     
@@ -249,11 +264,12 @@ extension BottomSheetView {
         static let duration = 0.5
         static let cornerRadius = 12.0
         static let barViewTopSpacing = 5.0
-        static let barViewSize = CGSize(width: UIScreen.main.bounds.width * 0.2, height: 5.0)
+        static let barViewWidth = UIScreen.main.bounds.width * 0.2
+        static let barViewHeight = 5.0
         static let bottomSheetRatio: (Mode) -> Double = { mode in
             switch mode {
             case .tip:
-                return 0.5 // 위에서 부터의 값 (밑으로 갈수록 값이 커짐)
+                return 0.47 // 위에서 부터의 값 (밑으로 갈수록 값이 커짐)
             case .full:
                 return 0.1
             }

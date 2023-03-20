@@ -5,6 +5,8 @@
 //  Created by Platfarm on 2023/03/10.
 //
 
+
+/// NOTE: THIS VC IS NOT IN USE. PLEASE DELETE WHEN POSSIBLE
 import UIKit
 
 final class LeaderBoardBottomSheetViewController: UIViewController {
@@ -50,7 +52,7 @@ final class LeaderBoardBottomSheetViewController: UIViewController {
         setUI()
         setLayout()
         setDelegate()
-        dummyViewModelGenerator()
+//        dummyViewModelGenerator()
     }
     
     // MARK: - Set up UI & Layout
@@ -98,19 +100,19 @@ extension LeaderBoardBottomSheetViewController: UITableViewDelegate, UITableView
     
     
     /* TEMP */
-    private func dummyViewModelGenerator() {
-        let vm = LeaderBoardTableViewCellViewModel(rankImage: "1st_place_medal",
-                                                   nftImage: "nftimage1",
-                                                   nftName: "Moono #100",
-                                                   touchScore: 10)
-        for _ in 0...10 {
-            self.viewModel.viewModelList.append(vm)
-        }
-        
-        DispatchQueue.main.async {
-            self.leaderBoardTableView.reloadData()
-        }
-    }
+//    private func dummyViewModelGenerator() {
+//        let vm = LeaderBoardTableViewCellViewModel(rankImage: "1st_place_medal",
+//                                                   nftImage: "nftimage1",
+//                                                   nftName: "Moono #100",
+//                                                   touchScore: 10)
+//        for _ in 0...10 {
+//            self.viewModel.viewModelList.append(vm)
+//        }
+//        
+//        DispatchQueue.main.async {
+//            self.leaderBoardTableView.reloadData()
+//        }
+//    }
     
     private func setDelegate() {
         leaderBoardTableView.delegate = self

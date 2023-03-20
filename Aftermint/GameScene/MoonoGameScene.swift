@@ -9,6 +9,8 @@ import SpriteKit
 
 final class MoonoGameScene: SKScene {
     
+    let vm: MoonoGameSceneViewModel = MoonoGameSceneViewModel()
+    
     // MARK: - Nodes
     private var particles: SKEmitterNode?
     private var moonoImage: SKSpriteNode?
@@ -45,7 +47,7 @@ final class MoonoGameScene: SKScene {
         moonoImage = SKSpriteNode(imageNamed: GameSceneAsset.moonoImage.rawValue)
         guard let moonoNode = moonoImage else { return }
         moonoNode.anchorPoint = CGPoint(x: 0, y: 0)
-        moonoNode.position = CGPoint(x: 80, y: 350)
+        moonoNode.position = CGPoint(x: 80, y: 370)
         moonoNode.zPosition = 0
         moonoNode.size = CGSize(width: 250, height: 250)
         addChild(moonoNode)
@@ -53,7 +55,7 @@ final class MoonoGameScene: SKScene {
     
     //MARK: - Touch Handling
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+        vm.increaseTouchCountByOne()
         particles?.removeFromParent()
         particles = nil
         

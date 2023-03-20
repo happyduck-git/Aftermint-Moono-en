@@ -383,6 +383,15 @@
 		9300BB2C29C44C6400C67A29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9300BB2A29C44C6400C67A29 /* Assets.xcassets */; };
 		9300BB5829C8106200C67A29 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB5729C8106200C67A29 /* BottomSheetView.swift */; };
 		9300BB5A29C8116D00C67A29 /* PassThroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB5929C8116D00C67A29 /* PassThroughView.swift */; };
+		9300BB5C29C820C900C67A29 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 9300BB5B29C820C900C67A29 /* FirebaseFirestore */; };
+		9300BB5E29C820D100C67A29 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9300BB5D29C820D100C67A29 /* FirebaseFirestoreSwift */; };
+		9300BB6029C8214000C67A29 /* FirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB5F29C8214000C67A29 /* FirestoreRepository.swift */; };
+		9300BB6329C8222300C67A29 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB6229C8222300C67A29 /* Card.swift */; };
+		9300BB6629C8226900C67A29 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB6529C8226900C67A29 /* Storable.swift */; };
+		9300BB6929C8280100C67A29 /* NftCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB6829C8280100C67A29 /* NftCollection.swift */; };
+		9300BB6D29C82F0E00C67A29 /* GameViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB6C29C82F0E00C67A29 /* GameViewControllerViewModel.swift */; };
+		9300BB6F29C8320D00C67A29 /* MoonoGameSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB6E29C8320D00C67A29 /* MoonoGameSceneViewModel.swift */; };
+		9300BB7629C840FD00C67A29 /* MoonoMockMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB7529C840FD00C67A29 /* MoonoMockMetaData.swift */; };
 		93199EF12989EDE1008D532B /* KASConnectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93199EF02989EDE1008D532B /* KASConnectService.swift */; };
 		93199EF4298A06A4008D532B /* KasWalletRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93199EF3298A06A4008D532B /* KasWalletRepository.swift */; };
 		932977862987990700C76AB5 /* LoginViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932977852987990700C76AB5 /* LoginViewReactor.swift */; };
@@ -785,6 +794,14 @@
 		9300BB2A29C44C6400C67A29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9300BB5729C8106200C67A29 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		9300BB5929C8116D00C67A29 /* PassThroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassThroughView.swift; sourceTree = "<group>"; };
+		9300BB5F29C8214000C67A29 /* FirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreRepository.swift; sourceTree = "<group>"; };
+		9300BB6229C8222300C67A29 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		9300BB6529C8226900C67A29 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
+		9300BB6829C8280100C67A29 /* NftCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftCollection.swift; sourceTree = "<group>"; };
+		9300BB6C29C82F0E00C67A29 /* GameViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewControllerViewModel.swift; sourceTree = "<group>"; };
+		9300BB6E29C8320D00C67A29 /* MoonoGameSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonoGameSceneViewModel.swift; sourceTree = "<group>"; };
+		9300BB7429C8382300C67A29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9300BB7529C840FD00C67A29 /* MoonoMockMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonoMockMetaData.swift; sourceTree = "<group>"; };
 		93199EF02989EDE1008D532B /* KASConnectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KASConnectService.swift; sourceTree = "<group>"; };
 		93199EF3298A06A4008D532B /* KasWalletRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KasWalletRepository.swift; sourceTree = "<group>"; };
 		932977852987990700C76AB5 /* LoginViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewReactor.swift; sourceTree = "<group>"; };
@@ -838,6 +855,7 @@
 				3619B20129790AFB0051C387 /* ReactorKit in Frameworks */,
 				3619B2252979120F0051C387 /* FirebaseRemoteConfig in Frameworks */,
 				3619B20B29790BBB0051C387 /* RxGesture in Frameworks */,
+				9300BB5E29C820D100C67A29 /* FirebaseFirestoreSwift in Frameworks */,
 				3619B22D2979123B0051C387 /* RxDataSources in Frameworks */,
 				3619B20E29790BCE0051C387 /* Macaw in Frameworks */,
 				3619B2232979120F0051C387 /* FirebaseCrashlytics in Frameworks */,
@@ -853,6 +871,7 @@
 				3619B2212979120F0051C387 /* FirebaseAnalytics in Frameworks */,
 				24097B7C29913E9000F92366 /* Pulley in Frameworks */,
 				3619B20429790B0E0051C387 /* Then in Frameworks */,
+				9300BB5C29C820C900C67A29 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -984,6 +1003,7 @@
 		3619AF11297908F90051C387 /* Aftermint */ = {
 			isa = PBXGroup;
 			children = (
+				9300BB7029C8367100C67A29 /* Firebase */,
 				9300BB2429C44A8C00C67A29 /* GameScene */,
 				240121A829A7B48100F60BDA /* Coordinator */,
 				93199EF2298A0685008D532B /* Repository */,
@@ -997,7 +1017,6 @@
 				3619AF12297908F90051C387 /* AppDelegate.swift */,
 				3619AF14297908F90051C387 /* SceneDelegate.swift */,
 				3619AF20297908FA0051C387 /* Info.plist */,
-				3619B232297920C50051C387 /* GoogleService-Info.plist */,
 			);
 			path = Aftermint;
 			sourceTree = "<group>";
@@ -2138,6 +2157,7 @@
 				245AC14F29A9348E00CE7857 /* Box.swift */,
 				245AC15129A934DC00CE7857 /* Constants.swift */,
 				24ED33AB29BEBCDD00C2D4E1 /* NukeImageLoader.swift */,
+				9300BB7529C840FD00C67A29 /* MoonoMockMetaData.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -2155,6 +2175,7 @@
 			isa = PBXGroup;
 			children = (
 				9300BB2729C44AD400C67A29 /* MoonoGameScene.swift */,
+				9300BB6E29C8320D00C67A29 /* MoonoGameSceneViewModel.swift */,
 				9300BB2929C44C6400C67A29 /* SparkParticle.sks */,
 				9300BB2A29C44C6400C67A29 /* Assets.xcassets */,
 			);
@@ -2170,10 +2191,54 @@
 			path = BottomSheetView;
 			sourceTree = "<group>";
 		};
+		9300BB6129C821E900C67A29 /* Firestore */ = {
+			isa = PBXGroup;
+			children = (
+				9300BB6229C8222300C67A29 /* Card.swift */,
+				9300BB6829C8280100C67A29 /* NftCollection.swift */,
+			);
+			path = Firestore;
+			sourceTree = "<group>";
+		};
+		9300BB6429C8225100C67A29 /* FireStore */ = {
+			isa = PBXGroup;
+			children = (
+				9300BB5F29C8214000C67A29 /* FirestoreRepository.swift */,
+			);
+			path = FireStore;
+			sourceTree = "<group>";
+		};
+		9300BB7029C8367100C67A29 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				9300BB7329C836C800C67A29 /* DEV */,
+				9300BB7229C836B400C67A29 /* PROD */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		9300BB7229C836B400C67A29 /* PROD */ = {
+			isa = PBXGroup;
+			children = (
+				3619B232297920C50051C387 /* GoogleService-Info.plist */,
+			);
+			path = PROD;
+			sourceTree = "<group>";
+		};
+		9300BB7329C836C800C67A29 /* DEV */ = {
+			isa = PBXGroup;
+			children = (
+				9300BB7429C8382300C67A29 /* GoogleService-Info.plist */,
+			);
+			path = DEV;
+			sourceTree = "<group>";
+		};
 		93199EF2298A0685008D532B /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				9300BB6429C8225100C67A29 /* FireStore */,
 				93199EF3298A06A4008D532B /* KasWalletRepository.swift */,
+				9300BB6529C8226900C67A29 /* Storable.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -2243,6 +2308,7 @@
 		939DE05E297A2DC000EFA71E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9300BB6129C821E900C67A29 /* Firestore */,
 				939DE061297A2E0600EFA71E /* KlaytnAuthResult.swift */,
 				939DE062297A2E0600EFA71E /* KlaytnNFT.swift */,
 				36A8CEE62983B5FC007BF65A /* KlaytnRawNft.swift */,
@@ -2325,6 +2391,7 @@
 			isa = PBXGroup;
 			children = (
 				93C32FBD29B9A69700DB3CB3 /* GameViewController.swift */,
+				9300BB6C29C82F0E00C67A29 /* GameViewControllerViewModel.swift */,
 			);
 			path = GameVC;
 			sourceTree = "<group>";
@@ -2347,6 +2414,7 @@
 				3619AF0B297908F90051C387 /* Sources */,
 				3619AF0C297908F90051C387 /* Frameworks */,
 				3619AF0D297908F90051C387 /* Resources */,
+				9300BB7129C8368B00C67A29 /* Setup Firebase Environment GoogleService-Info.plist */,
 			);
 			buildRules = (
 			);
@@ -2374,6 +2442,8 @@
 				3619B2302979125D0051C387 /* SnapKit */,
 				24097B7B29913E9000F92366 /* Pulley */,
 				93A4B8192991CFC100146FD8 /* FSCalendar */,
+				9300BB5B29C820C900C67A29 /* FirebaseFirestore */,
+				9300BB5D29C820D100C67A29 /* FirebaseFirestoreSwift */,
 			);
 			productName = Aftermint;
 			productReference = 3619AF0F297908F90051C387 /* Aftermint.app */;
@@ -2465,6 +2535,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9300BB7129C8368B00C67A29 /* Setup Firebase Environment GoogleService-Info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Setup Firebase Environment GoogleService-Info.plist";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Name of the resource we're selectively copying\nGOOGLESERVICE_INFO_PLIST=GoogleService-Info.plist\n\n# Get references to dev and prod versions of the GoogleService-Info.plist\n# NOTE: These should only live on the file system and should NOT be part of the target (since we'll be adding them to the target manually)\nGOOGLESERVICE_INFO_DEV=${PROJECT_DIR}/${TARGET_NAME}/Firebase/DEV/${GOOGLESERVICE_INFO_PLIST}\nGOOGLESERVICE_INFO_PROD=${PROJECT_DIR}/${TARGET_NAME}/Firebase/PROD/${GOOGLESERVICE_INFO_PLIST}\n\n# Make sure the dev version of GoogleService-Info.plist exists\necho \"Looking for ${GOOGLESERVICE_INFO_PLIST} in ${GOOGLESERVICE_INFO_DEV}\"\nif [ ! -f $GOOGLESERVICE_INFO_DEV ]\nthen\n    echo \"No Development GoogleService-Info.plist found. Please ensure it's in the proper directory.\"\n    exit 1\nfi\n\n# Make sure the prod version of GoogleService-Info.plist exists\necho \"Looking for ${GOOGLESERVICE_INFO_PLIST} in ${GOOGLESERVICE_INFO_PROD}\"\nif [ ! -f $GOOGLESERVICE_INFO_PROD ]\nthen\n    echo \"No Production GoogleService-Info.plist found. Please ensure it's in the proper directory.\"\n    exit 1\nfi\n\n# Get a reference to the destination location for the GoogleService-Info.plist\nPLIST_DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\necho \"Will copy ${GOOGLESERVICE_INFO_PLIST} to final destination: ${PLIST_DESTINATION}\"\n\n# Copy over the prod GoogleService-Info.plist for Release builds\nif [ \"${CONFIGURATION}\" == \"Release\" ]\nthen\n    echo \"Using ${GOOGLESERVICE_INFO_PROD}\"\n    cp \"${GOOGLESERVICE_INFO_PROD}\" \"${PLIST_DESTINATION}\"\nelse\n    echo \"Using ${GOOGLESERVICE_INFO_DEV}\"\n    cp \"${GOOGLESERVICE_INFO_DEV}\" \"${PLIST_DESTINATION}\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3619AF0B297908F90051C387 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -2521,6 +2612,7 @@
 				3619B1A029790AC60051C387 /* NodePropertyMap.swift in Sources */,
 				24097B7E29913EFD00F92366 /* BenefitTabBottomViewController.swift in Sources */,
 				3619B18629790AC60051C387 /* InvertedMatteLayer.swift in Sources */,
+				9300BB6329C8222300C67A29 /* Card.swift in Sources */,
 				3619B0CF29790AC50051C387 /* UIButton.swift in Sources */,
 				3619B14C29790AC60051C387 /* Keyframe.swift in Sources */,
 				3619B0D729790AC50051C387 /* WalletServiceProtocol.swift in Sources */,
@@ -2682,12 +2774,14 @@
 				24097B34298FD99700F92366 /* BellygomUtilityModel.swift in Sources */,
 				935E6A822982619200D94DA6 /* LottieViewController.swift in Sources */,
 				3619B0D129790AC50051C387 /* UICollectionReusableView.swift in Sources */,
+				9300BB6F29C8320D00C67A29 /* MoonoGameSceneViewModel.swift in Sources */,
 				3619B1FA29790AC60051C387 /* NewVideoRenderer.swift in Sources */,
 				3619B13A29790AC60051C387 /* AnimationViewInitializers.swift in Sources */,
 				24F9FFB82986615E00E534A1 /* LottieViewReactor.swift in Sources */,
 				3619B0F529790AC50051C387 /* TwitterError.swift in Sources */,
 				3619B1B929790AC60051C387 /* Star.swift in Sources */,
 				36907840297A70320066530D /* TemplateShareViewController2.swift in Sources */,
+				9300BB6D29C82F0E00C67A29 /* GameViewControllerViewModel.swift in Sources */,
 				3619B17C29790AC60051C387 /* TextCompositionLayer.swift in Sources */,
 				3619B1DC29790AC60051C387 /* ColorExtension.swift in Sources */,
 				3619B0D229790AC50051C387 /* OpenSeaClient.swift in Sources */,
@@ -2749,6 +2843,7 @@
 				3619B0EB29790AC50051C387 /* JWT.swift in Sources */,
 				3619B16929790AC60051C387 /* CALayer+fillBounds.swift in Sources */,
 				3619B0F429790AC50051C387 /* TwitterTweetForm.swift in Sources */,
+				9300BB7629C840FD00C67A29 /* MoonoMockMetaData.swift in Sources */,
 				3619B1A929790AC60051C387 /* PathNode.swift in Sources */,
 				3619B16029790AC60051C387 /* TransformLayer.swift in Sources */,
 				3619B0E929790AC50051C387 /* TokenKind.swift in Sources */,
@@ -2795,9 +2890,11 @@
 				3619B0F229790AC50051C387 /* MediaUploadImageType.swift in Sources */,
 				93A4B8112990E70E00146FD8 /* BookmarkMenuBar.swift in Sources */,
 				3619B1D629790AC60051C387 /* AnimationKeypathExtension.swift in Sources */,
+				9300BB6929C8280100C67A29 /* NftCollection.swift in Sources */,
 				3619B13729790AC60051C387 /* AnimationSubview.macOS.swift in Sources */,
 				3619B1D229790AC60051C387 /* SnapshotTestSupport.swift in Sources */,
 				3619B0F929790AC50051C387 /* MediaUploadVideoType.swift in Sources */,
+				9300BB6029C8214000C67A29 /* FirestoreRepository.swift in Sources */,
 				3619B0F329790AC50051C387 /* MediaUploadFinalizeResponse.swift in Sources */,
 				3619AF13297908F90051C387 /* AppDelegate.swift in Sources */,
 				3619B17329790AC60051C387 /* StarAnimation.swift in Sources */,
@@ -2809,6 +2906,7 @@
 				36907844297A70620066530D /* TemplateCreateViewController2.swift in Sources */,
 				3619B0CB29790AC50051C387 /* URLRequest.swift in Sources */,
 				3619B14429790AC60051C387 /* AnimatedButton.swift in Sources */,
+				9300BB6629C8226900C67A29 /* Storable.swift in Sources */,
 				3619B11129790AC50051C387 /* SVGView.swift in Sources */,
 				3619B17029790AC60051C387 /* RectangleAnimation.swift in Sources */,
 				36907846297A706E0066530D /* TemplateCreateViewReactor2.swift in Sources */,
@@ -2965,6 +3063,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -3270,6 +3369,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3619B20529790B220051C387 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		9300BB5B29C820C900C67A29 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3619B21329790C900051C387 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		9300BB5D29C820D100C67A29 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3619B21329790C900051C387 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 		93A4B8192991CFC100146FD8 /* FSCalendar */ = {
 			isa = XCSwiftPackageProductDependency;

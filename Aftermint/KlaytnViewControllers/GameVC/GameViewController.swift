@@ -11,6 +11,7 @@ import SpriteKit
 final class GameViewController: UIViewController {
     
     private let leaderBoardBottomSheetVC = LeaderBoardBottomSheetViewController()
+    private let gameVCViewModel: GameViewControllerViewModel = GameViewControllerViewModel()
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -47,7 +48,6 @@ final class GameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationBarSetup()
-//        self.showLeaderBoardBottomSheetVC()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -107,40 +107,3 @@ extension GameViewController {
     
 }
 
-extension GameViewController {
-    
-    private func showLeaderBoardBottomSheetVC() {
-        
-     
-        if #available(iOS 16.0, *) {
-            let navVC = UINavigationController(rootViewController: self.leaderBoardBottomSheetVC)
-            navVC.modalPresentationStyle = .pageSheet
-            
-            /// custom size
-            let small = UISheetPresentationController.Detent.custom { context in
-                return 300.0
-            }
-            
-            if let sheet = navVC.sheetPresentationController {
-                
-                sheet.detents = [.large(), small]
-                sheet.largestUndimmedDetentIdentifier = .large
-                sheet.prefersScrollingExpandsWhenScrolledToEdge = false
-                sheet.prefersEdgeAttachedInCompactHeight = true
-                sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
-            }
-            
-            present(navVC, animated: true, completion: nil)
-            
-        } else {
-            
-        }
-        
-    }
-    
-    private func hideBottomVC() {
-        self.leaderBoardBottomSheetVC.dismiss(animated: true)
-        
-    }
-    
-}

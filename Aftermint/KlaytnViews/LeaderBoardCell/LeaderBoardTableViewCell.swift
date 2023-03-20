@@ -116,22 +116,22 @@ final class LeaderBoardTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        
         super.prepareForReuse()
         self.rankImageView.image = nil
         self.nftImageView.image = nil
-        self.nftNameLabel.text = ""
-        self.touchScoreLabel.text = ""
+        self.nftNameLabel.text = nil
+        self.touchScoreLabel.text = nil
+        
     }
     
     // MARK: - Public
     public func configure(with vm: LeaderBoardTableViewCellViewModel) {
-        rankImageView.image = UIImage(named: vm.rankImage)
+        
+        rankImageView.image = vm.rankImage
         nftNameLabel.text = vm.nftName //TODO: Change TokenId -> NFTName (e.g. Moono #199)
         touchScoreLabel.text = String(describing: vm.touchScore)
-        nftImageView.image = UIImage(named: vm.nftImage)
-        
-        //OG Code
-        /*
+       
         self.imageStringToImage(with: vm.nftImage) { result in
             switch result {
             case .success(let image):
@@ -141,7 +141,7 @@ final class LeaderBoardTableViewCell: UITableViewCell {
                 self.nftImageView.image = nil
             }
         }
-         */
+         
     }
     
     /* Not yet used */
