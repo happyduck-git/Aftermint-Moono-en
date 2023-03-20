@@ -118,6 +118,9 @@ final class LeaderBoardTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         
         super.prepareForReuse()
+        //TODO: Fix rankLabel & nftImageView abnormal functioning 
+        self.rankLabel.isHidden = false
+        self.nftImageView.isHidden = false
         self.rankImageView.image = nil
         self.nftImageView.image = nil
         self.nftNameLabel.text = nil
