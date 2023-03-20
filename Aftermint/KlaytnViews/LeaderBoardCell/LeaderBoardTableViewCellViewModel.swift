@@ -35,9 +35,11 @@ class LeaderBoardTableViewCellListViewModel {
                   let rankImage = UIImage(named: RankImage.firstPlace.rawValue)
             else { return }
             
+            let initialRank = 1
             let viewModels = cards.map { card in
                 
                 let viewModel: LeaderBoardTableViewCellViewModel = LeaderBoardTableViewCellViewModel(rankImage: rankImage,
+                                                                                                     rank: initialRank, // Set initial rank as 1
                                                                                                      nftImage: card.imageUri,
                                                                                                      nftName: card.tokenId,
                                                                                                      touchScore: card.count)
@@ -62,13 +64,15 @@ extension LeaderBoardTableViewCellListViewModel {
 class LeaderBoardTableViewCellViewModel {
     
     var rankImage: UIImage
+    var rank: Int
     let nftImage: String
     let nftName: String
     let touchScore: Int64
     
     //MARK: - Initializer
-    init(rankImage: UIImage, nftImage: String, nftName: String, touchScore: Int64) {
+    init(rankImage: UIImage, rank: Int, nftImage: String, nftName: String, touchScore: Int64) {
         self.rankImage = rankImage
+        self.rank = rank
         self.nftImage = nftImage
         self.nftName = nftName
         self.touchScore = touchScore
@@ -79,6 +83,11 @@ class LeaderBoardTableViewCellViewModel {
         guard let image = image else { return }
         self.rankImage = image
     }
+    
+    func setRankNumberWithIndexPath(_ indexPathRow: Int) {
+        self.rank = indexPathRow
+    }
+    
 }
 
 
