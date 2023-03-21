@@ -111,6 +111,13 @@ class LoginViewController: UIViewController, View, Coordinating {
         ])
     }
     
+    private func connectFavorletWallet() {
+        /// NOTE: Temporarily push directly to KlaytnTabViewController;
+        /// Will connect to FavorletWallet application later in the future
+        let homeVC = KlaytnTabViewController()
+        navigationController?.pushViewController(homeVC, animated: true)
+    }
+    
     private func connectKaikasWallet() {
         let reactor: StartViewReactor = StartViewReactor()
         let startVC = StartViewController(reactor: reactor)
@@ -130,12 +137,29 @@ extension LoginViewController {
     }
     
     private func bindState(with reactor: LoginViewReactor) {
-        reactor.state.map { $0.connect }
-            .bind{ [weak self] _ in self?.connectKaikasWallet()  }
+        reactor.state.map { $0.shouldOpenFavorlet }
+            .bind{ [weak self] shouldOpenFavorlet in
+                if shouldOpenFavorlet {
+                    self?.connectFavorletWallet()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.shouldOpenKaikas }
+            .bind{ [weak self] shouldOpenKaikas in
+                if shouldOpenKaikas {
+                    self?.connectKaikasWallet()
+                }
+            }
             .disposed(by: disposeBag)
     }
     
     private func bindAction(with reactor: LoginViewReactor) {
+        favorletButton.rx.tap
+            .map { Reactor.Action.connectWithFavorlet }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
         kaikasButton.rx.tap
             .map { Reactor.Action.connectWithKaikas }
             .bind(to: reactor.action)

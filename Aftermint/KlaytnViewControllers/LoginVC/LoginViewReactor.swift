@@ -18,18 +18,20 @@ final class LoginViewReactor: Reactor {
     private var isWaitingTransactionResponse: Bool = false
     private var observer: NSObjectProtocol?
     
-    
     enum Action {
+        case connectWithFavorlet
         case connectWithKaikas
     }
     
     enum Mutation {
-        case connect
+        case openFavorlet
+        case openKaikas
         case presentAlert(String)
     }
     
     struct State {
-        var connect: Void = ()
+        var shouldOpenFavorlet: Bool = false
+        var shouldOpenKaikas: Bool = false
         var alertMessage: String?
     }
     
@@ -43,8 +45,10 @@ final class LoginViewReactor: Reactor {
     // MARK: - Action -> Mutation
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-        case .connectWithKaikas:
+        case .connectWithFavorlet:
+            return Observable.just(Mutation.openFavorlet)
             
+        case .connectWithKaikas:
             if NetworkStatus.shared.isConnected {
                 Task.init {
                     do {
@@ -52,28 +56,33 @@ final class LoginViewReactor: Reactor {
                         guard let url = URL(string: "kaikas://wallet/api?request_key=\(requestToken)") else { return }
                         self.isWaitingTransactionResponse = true
                         
-                        /* Open KAS app to login */
+                        /// Open KAS app to login.
                         DispatchQueue.main.async {
                             UIApplication.shared.open(url)
                         }
                         
+                        /// Notify when the app will enter foreground.
                         self.observer = await NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification,
                                                                                      object: nil,
                                                                                      queue: .main,
                                                                                      using: { notification in
+                            /// When notified that the app will enter foreground,
+                            /// acquire wallet address and save the address to KasWalletRepository.
                             Task.init {
                                 guard let walletAddress = try await self.kasConnectService.getWalletAddress(requestKey: requestToken) else { return }
                                 self.kasWalletRepository.setCurrentWallet(walletAddress: walletAddress)
                                 print("walletAddress: \(walletAddress)")
+                                
                             }
                         })
                         
                     } catch (let error){
                         print("Error \(error)")
                     }
+                    
                 }
                 
-                return Observable.just(Mutation.connect)
+                return Observable.just(Mutation.openKaikas)
             } else {
                 print("Please check your Network connection!")
             }
@@ -85,12 +94,17 @@ final class LoginViewReactor: Reactor {
     func reduce(state: State, mutation: Mutation) -> State {
         var newState = state
         switch mutation {
-        case .connect:
-            newState.connect = ()
+        case .openFavorlet:
+            newState.shouldOpenFavorlet = true
+            newState.shouldOpenKaikas = false
+            
+        case .openKaikas:
+            newState.shouldOpenFavorlet = false
+            newState.shouldOpenKaikas = true
+            
         case .presentAlert(let message):
             newState.alertMessage = message
         }
-        
         return newState
     }
 }
