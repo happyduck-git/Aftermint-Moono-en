@@ -199,6 +199,7 @@ final class BottomSheetView: PassThroughView {
     
     /// Update top constraint of the bottom sheet by pan gesture offset
     private func updateConstraint(offset: Double) {
+
         bottomSheetViewTopConstraint?.constant = offset
         self.layoutIfNeeded()
     }
