@@ -152,6 +152,13 @@ extension LoginViewController {
                 }
             }
             .disposed(by: disposeBag)
+        /*
+        reactor.state.asObservable()
+            .map { $0.shouldOpenKaikas }
+            .bind(to: self.kaikasButton.rx.tap)
+            .disposed(by: disposeBag)
+         */
+      
     }
     
     private func bindAction(with reactor: LoginViewReactor) {

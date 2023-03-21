@@ -12,13 +12,66 @@ final class GameViewController: UIViewController {
     
     private let leaderBoardBottomSheetVC = LeaderBoardBottomSheetViewController()
     private let gameVCViewModel: GameViewControllerViewModel = GameViewControllerViewModel()
+    private var gameScene: MoonoGameScene = MoonoGameScene()
     
-    private let profileImageView: UIImageView = {
+    private let nftImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "game_user_info")
+        imageView.image = UIImage(systemName: "house")
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.borderColor = UIColor(ciColor: .white).cgColor
+        imageView.layer.borderWidth = 1.0
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
+    
+    private let nftDataAndScoreStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 5
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    private let nftDataStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    private let nftNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Moono #1147 "
+        label.textColor = .white
+        label.font = BellyGomFont.header06
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let nftGradeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "/ Moono week"
+        label.textColor = .white
+        label.font = BellyGomFont.header06
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let touchCountLabel: UILabel = {
+        let label = UILabel()
+        label.text = "129"
+        label.font = BellyGomFont.header03
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+//    private let profileImageView: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.image = UIImage(named: "game_user_info")
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        return imageView
+//    }()
     
     private lazy var gameSKView: SKView = {
        let view = SKView()
@@ -43,6 +96,7 @@ final class GameViewController: UIViewController {
         setUI()
         setLayout()
         setGameScene()
+        self.gameScene.moonoGameSceneDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,19 +109,19 @@ final class GameViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
+    override func viewWillLayoutSubviews() {
+        nftImageView.layer.cornerRadius = nftImageView.frame.size.width / 2
+    }
+    
     private func navigationBarSetup() {
         
         self.tabBarController?.navigationItem.setHidesBackButton(true, animated: false)
-        
         self.tabBarController?.navigationItem.title = ""
         
-        /* Left bar item */
         let logo = UIImage(named: "game_logo")
         let myImageView = UIImageView(image: logo)
         let leftBar: UIBarButtonItem = UIBarButtonItem(customView: myImageView)
         self.tabBarController?.navigationItem.leftBarButtonItem = leftBar
-        
-        /* Right bar item */
         self.tabBarController?.navigationItem.rightBarButtonItems = nil
     }
     
@@ -75,15 +129,29 @@ final class GameViewController: UIViewController {
     private func setUI() {
         view.backgroundColor = AftermintColor.backgroundLightBlue
         view.addSubview(gameSKView)
-        view.addSubview(profileImageView)
+        view.addSubview(nftImageView)
+        view.addSubview(nftDataAndScoreStackView)
         view.addSubview(bottomSheetView)
+        
+        nftDataAndScoreStackView.addArrangedSubview(nftDataStackView)
+        nftDataAndScoreStackView.addArrangedSubview(touchCountLabel)
+        nftDataStackView.addArrangedSubview(nftNameLabel)
+        nftDataStackView.addArrangedSubview(nftGradeLabel)
     }
     
     private func setLayout() {
+        let viewHeight = view.frame.size.height
         gameSKView.frame = view.bounds
         NSLayoutConstraint.activate([
-            self.profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            self.profileImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.0),
+            self.nftImageView.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2),
+            self.nftImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.0),
+            self.nftImageView.heightAnchor.constraint(equalToConstant: viewHeight / 14),
+            self.nftImageView.widthAnchor.constraint(equalTo: self.nftImageView.heightAnchor),
+            
+            
+            self.nftDataAndScoreStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: self.nftImageView.trailingAnchor, multiplier: 1),
+            self.nftDataAndScoreStackView.centerYAnchor.constraint(equalTo: self.nftImageView.centerYAnchor),
+            
             self.bottomSheetView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             self.bottomSheetView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             self.bottomSheetView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -99,11 +167,26 @@ extension GameViewController {
     private func setGameScene() {
         let width = view.frame.size.width
         let height = view.frame.size.height
-        let scene = MoonoGameScene(size: CGSize(width: width, height: height))
-        scene.backgroundColor = AftermintColor.backgroundLightBlue
-        scene.scaleMode = .aspectFit
-        gameSKView.presentScene(scene)
+        gameScene.size = CGSize(width: width, height: height)
+        gameScene.backgroundColor = AftermintColor.backgroundLightBlue
+        gameScene.scaleMode = .aspectFit
+//        let scene = MoonoGameScene(size: CGSize(width: width, height: height))
+//        scene.backgroundColor = AftermintColor.backgroundLightBlue
+//        scene.scaleMode = .aspectFit
+        gameSKView.presentScene(gameScene)
     }
     
 }
 
+extension GameViewController: MoonoGameSceneDelegate {
+    
+    func fetchCurrentNftData(nft: Card) {
+        print(nft.imageUri)
+        let url = URL(string: nft.imageUri)
+        NukeImageLoader.loadImageUsingNuke(url: url) { image in
+            self.nftImageView.image = image
+        }
+        self.nftNameLabel.text = nft.tokenId
+    }
+    
+}

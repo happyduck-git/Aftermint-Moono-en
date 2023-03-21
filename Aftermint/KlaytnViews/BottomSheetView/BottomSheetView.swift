@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol BottomSheetViewDelegate: AnyObject {
+    func fetchCurrentNftData(nftName: String, touchCount: Int64)
+}
+
 final class BottomSheetView: PassThroughView {
     
     var viewModel: LeaderBoardTableViewCellListViewModel = LeaderBoardTableViewCellListViewModel()

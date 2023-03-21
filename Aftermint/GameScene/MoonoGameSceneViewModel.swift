@@ -7,10 +7,26 @@
 
 import Foundation
 
-class MoonoGameSceneViewModel {
+protocol MoonoGameSceneViewModelDelegate: AnyObject {
+    func fetchCurrentNftData(nft: Card)
+}
+
+final class MoonoGameSceneViewModel {
     
+    var delegate: MoonoGameSceneViewModelDelegate?
+    var delegateDidSet: Bool {
+        if delegate != nil {
+            print("delegate has been set")
+            return true
+        }
+        return false
+    }
     let fireStoreRepository = FirestoreRepository.shared
     let randomMoonoData: Card = MoonoMockMetaData().getRandomData()
+    
+    init() {
+        delegate?.fetchCurrentNftData(nft: self.randomMoonoData)
+    }
     
     //TODO: Need to change from dummy data to realtime data
     var count: Int64 = 0 {
