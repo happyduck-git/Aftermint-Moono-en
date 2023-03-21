@@ -11,7 +11,9 @@ final class MoonoGameScene: SKScene {
     
     let vm: MoonoGameSceneViewModel = MoonoGameSceneViewModel()
     
-    // MARK: - Nodes
+    // MARK: - Game Elements
+    
+    //Nodes
     private var particles: SKEmitterNode?
     private var moonoImage: SKSpriteNode?
     
@@ -20,7 +22,8 @@ final class MoonoGameScene: SKScene {
     private let touchFadeIn: SKAction = SKAction.fadeIn(withDuration: 0.1)
     
     // MARK: - Life cycle
-    override func didMove(to view: SKView) { // Tells you when the scene is presented by a view.
+    /// Indicates when the scene is presented by a view.
+    override func didMove(to view: SKView) {
         setUpScenery()
     }
     
@@ -59,9 +62,22 @@ final class MoonoGameScene: SKScene {
         particles?.removeFromParent()
         particles = nil
         
+        /// Define touch animation range;
+        /// Range is based on the position and the size of 'moonoImage property'
+        let moonoImagePostion = self.moonoImage?.position ?? CGPoint(x: 0.0, y: 0.0)
+        let moonoImageSize = self.moonoImage?.size ?? CGSize(width: 0.0, height: 0.0)
+        let rangeX = moonoImagePostion.x...(moonoImagePostion.x + moonoImageSize.width)
+        let rangeY = moonoImagePostion.y...(moonoImagePostion.y + moonoImageSize.height)
+        
+        /// Check if touch is found in the valid range;
+        /// Fire animation if the touch is in the valid range
         for touch in touches {
+            
             let startPoint = touch.location(in: self)
-            showMoveParticles(touchPosition: startPoint)
+            if rangeX.contains(startPoint.x) && rangeY.contains(startPoint.y) {
+                showMoveParticles(touchPosition: startPoint)
+            }
+            
         }
         
     }

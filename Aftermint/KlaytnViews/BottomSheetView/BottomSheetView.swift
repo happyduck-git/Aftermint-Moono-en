@@ -10,7 +10,7 @@ import UIKit
 final class BottomSheetView: PassThroughView {
     
     var viewModel: LeaderBoardTableViewCellListViewModel = LeaderBoardTableViewCellListViewModel()
-
+    
     // MARK: - UI Elements
     
     let bottomSheetView: UIView = {
@@ -60,7 +60,7 @@ final class BottomSheetView: PassThroughView {
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
-
+    
     // MARK: - Properties
     var mode: Mode = .tip {
         didSet {
@@ -82,7 +82,7 @@ final class BottomSheetView: PassThroughView {
         didSet { self.barView.backgroundColor = self.barViewColor }
     }
     
- // MARK: - Initializer
+    // MARK: - Initializer
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
@@ -119,11 +119,13 @@ final class BottomSheetView: PassThroughView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let height = self.barView.bounds.size.height
+        let height = self.barView.frame.size.height
         self.barView.layer.cornerRadius = height / 2
     }
     
     // MARK: - SetUI & Layout
+    /// Dynamic BottomSheet top constraint
+    var bottomSheetViewTopConstraint: NSLayoutConstraint?
     
     private func setUI() {
         
@@ -140,11 +142,10 @@ final class BottomSheetView: PassThroughView {
     private func setLayout() {
         
         NSLayoutConstraint.activate([
-            self.bottomSheetView.topAnchor.constraint(equalTo: self.topAnchor, constant: Const.bottomSheetYPosition(.tip)),
             self.bottomSheetView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.bottomSheetView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             self.bottomSheetView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-
+            
             self.barView.topAnchor.constraint(equalTo: self.bottomSheetView.topAnchor, constant: Const.barViewTopSpacing),
             self.barView.widthAnchor.constraint(equalToConstant: Const.barViewWidth),
             self.barView.heightAnchor.constraint(equalToConstant: Const.barViewHeight),
@@ -159,10 +160,14 @@ final class BottomSheetView: PassThroughView {
             self.leaderBoardTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
         
+        bottomSheetViewTopConstraint = self.bottomSheetView.topAnchor.constraint(equalTo: self.topAnchor, constant: Const.bottomSheetYPosition(.tip))
+        bottomSheetViewTopConstraint?.isActive = true
+        
     }
     
     // MARK: Methods
     @objc private func didPan(_ recognizer: UIPanGestureRecognizer) {
+        
         let translationY = recognizer.translation(in: self).y
         let minY = self.bottomSheetView.frame.minY
         let offset = translationY + minY
@@ -186,22 +191,16 @@ final class BottomSheetView: PassThroughView {
             delay: 0,
             options: .allowUserInteraction,
             animations: {
-                // velocity를 이용하여 위로 스와이프인지, 아래로 스와이프인지 확인
                 self.mode = recognizer.velocity(in: self).y >= 0 ? Mode.tip : .full
             },
             completion: nil
         )
     }
     
+    /// Update top constraint of the bottom sheet by pan gesture offset
     private func updateConstraint(offset: Double) {
-        
-        NSLayoutConstraint.activate([
-            self.bottomSheetView.topAnchor.constraint(equalTo: self.topAnchor, constant: offset),
-            self.bottomSheetView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.bottomSheetView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.bottomSheetView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
-        ])
-        
+        bottomSheetViewTopConstraint?.constant = offset
+        self.layoutIfNeeded()
     }
 }
 
@@ -213,7 +212,10 @@ extension BottomSheetView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: LeaderBoardTableViewCell.identifier) as? LeaderBoardTableViewCell else { fatalError("Unsupported Cell") }
+        
+        cell.resetCell()
         
         let vm = self.viewModel.modelAt(indexPath.row)
         
@@ -221,6 +223,7 @@ extension BottomSheetView: UITableViewDelegate, UITableViewDataSource {
             vm.setRankImage(with: cellRankImageAt(indexPath.row))
         } else {
             cell.switchRankImageToLabel()
+            vm.setRankNumberWithIndexPath(indexPath.row + 1)
         }
         
         cell.configure(with: vm)
@@ -261,7 +264,7 @@ extension BottomSheetView {
     }
     
     private enum Const {
-        static let duration = 0.5
+        static let duration = 0.0
         static let cornerRadius = 12.0
         static let barViewTopSpacing = 5.0
         static let barViewWidth = UIScreen.main.bounds.width * 0.2

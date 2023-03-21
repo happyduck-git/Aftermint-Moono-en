@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Moono Mock MetaData Only for Game Demo
+/// Moono Mock MetaData Only for Game Demo;
 /// Will be removed
 struct MoonoMockMetaData {
     

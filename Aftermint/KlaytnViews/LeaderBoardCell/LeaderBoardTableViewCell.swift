@@ -19,7 +19,6 @@ final class LeaderBoardTableViewCell: UITableViewCell {
     
     private let rankLabel: UILabel = {
         let label = UILabel()
-        label.text = "4" //TEMP
         label.font = BellyGomFont.header03
         label.textColor = AftermintColor.rankGrey
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -64,8 +63,6 @@ final class LeaderBoardTableViewCell: UITableViewCell {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-        
     }
     
     override func layoutSubviews() {
@@ -81,8 +78,6 @@ final class LeaderBoardTableViewCell: UITableViewCell {
         contentView.addSubview(nftImageView)
         contentView.addSubview(nftNameLabel)
         contentView.addSubview(touchScoreLabel)
-        
-        
     }
     
     private func setLayout() {
@@ -116,22 +111,22 @@ final class LeaderBoardTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        
         super.prepareForReuse()
-        //TODO: Fix rankLabel & nftImageView abnormal functioning 
-        self.rankLabel.isHidden = false
-        self.nftImageView.isHidden = false
-        self.rankImageView.image = nil
+        self.rankImageView.isHidden = false
+        self.rankLabel.isHidden = true
+    }
+    
+    internal func resetCell() {
+        self.rankLabel.text = nil
         self.nftImageView.image = nil
         self.nftNameLabel.text = nil
         self.touchScoreLabel.text = nil
-        
     }
     
     // MARK: - Public
     public func configure(with vm: LeaderBoardTableViewCellViewModel) {
-        
         rankImageView.image = vm.rankImage
+        rankLabel.text = String(describing: vm.rank)
         nftNameLabel.text = vm.nftName //TODO: Change TokenId -> NFTName (e.g. Moono #199)
         touchScoreLabel.text = String(describing: vm.touchScore)
        
@@ -139,15 +134,15 @@ final class LeaderBoardTableViewCell: UITableViewCell {
             switch result {
             case .success(let image):
                 self.nftImageView.image = image
+                return
             case .failure(let error):
-                print("Error configure NftRankCell --- \(error.localizedDescription)")
+                print("Error configure NftRankCell --- \(error.localizedDescription) --- with result \(result)")
                 self.nftImageView.image = nil
+                return
             }
         }
-         
     }
     
-    /* Not yet used */
     public func switchRankImageToLabel() {
         self.rankImageView.isHidden = true
         self.rankLabel.isHidden = false
@@ -158,7 +153,6 @@ final class LeaderBoardTableViewCell: UITableViewCell {
         NukeImageLoader.loadImageUsingNuke(url: url) { image in
             completion(.success(image))
         }
-        completion(.failure(ImageError.nukeImageLoadingError))
     }
     
     enum ImageError: Error {
