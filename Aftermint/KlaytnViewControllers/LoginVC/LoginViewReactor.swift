@@ -50,6 +50,7 @@ final class LoginViewReactor: Reactor {
             return Observable.just(Mutation.openFavorlet)
             
         case .connectWithKaikas:
+<<<<<<< HEAD
          
             self.deeplinkToKaikasToConnectWallet{ result in
                 switch result {
@@ -66,6 +67,43 @@ final class LoginViewReactor: Reactor {
                .catchErrorJustReturn(.updateNetworkStatus(.failed(" sent code failed"))) // when fails
              return .concat([startLoading, requestCode])
              */
+=======
+            if !NetworkStatus.shared.isConnected { return Observable.error(NetworkError.networkConnectionError) }
+            
+            Task.init {
+                do {
+                    guard let requestToken = try await self.kasConnectService.getTokenID() else { return }
+                    guard let url = URL(string: "kaikas://wallet/api?request_key=\(requestToken)") else { return }
+                    self.isWaitingTransactionResponse = true
+                    
+                    /// Open KAS app to login.
+                    DispatchQueue.main.async {
+                        UIApplication.shared.open(url)
+                    }
+                    
+                    /// Notify when the app will enter foreground.
+                    self.observer = await NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification,
+                                                                                 object: nil,
+                                                                                 queue: .main,
+                                                                                 using: { notification in
+                        /// When notified that the app will enter foreground,
+                        /// acquire wallet address and save the address to KasWalletRepository.
+                        Task.init {
+                            guard let walletAddress = try await self.kasConnectService.getWalletAddress(requestKey: requestToken) else { return }
+                            self.kasWalletRepository.setCurrentWallet(walletAddress: walletAddress)
+                            print("walletAddress: \(walletAddress)")
+                            
+                        }
+                    })
+                    
+                } catch (let error){
+                    print("Error \(error)")
+                }
+                
+            }
+            
+            return Observable.just(Mutation.openKaikas)
+>>>>>>> 5d5d0afb50b40eb6f9e18fa1d1dadab02730c669
             
         }
     }
@@ -90,6 +128,7 @@ final class LoginViewReactor: Reactor {
     }
 }
 
+<<<<<<< HEAD
 extension LoginViewReactor {
     
     private func deeplinkToKaikasToConnectWallet(completion: @escaping (Result<Bool, Error>) -> ()) {
@@ -127,3 +166,5 @@ extension LoginViewReactor {
         }
     }
 }
+=======
+>>>>>>> 5d5d0afb50b40eb6f9e18fa1d1dadab02730c669

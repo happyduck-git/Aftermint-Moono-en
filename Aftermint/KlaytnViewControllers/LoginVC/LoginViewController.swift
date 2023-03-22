@@ -152,6 +152,7 @@ extension LoginViewController {
                 }
             }
             .disposed(by: disposeBag)
+<<<<<<< HEAD
         
 //        reactor.state.map { $0.shouldOpenKaikas }
 //            .bind{ [weak self] shouldOpenKaikas in
@@ -168,6 +169,15 @@ extension LoginViewController {
 //                }
 //            }
 //            .disposed(by: disposeBag)
+=======
+        /*
+        reactor.state.asObservable()
+            .map { $0.shouldOpenKaikas }
+            .bind(to: self.kaikasButton.rx.tap)
+            .disposed(by: disposeBag)
+         */
+      
+>>>>>>> 5d5d0afb50b40eb6f9e18fa1d1dadab02730c669
     }
     
     private func bindAction(with reactor: LoginViewReactor) {

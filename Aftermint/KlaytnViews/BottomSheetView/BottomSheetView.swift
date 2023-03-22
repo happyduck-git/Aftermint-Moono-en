@@ -8,7 +8,11 @@
 import UIKit
 
 protocol BottomSheetViewDelegate: AnyObject {
+<<<<<<< HEAD
     func tempFetchData(data: [String: Int64])
+=======
+    func fetchCurrentNftData(nftName: String, touchCount: Int64)
+>>>>>>> 5d5d0afb50b40eb6f9e18fa1d1dadab02730c669
 }
 
 final class BottomSheetView: PassThroughView {

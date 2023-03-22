@@ -7,9 +7,19 @@
 
 import SpriteKit
 
+protocol MoonoGameSceneDelegate: AnyObject {
+    func fetchCurrentNftData(nft: Card)
+}
+
 final class MoonoGameScene: SKScene {
+<<<<<<< HEAD
     
     var vm: MoonoGameSceneViewModel?
+=======
+
+    var moonoGameSceneDelegate: MoonoGameSceneDelegate?
+    let vm: MoonoGameSceneViewModel = MoonoGameSceneViewModel()
+>>>>>>> 5d5d0afb50b40eb6f9e18fa1d1dadab02730c669
     
     // MARK: - Game Elements
     
@@ -35,6 +45,8 @@ final class MoonoGameScene: SKScene {
     /// Indicates when the scene is presented by a view.
     override func didMove(to view: SKView) {
         setUpScenery()
+        vm.delegate = self
+        moonoGameSceneDelegate?.fetchCurrentNftData(nft: vm.randomMoonoData)
     }
     
     // MARK: - Set up
@@ -90,6 +102,14 @@ final class MoonoGameScene: SKScene {
             
         }
         
+    }
+    
+}
+
+extension MoonoGameScene: MoonoGameSceneViewModelDelegate {
+    
+    func fetchCurrentNftData(nft: Card) {
+        self.moonoGameSceneDelegate?.fetchCurrentNftData(nft: nft)
     }
     
 }
