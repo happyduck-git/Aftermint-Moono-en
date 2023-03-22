@@ -8,7 +8,9 @@
 import UIKit
 
 protocol BottomSheetViewDelegate: AnyObject {
+
     func tempFetchData(data: [String: Int64])
+
 }
 
 final class BottomSheetView: PassThroughView {

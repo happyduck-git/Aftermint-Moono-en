@@ -148,7 +148,9 @@ extension LoginViewController {
         reactor.state.map { $0.isWalletConnected }
             .bind{ [weak self] isWalletConnected in
                 if isWalletConnected {
-                    self?.connectKaikasWallet()
+                    DispatchQueue.main.async {
+                        self?.connectKaikasWallet()
+                    }
                 }
             }
             .disposed(by: disposeBag)
@@ -168,6 +170,7 @@ extension LoginViewController {
 //                }
 //            }
 //            .disposed(by: disposeBag)
+
     }
     
     private func bindAction(with reactor: LoginViewReactor) {

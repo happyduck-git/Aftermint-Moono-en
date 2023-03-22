@@ -7,7 +7,8 @@
 
 import Foundation
 
-class MoonoGameSceneViewModel {
+
+final class MoonoGameSceneViewModel {
     
     let fireStoreRepository = FirestoreRepository.shared
     let randomMoonoData: Card = MoonoMockMetaData().getData(at: 0)

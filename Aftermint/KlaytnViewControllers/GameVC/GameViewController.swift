@@ -12,7 +12,6 @@ final class GameViewController: UIViewController {
     
     private let leaderBoardBottomSheetVC = LeaderBoardBottomSheetViewController()
     private let gameVCViewModel: GameViewControllerViewModel = GameViewControllerViewModel()
-    
     private let gameSceneViewModel: MoonoGameSceneViewModel = MoonoGameSceneViewModel()
     var leaderBoardViewModel: LeaderBoardTableViewCellListViewModel = LeaderBoardTableViewCellListViewModel()
     
@@ -62,13 +61,12 @@ final class GameViewController: UIViewController {
     
     private let touchCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "129"
         label.textColor = .white
         label.font = BellyGomFont.header03
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     private lazy var gameSKView: SKView = {
         let view = SKView()
         view.backgroundColor = AftermintColor.secondaryBackgroundNavy
@@ -97,9 +95,11 @@ final class GameViewController: UIViewController {
         setUI()
         setLayout()
         setGameScene()
+
         configureProfileInfo()
         
         self.bottomSheetView.bottomSheetDelegate = self
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -194,5 +194,5 @@ extension GameViewController: BottomSheetViewDelegate {
         
         self.touchCountLabel.text = "\(count ?? 0)"
     } 
-    
+
 }

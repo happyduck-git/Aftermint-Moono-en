@@ -50,23 +50,18 @@ final class LoginViewReactor: Reactor {
             return Observable.just(Mutation.openFavorlet)
             
         case .connectWithKaikas:
-         
-            self.deeplinkToKaikasToConnectWallet{ result in
-                switch result {
-                case .success:
-                    
-                case .failure:
+            return Observable.create { observer -> Disposable in
+                self.deeplinkToKaikasToConnectWallet { result in
+                    switch result {
+                    case .success:
+                        observer.onNext(.openKaikas)
+                        observer.onCompleted()
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
                 }
+                return Disposables.create()
             }
-            
-            /*
-             let requestCode = userService.requestSMSCode("phone").asObservable()
-               .map { _ in Mutation.updateNetworkStatus(.loaded("code sent")) }
-               .concat(startCountdown) // when succeeds
-               .catchErrorJustReturn(.updateNetworkStatus(.failed(" sent code failed"))) // when fails
-             return .concat([startLoading, requestCode])
-             */
-            
         }
     }
     
@@ -91,8 +86,8 @@ final class LoginViewReactor: Reactor {
 }
 
 extension LoginViewReactor {
-    
-    private func deeplinkToKaikasToConnectWallet(completion: @escaping (Result<Bool, Error>) -> ()) {
+
+    private func deeplinkToKaikasToConnectWallet(completion: @escaping (Result<String, Error>) -> ()) {
         Task.init {
             do {
                 guard let requestToken = try await self.kasConnectService.getTokenID() else { return }
@@ -115,7 +110,7 @@ extension LoginViewReactor {
                         guard let walletAddress = try await self.kasConnectService.getWalletAddress(requestKey: requestToken) else { return }
                         self.kasWalletRepository.setCurrentWallet(walletAddress: walletAddress)
                         print("walletAddress: \(walletAddress)")
-                        completion(.success(true))
+                        completion(.success(walletAddress))
                     }
                 })
                 
@@ -127,3 +122,4 @@ extension LoginViewReactor {
         }
     }
 }
+
