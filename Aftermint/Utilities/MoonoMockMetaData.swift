@@ -45,6 +45,10 @@ struct MoonoMockMetaData {
         
     ]
     
+    func getData(at index: Int) -> Card {
+        return self.moonoList[index]
+    }
+    
     func getRandomData() -> Card {
         let randomIndex = Int.random(in: 0..<self.moonoList.count)
         return self.moonoList[randomIndex]

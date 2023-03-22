@@ -10,7 +10,7 @@ import Foundation
 class MoonoGameSceneViewModel {
     
     let fireStoreRepository = FirestoreRepository.shared
-    let randomMoonoData: Card = MoonoMockMetaData().getRandomData()
+    let randomMoonoData: Card = MoonoMockMetaData().getData(at: 0)
     
     //TODO: Need to change from dummy data to realtime data
     var count: Int64 = 0 {
@@ -26,10 +26,6 @@ class MoonoGameSceneViewModel {
     
     func increaseTouchCountByOne() {
         self.count += 1
-    }
-    
-    func testFunction() {
-        print("Called")
     }
     
     func saveCountNumberOfCard(imageUri: String,

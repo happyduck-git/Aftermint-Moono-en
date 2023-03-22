@@ -12,8 +12,6 @@
 		24097B1A2989530000F92366 /* NftCardCellBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24097B192989530000F92366 /* NftCardCellBackView.swift */; };
 		24097B22298D515E00F92366 /* MarketViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24097B21298D515E00F92366 /* MarketViewReactor.swift */; };
 		24097B25298E952600F92366 /* MarketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24097B24298E952600F92366 /* MarketCell.swift */; };
-		24097B2D298FC61100F92366 /* BellygomEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24097B2C298FC61100F92366 /* BellygomEventModel.swift */; };
-		24097B34298FD99700F92366 /* BellygomUtilityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24097B33298FD99700F92366 /* BellygomUtilityModel.swift */; };
 		24097B7929913C2E00F92366 /* MarketDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24097B7829913C2E00F92366 /* MarketDetailViewController.swift */; };
 		24097B7C29913E9000F92366 /* Pulley in Frameworks */ = {isa = PBXBuildFile; productRef = 24097B7B29913E9000F92366 /* Pulley */; };
 		24097B7E29913EFD00F92366 /* BenefitTabBottomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24097B7D29913EFD00F92366 /* BenefitTabBottomViewController.swift */; };
@@ -372,8 +370,6 @@
 		36907844297A70620066530D /* TemplateCreateViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36907843297A70620066530D /* TemplateCreateViewController2.swift */; };
 		36907846297A706E0066530D /* TemplateCreateViewReactor2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36907845297A706E0066530D /* TemplateCreateViewReactor2.swift */; };
 		36A8CEE72983B5FC007BF65A /* KlaytnRawNft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A8CEE62983B5FC007BF65A /* KlaytnRawNft.swift */; };
-		36A8CEE92983B641007BF65A /* BellyGomNftMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A8CEE82983B641007BF65A /* BellyGomNftMetadata.swift */; };
-		36A8CEEB2983BE7B007BF65A /* BellyGomNft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A8CEEA2983BE7B007BF65A /* BellyGomNft.swift */; };
 		36A8CEED2983C238007BF65A /* KlaytnNftRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A8CEEC2983C238007BF65A /* KlaytnNftRequester.swift */; };
 		36A8CEF02983CB9C007BF65A /* LLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A8CEEF2983CB9C007BF65A /* LLog.swift */; };
 		9300BB1B29C3FFE600C67A29 /* LeaderBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB1A29C3FFE600C67A29 /* LeaderBoardTableViewCell.swift */; };
@@ -440,8 +436,6 @@
 		24097B192989530000F92366 /* NftCardCellBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftCardCellBackView.swift; sourceTree = "<group>"; };
 		24097B21298D515E00F92366 /* MarketViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewReactor.swift; sourceTree = "<group>"; };
 		24097B24298E952600F92366 /* MarketCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCell.swift; sourceTree = "<group>"; };
-		24097B2C298FC61100F92366 /* BellygomEventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellygomEventModel.swift; sourceTree = "<group>"; };
-		24097B33298FD99700F92366 /* BellygomUtilityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellygomUtilityModel.swift; sourceTree = "<group>"; };
 		24097B7829913C2E00F92366 /* MarketDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDetailViewController.swift; sourceTree = "<group>"; };
 		24097B7D29913EFD00F92366 /* BenefitTabBottomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenefitTabBottomViewController.swift; sourceTree = "<group>"; };
 		24097B7F299154E200F92366 /* UtilityClaimBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityClaimBottomSheet.swift; sourceTree = "<group>"; };
@@ -783,8 +777,6 @@
 		36907843297A70620066530D /* TemplateCreateViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateCreateViewController2.swift; sourceTree = "<group>"; };
 		36907845297A706E0066530D /* TemplateCreateViewReactor2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateCreateViewReactor2.swift; sourceTree = "<group>"; };
 		36A8CEE62983B5FC007BF65A /* KlaytnRawNft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlaytnRawNft.swift; sourceTree = "<group>"; };
-		36A8CEE82983B641007BF65A /* BellyGomNftMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellyGomNftMetadata.swift; sourceTree = "<group>"; };
-		36A8CEEA2983BE7B007BF65A /* BellyGomNft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellyGomNft.swift; sourceTree = "<group>"; };
 		36A8CEEC2983C238007BF65A /* KlaytnNftRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlaytnNftRequester.swift; sourceTree = "<group>"; };
 		36A8CEEF2983CB9C007BF65A /* LLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLog.swift; sourceTree = "<group>"; };
 		9300BB1A29C3FFE600C67A29 /* LeaderBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardTableViewCell.swift; sourceTree = "<group>"; };
@@ -2314,11 +2306,7 @@
 				36A8CEE62983B5FC007BF65A /* KlaytnRawNft.swift */,
 				939DE05F297A2E0600EFA71E /* KlaytnPrepareResponse.swift */,
 				939DE060297A2E0600EFA71E /* KlaytnTokenResponse.swift */,
-				36A8CEE82983B641007BF65A /* BellyGomNftMetadata.swift */,
-				36A8CEEA2983BE7B007BF65A /* BellyGomNft.swift */,
 				24DDC999298175A2007A3F63 /* UtilityModel.swift */,
-				24097B2C298FC61100F92366 /* BellygomEventModel.swift */,
-				24097B33298FD99700F92366 /* BellygomUtilityModel.swift */,
 				3620690529B88699008764BE /* MoonoNftMetadata.swift */,
 				3620690729B88789008764BE /* MoonoNft.swift */,
 			);
@@ -2585,7 +2573,6 @@
 				3619B11C29790AC60051C387 /* AppDependency.swift in Sources */,
 				3619B1C029790AC60051C387 /* Animation.swift in Sources */,
 				3619B19E29790AC60051C387 /* NodeProperty.swift in Sources */,
-				24097B2D298FC61100F92366 /* BellygomEventModel.swift in Sources */,
 				3619B0F729790AC50051C387 /* OAuthTokenInput.swift in Sources */,
 				3619B1BB29790AC60051C387 /* LayerModel.swift in Sources */,
 				3619B1B629790AC60051C387 /* GradientStroke.swift in Sources */,
@@ -2723,7 +2710,6 @@
 				3619B1C829790AC60051C387 /* KeyframeData.swift in Sources */,
 				3619B1A229790AC60051C387 /* AnyValueContainer.swift in Sources */,
 				3619B1CE29790AC60051C387 /* PrecompAsset.swift in Sources */,
-				36A8CEE92983B641007BF65A /* BellyGomNftMetadata.swift in Sources */,
 				3619B0DE29790AC50051C387 /* Resource.swift in Sources */,
 				3690783E297A70050066530D /* HomeViewReactor2.swift in Sources */,
 				3619B10B29790AC50051C387 /* FontMeta.swift in Sources */,
@@ -2772,7 +2758,6 @@
 				3619B1C429790AC60051C387 /* Marker.swift in Sources */,
 				240121AA29A7B49200F60BDA /* Coordinator.swift in Sources */,
 				3619B16829790AC60051C387 /* ValueProviderStore.swift in Sources */,
-				24097B34298FD99700F92366 /* BellygomUtilityModel.swift in Sources */,
 				935E6A822982619200D94DA6 /* LottieViewController.swift in Sources */,
 				3619B0D129790AC50051C387 /* UICollectionReusableView.swift in Sources */,
 				9300BB6F29C8320D00C67A29 /* MoonoGameSceneViewModel.swift in Sources */,
@@ -2929,7 +2914,6 @@
 				3619B0F829790AC50051C387 /* TwitterUploadStatusResponse.swift in Sources */,
 				3619B13D29790AC60051C387 /* AnimationImageProvider.swift in Sources */,
 				3619B1CA29790AC60051C387 /* Glyph.swift in Sources */,
-				36A8CEEB2983BE7B007BF65A /* BellyGomNft.swift in Sources */,
 				3619B17F29790AC60051C387 /* ImageCompositionLayer.swift in Sources */,
 				3619B0CC29790AC50051C387 /* UIColor.swift in Sources */,
 				3619B16729790AC60051C387 /* ExperimentalAnimationLayer.swift in Sources */,

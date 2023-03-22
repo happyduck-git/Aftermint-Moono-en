@@ -33,8 +33,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.backgroundColor = AftermintColor.backgroundNavy
             UINavigationBar.appearance().backIndicatorImage = UIImage(named: "back")
             UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(named: "back")
-            
-            /* From LoginVC */
 
             let token = UserDefaults.standard.string(forKey: KasWalletRepository.shared.getWalletKey())
             var rootNaviVC: UINavigationController?

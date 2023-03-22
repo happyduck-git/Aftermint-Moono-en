@@ -7,9 +7,19 @@
 
 import UIKit
 
+protocol BottomSheetViewDelegate: AnyObject {
+    func tempFetchData(data: [String: Int64])
+}
+
 final class BottomSheetView: PassThroughView {
     
-    var viewModel: LeaderBoardTableViewCellListViewModel = LeaderBoardTableViewCellListViewModel()
+//    var viewModel: LeaderBoardTableViewCellListViewModel = LeaderBoardTableViewCellListViewModel()
+    var viewModel: LeaderBoardTableViewCellListViewModel?
+    
+    weak var bottomSheetDelegate: BottomSheetViewDelegate?
+    var tempTouchCountList: [String: Int64] = [:]
+    // viewModel.viewModelList -> forEach -> filter by elements tokenId(which is nftName)
+    // in GameVC, if the tokenId matches, get its touchCount and update scoreLabel.text
     
     // MARK: - UI Elements
     
@@ -56,6 +66,7 @@ final class BottomSheetView: PassThroughView {
     private let leaderBoardTableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = AftermintColor.backgroundNavy
+        table.alpha = 0.0
         table.register(LeaderBoardTableViewCell.self, forCellReuseIdentifier: LeaderBoardTableViewCell.identifier)
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
@@ -89,9 +100,10 @@ final class BottomSheetView: PassThroughView {
         fatalError("init() has not been implemented")
     }
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, vm: LeaderBoardTableViewCellListViewModel) {
         super.init(frame: frame)
         
+        self.viewModel = vm
         self.backgroundColor = .clear
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan))
         self.addGestureRecognizer(panGesture)
@@ -104,10 +116,12 @@ final class BottomSheetView: PassThroughView {
         setLayout()
         setDelegate()
         
-        self.viewModel.getAllNftRankCellViewModels { result in
+        self.viewModel?.getAllNftRankCellViewModels { result in
             switch result {
             case .success(let viewModels):
-                self.viewModel.viewModelList = viewModels
+                self.viewModel?.viewModelList = viewModels
+                self.tempTouchCountList = self.fetchTouchCount(with: viewModels)
+                self.bottomSheetDelegate?.tempFetchData(data: self.tempTouchCountList)
                 DispatchQueue.main.async {
                     self.leaderBoardTableView.reloadData()
                 }
@@ -209,7 +223,8 @@ final class BottomSheetView: PassThroughView {
 extension BottomSheetView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.numberOfRowsInSection(at: section)
+        guard let numberOfSection = self.viewModel?.numberOfRowsInSection(at: section) else { return 0 }
+        return numberOfSection
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -218,13 +233,21 @@ extension BottomSheetView: UITableViewDelegate, UITableViewDataSource {
         
         cell.resetCell()
         
-        let vm = self.viewModel.modelAt(indexPath.row)
+        guard let vm = self.viewModel?.modelAt(indexPath.row) else {
+            fatalError("ViewModel found to be nil")
+        }
         
         if indexPath.row <= 2 {
             vm.setRankImage(with: cellRankImageAt(indexPath.row))
         } else {
             cell.switchRankImageToLabel()
             vm.setRankNumberWithIndexPath(indexPath.row + 1)
+        }
+        
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.6) {
+                self.leaderBoardTableView.alpha = 1.0
+            }
         }
         
         cell.configure(with: vm)
@@ -281,5 +304,19 @@ extension BottomSheetView {
         static let bottomSheetYPosition: (Mode) -> Double = { mode in
             Self.bottomSheetRatio(mode) * UIScreen.main.bounds.height
         }
+    }
+}
+
+//TEMP
+extension BottomSheetView {
+    private func fetchTouchCount(with viewModelList: [LeaderBoardTableViewCellViewModel]) -> [String: Int64] {
+        var result: [String: Int64] = [:]
+        viewModelList.forEach { vm in
+            let key = vm.nftName
+            let value = vm.touchScore
+            result[key] = value
+        }
+        
+        return result
     }
 }

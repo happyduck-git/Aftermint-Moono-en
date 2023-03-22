@@ -118,7 +118,7 @@ class LoginViewController: UIViewController, View, Coordinating {
         navigationController?.pushViewController(homeVC, animated: true)
     }
     
-    private func connectKaikasWallet() {
+    private func connectKaikasWallet() { //change the name of the function to openStartVC
         let reactor: StartViewReactor = StartViewReactor()
         let startVC = StartViewController(reactor: reactor)
         navigationController?.pushViewController(startVC, animated: true)
@@ -144,14 +144,30 @@ extension LoginViewController {
                 }
             }
             .disposed(by: disposeBag)
-        
-        reactor.state.map { $0.shouldOpenKaikas }
-            .bind{ [weak self] shouldOpenKaikas in
-                if shouldOpenKaikas {
+    
+        reactor.state.map { $0.isWalletConnected }
+            .bind{ [weak self] isWalletConnected in
+                if isWalletConnected {
                     self?.connectKaikasWallet()
                 }
             }
             .disposed(by: disposeBag)
+        
+//        reactor.state.map { $0.shouldOpenKaikas }
+//            .bind{ [weak self] shouldOpenKaikas in
+//                if shouldOpenKaikas {
+//                    self?.connectKaikasWallet()
+//                }
+//            }
+//            .disposed(by: disposeBag)
+        
+//        reactor.state.map { $0.shouldOpenKaikas }
+//            .bind{ [weak self] shouldOpenKaikas in
+//                if shouldOpenKaikas {
+//                    print("open kaikas")
+//                }
+//            }
+//            .disposed(by: disposeBag)
     }
     
     private func bindAction(with reactor: LoginViewReactor) {
