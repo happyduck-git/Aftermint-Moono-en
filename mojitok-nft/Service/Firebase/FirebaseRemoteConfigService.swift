@@ -15,6 +15,7 @@ final class RemoteConfigService {
     // MARK: - Enum
     enum RemoteConfigKey: String, CaseIterable {
         case templates = "template"
+        //TODO: Change `fonts` to `font` after migrating to uinified Firebase project
         case fonts = "fonts"
     }
     
