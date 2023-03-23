@@ -40,13 +40,10 @@ class KlaytnTabViewController: UITabBarController, UITabBarControllerDelegate {
         benefitNaviVC.tabBarItem.selectedImage = UIImage(named: "gift_on")?.withRenderingMode(.alwaysOriginal)
         
         let marketVC = MarketViewController()
-        let marketNaviVC = UINavigationController(rootViewController: marketVC)
-        
         marketVC.tabBarItem.image = UIImage(named: "market_off")?.withRenderingMode(.alwaysOriginal)
         marketVC.tabBarItem.selectedImage = UIImage(named: "market_on")?.withRenderingMode(.alwaysOriginal)
 
         let gameVC = GameViewController()
-        
         gameVC.tabBarItem.image = UIImage(named: "game_off")?.withRenderingMode(.alwaysOriginal)
         gameVC.tabBarItem.selectedImage = UIImage(named: "game_on")?.withRenderingMode(.alwaysOriginal)
         

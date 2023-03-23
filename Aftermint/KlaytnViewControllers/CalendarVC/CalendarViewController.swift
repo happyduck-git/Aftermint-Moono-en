@@ -125,6 +125,8 @@ class CalendarViewController: UIViewController {
     
     // MARK: - Set up UI & Layout
     private func setUI() {
+        view.backgroundColor = AftermintColor.backgroundNavy
+
         view.addSubview(scrollView)
         scrollView.addSubview(calendar)
         scrollView.addSubview(toggleButton)

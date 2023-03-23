@@ -75,7 +75,15 @@ class LoginViewController: UIViewController, View, Coordinating {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        UIView.animate(withDuration: 0.1,
+                       delay: 0.0,
+                       options: .curveEaseOut) {
+            self.moonoLoginBackgroundImageView.alpha = 0.0
+            self.loginDescription.alpha = 0.0
+            self.walletStackView.alpha = 0.0
+            self.favorletButton.alpha = 0.0
+            self.kaikasButton.alpha = 0.0
+        }
     }
     
     // MARK: - Set UI & Layout
@@ -111,7 +119,14 @@ class LoginViewController: UIViewController, View, Coordinating {
         ])
     }
     
-    private func connectKaikasWallet() {
+    private func connectFavorletWallet() {
+        /// NOTE: Temporarily push directly to KlaytnTabViewController;
+        /// Will connect to FavorletWallet application later in the future
+        let homeVC = KlaytnTabViewController()
+        navigationController?.pushViewController(homeVC, animated: true)
+    }
+    
+    private func connectKaikasWallet() { //change the name of the function to openStartVC
         let reactor: StartViewReactor = StartViewReactor()
         let startVC = StartViewController(reactor: reactor)
         navigationController?.pushViewController(startVC, animated: true)
@@ -130,12 +145,31 @@ extension LoginViewController {
     }
     
     private func bindState(with reactor: LoginViewReactor) {
-        reactor.state.map { $0.connect }
-            .bind{ [weak self] _ in self?.connectKaikasWallet()  }
+        reactor.state.map { $0.shouldOpenFavorlet }
+            .bind{ [weak self] shouldOpenFavorlet in
+                if shouldOpenFavorlet {
+                    self?.connectFavorletWallet()
+                }
+            }
+            .disposed(by: disposeBag)
+    
+        reactor.state.map { $0.isWalletConnected }
+            .bind{ [weak self] isWalletConnected in
+                if isWalletConnected {
+                    DispatchQueue.main.async {
+                        self?.connectKaikasWallet()
+                    }
+                }
+            }
             .disposed(by: disposeBag)
     }
     
     private func bindAction(with reactor: LoginViewReactor) {
+        favorletButton.rx.tap
+            .map { Reactor.Action.connectWithFavorlet }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
         kaikasButton.rx.tap
             .map { Reactor.Action.connectWithKaikas }
             .bind(to: reactor.action)

@@ -90,7 +90,14 @@ class StartViewController: UIViewController, View {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         print("StartVC will disapear")
-//        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        UIView.animate(withDuration: 0.1,
+                       delay: 0.0,
+                       options: .curveEaseOut) {
+            self.walletConnectImageView.alpha = 0.0
+            self.mainTitle.alpha = 0.0
+            self.subTitle.alpha = 0.0
+        }
     }
     
     deinit {

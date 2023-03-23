@@ -120,12 +120,10 @@ class NFTCardView: UIView {
 extension NFTCardView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
       
-        guard let numberOfNfts = viewModel.moonoNfts.value?.count else { return 0 }
+        let numberOfNfts = self.viewModel.numberOfItemsInSection()
         
         self.numbersOfNft.text = String(numberOfNfts)
         nftSelected = Array(repeating: false, count: numberOfNfts)
-        
-        print("numberofNfts: \(numberOfNfts)")
         
         return numberOfNfts
 
@@ -133,14 +131,15 @@ extension NFTCardView: UICollectionViewDataSource, UICollectionViewDelegate, UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
-        guard let nft = viewModel.moonoNfts.value?[indexPath.row] else {
+        guard let vm = self.viewModel.itemAtIndex(indexPath.row) else {
             fatalError("No nft value found")
         }
+
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NftCardCell.identifier, for: indexPath) as? NftCardCell else {
             fatalError("Unsupported cell")
         }
         
+        // TODO: nftSelected을 ViewModel로 옮기기
         if nftSelected[indexPath.row] == false {
             cell.resetCell()
         } else {
@@ -153,36 +152,16 @@ extension NFTCardView: UICollectionViewDataSource, UICollectionViewDelegate, UIC
         makeCellRadius(of: cell)
         makeCellShadow(of: cell)
         
-        let url = URL(string: nft.imageUrl)!
-        
-        ImagePipeline.shared.loadImage(with: url) { result in
-            switch result {
-            case .success(let imageResponse):
-                cell.configureImage(image: imageResponse.image)
-            case .failure(let failure):
-                print("Nuke load image failed: \(failure)")
-            }
-        }
-        
         DispatchQueue.main.async {
             
+            // Give fade-in animation
             UIView.animate(withDuration: 0.4) {
                 self.nftCollectionView.alpha = 1.0
             }
             
-            cell.configure(accDesc: nft.traits.accessories,
-                           backgroundDesc: nft.traits.background,
-                           bodyDesc: nft.traits.body,
-                           dayDesc: nft.traits.day,
-                           effectDesc: nft.traits.effect,
-                           expressionDesc: nft.traits.expression,
-                           hairDesc: nft.traits.hair,
-                           name: nft.name,
-                           updatedAt: nft.updateAt
-                           )
+            cell.configure(with: vm)
             
         }
-        
         
         return cell
     }
@@ -241,18 +220,28 @@ extension NFTCardView: UICollectionViewDataSource, UICollectionViewDelegate, UIC
 extension NFTCardView {
     
     private func bind() {
-        viewModel.moonoNfts.bind { [weak self] _ in
+        
+        viewModel.nftCardCellViewModel.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.nftCollectionView.reloadData()
             }
         }
+        
     }
     
     private func fetchMoonoNft() {
+        
         let tempAddress: String = K.Wallet.temporaryAddress
-        self.viewModel.getNfts(of: tempAddress) { nfts in
-            self.viewModel.moonoNfts.value = nfts
+
+        self.viewModel.getNftCardCellViewModels(of: tempAddress) { result in
+            switch result {
+            case .success(let viewModels):
+                self.viewModel.nftCardCellViewModel.value = viewModels
+            case .failure(let failure):
+                print("Failed -- \(#function) --- \(failure)")
+            }
         }
+        
     }
     
 }

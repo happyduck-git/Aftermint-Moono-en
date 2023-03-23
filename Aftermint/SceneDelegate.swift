@@ -7,13 +7,14 @@
 
 import UIKit
 import ReactorKit
+import FirebaseCore
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-
+        
         if let windowScene = scene as? UIWindowScene {
             var path: [AnyObject] = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true) as [AnyObject]
             let folder: String = path[0] as! String
@@ -32,13 +33,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.backgroundColor = AftermintColor.backgroundNavy
             UINavigationBar.appearance().backIndicatorImage = UIImage(named: "back")
             UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(named: "back")
-            
-            /* From LoginVC */
 
             let token = UserDefaults.standard.string(forKey: KasWalletRepository.shared.getWalletKey())
             var rootNaviVC: UINavigationController?
             
-            /* Temp Comment: LogincVC */
+
             if token == nil {
                 let reactor: LoginViewReactor = LoginViewReactor()
                 let loginVC = LoginViewController(reactor: reactor)
@@ -47,12 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let homeVC = KlaytnTabViewController()
                 rootNaviVC = UINavigationController(rootViewController: homeVC)
             }
-            
-            /* Temp: StartVC */
-//            rootNaviVC = UINavigationController(rootViewController: KlaytnTabViewController())
-           
-            
-//            rootNaviVC?.setNavigationBarHidden(true, animated: false)
+
             
             window.rootViewController = rootNaviVC
             self.window = window
