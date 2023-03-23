@@ -11,7 +11,7 @@ import SpriteKit
 final class GameViewController: UIViewController {
     
     private let leaderBoardBottomSheetVC = LeaderBoardBottomSheetViewController()
-    private let gameVCViewModel: GameViewControllerViewModel = GameViewControllerViewModel()
+//    private let gameVCViewModel: GameViewControllerViewModel = GameViewControllerViewModel()
 
     private let gameSceneViewModel: MoonoGameSceneViewModel = MoonoGameSceneViewModel()
     var leaderBoardViewModel: LeaderBoardTableViewCellListViewModel = LeaderBoardTableViewCellListViewModel()

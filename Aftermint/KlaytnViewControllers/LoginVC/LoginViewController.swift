@@ -127,8 +127,7 @@ class LoginViewController: UIViewController, View, Coordinating {
     }
     
     private func connectKaikasWallet() { //change the name of the function to openStartVC
-        let reactor: StartViewReactor = StartViewReactor()
-        let startVC = StartViewController(reactor: reactor)
+        let startVC = StartViewController()
         navigationController?.pushViewController(startVC, animated: true)
         
     }

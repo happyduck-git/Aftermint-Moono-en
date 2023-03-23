@@ -385,13 +385,11 @@
 		9300BB6329C8222300C67A29 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB6229C8222300C67A29 /* Card.swift */; };
 		9300BB6629C8226900C67A29 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB6529C8226900C67A29 /* Storable.swift */; };
 		9300BB6929C8280100C67A29 /* NftCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB6829C8280100C67A29 /* NftCollection.swift */; };
-		9300BB6D29C82F0E00C67A29 /* GameViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB6C29C82F0E00C67A29 /* GameViewControllerViewModel.swift */; };
 		9300BB6F29C8320D00C67A29 /* MoonoGameSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB6E29C8320D00C67A29 /* MoonoGameSceneViewModel.swift */; };
 		9300BB7629C840FD00C67A29 /* MoonoMockMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB7529C840FD00C67A29 /* MoonoMockMetaData.swift */; };
 		93199EF12989EDE1008D532B /* KASConnectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93199EF02989EDE1008D532B /* KASConnectService.swift */; };
 		93199EF4298A06A4008D532B /* KasWalletRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93199EF3298A06A4008D532B /* KasWalletRepository.swift */; };
 		932977862987990700C76AB5 /* LoginViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932977852987990700C76AB5 /* LoginViewReactor.swift */; };
-		9329778929879F4400C76AB5 /* StartViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9329778829879F4400C76AB5 /* StartViewReactor.swift */; };
 		935E6A742980BC1900D94DA6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935E6A732980BC1900D94DA6 /* LoginViewController.swift */; };
 		935E6A762980CE0800D94DA6 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935E6A752980CE0800D94DA6 /* StartViewController.swift */; };
 		935E6A802982462B00D94DA6 /* CustomeSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935E6A7F2982462B00D94DA6 /* CustomeSegmentedControl.swift */; };
@@ -790,14 +788,12 @@
 		9300BB6229C8222300C67A29 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		9300BB6529C8226900C67A29 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		9300BB6829C8280100C67A29 /* NftCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftCollection.swift; sourceTree = "<group>"; };
-		9300BB6C29C82F0E00C67A29 /* GameViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewControllerViewModel.swift; sourceTree = "<group>"; };
 		9300BB6E29C8320D00C67A29 /* MoonoGameSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonoGameSceneViewModel.swift; sourceTree = "<group>"; };
 		9300BB7429C8382300C67A29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9300BB7529C840FD00C67A29 /* MoonoMockMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonoMockMetaData.swift; sourceTree = "<group>"; };
 		93199EF02989EDE1008D532B /* KASConnectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KASConnectService.swift; sourceTree = "<group>"; };
 		93199EF3298A06A4008D532B /* KasWalletRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KasWalletRepository.swift; sourceTree = "<group>"; };
 		932977852987990700C76AB5 /* LoginViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewReactor.swift; sourceTree = "<group>"; };
-		9329778829879F4400C76AB5 /* StartViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewReactor.swift; sourceTree = "<group>"; };
 		935E6A732980BC1900D94DA6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		935E6A752980CE0800D94DA6 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		935E6A7F2982462B00D94DA6 /* CustomeSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomeSegmentedControl.swift; sourceTree = "<group>"; };
@@ -2257,7 +2253,6 @@
 			isa = PBXGroup;
 			children = (
 				935E6A752980CE0800D94DA6 /* StartViewController.swift */,
-				9329778829879F4400C76AB5 /* StartViewReactor.swift */,
 			);
 			path = StartVC;
 			sourceTree = "<group>";
@@ -2379,7 +2374,6 @@
 			isa = PBXGroup;
 			children = (
 				93C32FBD29B9A69700DB3CB3 /* GameViewController.swift */,
-				9300BB6C29C82F0E00C67A29 /* GameViewControllerViewModel.swift */,
 			);
 			path = GameVC;
 			sourceTree = "<group>";
@@ -2767,7 +2761,6 @@
 				3619B0F529790AC50051C387 /* TwitterError.swift in Sources */,
 				3619B1B929790AC60051C387 /* Star.swift in Sources */,
 				36907840297A70320066530D /* TemplateShareViewController2.swift in Sources */,
-				9300BB6D29C82F0E00C67A29 /* GameViewControllerViewModel.swift in Sources */,
 				3619B17C29790AC60051C387 /* TextCompositionLayer.swift in Sources */,
 				3619B1DC29790AC60051C387 /* ColorExtension.swift in Sources */,
 				3619B0D229790AC50051C387 /* OpenSeaClient.swift in Sources */,
@@ -2854,7 +2847,6 @@
 				3619B12529790AC60051C387 /* FirebaseRemoteConfigService.swift in Sources */,
 				3619B1D429790AC60051C387 /* CGFloatExtensions.swift in Sources */,
 				3619B0EC29790AC50051C387 /* AccessTokenWithSecret.swift in Sources */,
-				9329778929879F4400C76AB5 /* StartViewReactor.swift in Sources */,
 				9300BB5829C8106200C67A29 /* BottomSheetView.swift in Sources */,
 				93C32FC129BAC2DD00DB3CB3 /* LeaderBoardBottomSheetViewController.swift in Sources */,
 				24ED33AC29BEBCDD00C2D4E1 /* NukeImageLoader.swift in Sources */,
