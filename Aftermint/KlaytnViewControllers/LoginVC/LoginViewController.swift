@@ -75,7 +75,15 @@ class LoginViewController: UIViewController, View, Coordinating {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        UIView.animate(withDuration: 0.1,
+                       delay: 0.0,
+                       options: .curveEaseOut) {
+            self.moonoLoginBackgroundImageView.alpha = 0.0
+            self.loginDescription.alpha = 0.0
+            self.walletStackView.alpha = 0.0
+            self.favorletButton.alpha = 0.0
+            self.kaikasButton.alpha = 0.0
+        }
     }
     
     // MARK: - Set UI & Layout
@@ -148,36 +156,12 @@ extension LoginViewController {
         reactor.state.map { $0.isWalletConnected }
             .bind{ [weak self] isWalletConnected in
                 if isWalletConnected {
-                    self?.connectKaikasWallet()
+                    DispatchQueue.main.async {
+                        self?.connectKaikasWallet()
+                    }
                 }
             }
             .disposed(by: disposeBag)
-<<<<<<< HEAD
-        
-//        reactor.state.map { $0.shouldOpenKaikas }
-//            .bind{ [weak self] shouldOpenKaikas in
-//                if shouldOpenKaikas {
-//                    self?.connectKaikasWallet()
-//                }
-//            }
-//            .disposed(by: disposeBag)
-        
-//        reactor.state.map { $0.shouldOpenKaikas }
-//            .bind{ [weak self] shouldOpenKaikas in
-//                if shouldOpenKaikas {
-//                    print("open kaikas")
-//                }
-//            }
-//            .disposed(by: disposeBag)
-=======
-        /*
-        reactor.state.asObservable()
-            .map { $0.shouldOpenKaikas }
-            .bind(to: self.kaikasButton.rx.tap)
-            .disposed(by: disposeBag)
-         */
-      
->>>>>>> 5d5d0afb50b40eb6f9e18fa1d1dadab02730c669
     }
     
     private func bindAction(with reactor: LoginViewReactor) {

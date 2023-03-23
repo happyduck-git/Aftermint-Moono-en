@@ -12,9 +12,7 @@ final class GameViewController: UIViewController {
     
     private let leaderBoardBottomSheetVC = LeaderBoardBottomSheetViewController()
     private let gameVCViewModel: GameViewControllerViewModel = GameViewControllerViewModel()
-    private var gameScene: MoonoGameScene = MoonoGameScene()
-    
-<<<<<<< HEAD
+
     private let gameSceneViewModel: MoonoGameSceneViewModel = MoonoGameSceneViewModel()
     var leaderBoardViewModel: LeaderBoardTableViewCellListViewModel = LeaderBoardTableViewCellListViewModel()
     
@@ -22,11 +20,6 @@ final class GameViewController: UIViewController {
     private let nftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .tertiarySystemFill
-=======
-    private let nftImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "house")
->>>>>>> 5d5d0afb50b40eb6f9e18fa1d1dadab02730c669
         imageView.contentMode = .scaleAspectFit
         imageView.layer.borderColor = UIColor(ciColor: .white).cgColor
         imageView.layer.borderWidth = 1.0
@@ -52,10 +45,6 @@ final class GameViewController: UIViewController {
     
     private let nftNameLabel: UILabel = {
         let label = UILabel()
-<<<<<<< HEAD
-=======
-        label.text = "Moono #1147 "
->>>>>>> 5d5d0afb50b40eb6f9e18fa1d1dadab02730c669
         label.textColor = .white
         label.font = BellyGomFont.header06
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -73,26 +62,12 @@ final class GameViewController: UIViewController {
     
     private let touchCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "129"
-<<<<<<< HEAD
         label.textColor = .white
-=======
->>>>>>> 5d5d0afb50b40eb6f9e18fa1d1dadab02730c669
         label.font = BellyGomFont.header03
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-<<<<<<< HEAD
-=======
-//    private let profileImageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "game_user_info")
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        return imageView
-//    }()
-    
->>>>>>> 5d5d0afb50b40eb6f9e18fa1d1dadab02730c669
+
     private lazy var gameSKView: SKView = {
         let view = SKView()
         view.backgroundColor = AftermintColor.secondaryBackgroundNavy
@@ -121,13 +96,10 @@ final class GameViewController: UIViewController {
         setUI()
         setLayout()
         setGameScene()
-<<<<<<< HEAD
+
         configureProfileInfo()
-        
         self.bottomSheetView.bottomSheetDelegate = self
-=======
-        self.gameScene.moonoGameSceneDelegate = self
->>>>>>> 5d5d0afb50b40eb6f9e18fa1d1dadab02730c669
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -198,20 +170,10 @@ extension GameViewController {
     private func setGameScene() {
         let width = view.frame.size.width
         let height = view.frame.size.height
-<<<<<<< HEAD
         let scene: MoonoGameScene = MoonoGameScene(size: CGSize(width: width, height: height), vm: gameSceneViewModel)
         scene.backgroundColor = AftermintColor.backgroundLightBlue
         scene.scaleMode = .aspectFit
         gameSKView.presentScene(scene)
-=======
-        gameScene.size = CGSize(width: width, height: height)
-        gameScene.backgroundColor = AftermintColor.backgroundLightBlue
-        gameScene.scaleMode = .aspectFit
-//        let scene = MoonoGameScene(size: CGSize(width: width, height: height))
-//        scene.backgroundColor = AftermintColor.backgroundLightBlue
-//        scene.scaleMode = .aspectFit
-        gameSKView.presentScene(gameScene)
->>>>>>> 5d5d0afb50b40eb6f9e18fa1d1dadab02730c669
     }
     
     private func configureProfileInfo() {
@@ -224,7 +186,6 @@ extension GameViewController {
     }
 }
 
-<<<<<<< HEAD
 extension GameViewController: BottomSheetViewDelegate {
     
     func tempFetchData(data: [String : Int64]) {
@@ -233,17 +194,5 @@ extension GameViewController: BottomSheetViewDelegate {
         
         self.touchCountLabel.text = "\(count ?? 0)"
     } 
-=======
-extension GameViewController: MoonoGameSceneDelegate {
-    
-    func fetchCurrentNftData(nft: Card) {
-        print(nft.imageUri)
-        let url = URL(string: nft.imageUri)
-        NukeImageLoader.loadImageUsingNuke(url: url) { image in
-            self.nftImageView.image = image
-        }
-        self.nftNameLabel.text = nft.tokenId
-    }
->>>>>>> 5d5d0afb50b40eb6f9e18fa1d1dadab02730c669
-    
+
 }
