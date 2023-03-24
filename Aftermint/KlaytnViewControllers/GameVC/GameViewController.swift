@@ -214,6 +214,7 @@ extension GameViewController: MoonoGameSceneDelegate {
 
 }
 
+//TODO: Export this logic to GameVCViewModel
 extension GameViewController: BottomSheetViewDelegate {
     
     ///TEMP: Use Moono#81 for the demo purpose
