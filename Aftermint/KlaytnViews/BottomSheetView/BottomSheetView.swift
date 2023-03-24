@@ -67,6 +67,7 @@ final class BottomSheetView: PassThroughView {
         table.backgroundColor = AftermintColor.backgroundNavy
         table.alpha = 0.0
         table.register(LeaderBoardTableViewCell.self, forCellReuseIdentifier: LeaderBoardTableViewCell.identifier)
+        table.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10.0, right: 0)
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -123,7 +124,11 @@ final class BottomSheetView: PassThroughView {
                 self.bottomSheetDelegate?.tempFetchData(data: self.tempTouchCountList)
                 
                 DispatchQueue.main.async {
-                    self.leaderBoardTableView.reloadData()
+                    UIView.animate(withDuration: 0.6) {
+                        self.leaderBoardTableView.reloadData()
+                        self.leaderBoardTableView.alpha = 1.0
+                    }
+                    
                 }
                 
             case .failure(let failure):
@@ -214,7 +219,6 @@ final class BottomSheetView: PassThroughView {
     
     /// Update top constraint of the bottom sheet by pan gesture offset
     private func updateConstraint(offset: Double) {
-
         bottomSheetViewTopConstraint?.constant = offset
         self.layoutIfNeeded()
     }
@@ -238,17 +242,24 @@ extension BottomSheetView: UITableViewDelegate, UITableViewDataSource {
             fatalError("ViewModel found to be nil")
         }
         
+        //TODO: Make below logic as a separate function -- (1)
+        ///Find currently used moononft's name from viewModels
+        if vm.nftName == MoonoMockMetaData().getOneMockData().tokenId {
+            DispatchQueue.main.async {
+                cell.contentView.backgroundColor = .systemBlue.withAlphaComponent(0.5)
+                cell.contentView.alpha = 0.5
+                UIView.animate(withDuration: 0.6) {
+                    cell.contentView.alpha = 1.0
+                }
+            }
+        }
+     
+        //TODO: Make below logic as a separate function -- (2)
         if indexPath.row <= 2 {
             vm.setRankImage(with: cellRankImageAt(indexPath.row))
         } else {
             cell.switchRankImageToLabel()
             vm.setRankNumberWithIndexPath(indexPath.row + 1)
-        }
-        
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.6) {
-                self.leaderBoardTableView.alpha = 1.0
-            }
         }
         
         cell.configure(with: vm)
@@ -260,6 +271,7 @@ extension BottomSheetView: UITableViewDelegate, UITableViewDataSource {
         return 60
     }
     
+    /// Determine cell image 
     private func cellRankImageAt(_ indexPathRow: Int) -> UIImage? {
         switch indexPathRow {
         case 0:
@@ -317,7 +329,6 @@ extension BottomSheetView {
             let value = vm.touchScore
             result[key] = value
         }
-        
         return result
     }
 }

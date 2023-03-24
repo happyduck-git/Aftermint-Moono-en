@@ -11,6 +11,9 @@ import Foundation
 /// Will be removed
 struct MoonoMockMetaData {
     
+    /// Changing this prorperty value will decide what mock Card object to use from the moonoList property
+    private let mockIndex: Int = 1
+    
     private let moonoList: [Card] = [
         
         Card(imageUri: "https://firebasestorage.googleapis.com/v0/b/moono-aftermint-storage.appspot.com/o/Moono%2381.jpeg?alt=media",
@@ -45,10 +48,11 @@ struct MoonoMockMetaData {
         
     ]
     
-    func getData(at index: Int) -> Card {
-        return self.moonoList[index]
+    func getOneMockData() -> Card {
+        let numberOfData = self.moonoList.count
+        return self.moonoList[mockIndex % numberOfData]
     }
-    
+
     func getRandomData() -> Card {
         let randomIndex = Int.random(in: 0..<self.moonoList.count)
         return self.moonoList[randomIndex]

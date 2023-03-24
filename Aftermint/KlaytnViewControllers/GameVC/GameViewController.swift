@@ -13,6 +13,14 @@ final class GameViewController: UIViewController {
     private let gameSceneViewModel: MoonoGameSceneViewModel
     private var leaderBoardListViewModel: LeaderBoardTableViewCellListViewModel
     
+    private var initialCount: Int64 = 0
+    private var touchCount: Int64 = 0 {
+        didSet {
+            print("Initial count: \(self.initialCount)")
+            print("Touch count: \(self.touchCount)")
+            self.touchCountLabel.text = "\(self.initialCount + self.touchCount)"
+        }
+    }
     // MARK: - UI Elements
     private let nftImageView: UIImageView = {
         let imageView = UIImageView()
@@ -181,6 +189,7 @@ extension GameViewController {
         let width = view.frame.size.width
         let height = view.frame.size.height
         let scene: MoonoGameScene = MoonoGameScene(size: CGSize(width: width, height: height), vm: gameSceneViewModel)
+        scene.gameSceneDelegate = self
         scene.backgroundColor = AftermintColor.backgroundLightBlue
         scene.scaleMode = .aspectFit
         gameSKView.presentScene(scene)
@@ -196,13 +205,24 @@ extension GameViewController {
     }
 }
 
+extension GameViewController: MoonoGameSceneDelegate {
+    
+    func didReceiveTouchCount(number: Int64) {
+        print("Touch received: \(number)")
+        self.touchCount += number
+    }
+
+}
+
 extension GameViewController: BottomSheetViewDelegate {
     
+    ///TEMP: Use Moono#81 for the demo purpose
     func tempFetchData(data: [String : Int64]) {
-
-        let count = data["Moono #81"]
-        
+        let mockCard = MoonoMockMetaData().getOneMockData()
+        let count = data[mockCard.tokenId]
+        self.initialCount = count ?? 0
         self.touchCountLabel.text = "\(count ?? 0)"
+        self.touchCount = 0
     } 
 
 }

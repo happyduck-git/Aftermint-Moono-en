@@ -27,12 +27,14 @@ class FirestoreRepository {
             K.FStore.collectionIdFieldKey: card.collectionId,
             K.FStore.imageUriFieldKey: card.imageUri,
             K.FStore.tokenIdFieldKey: card.tokenId,
-            K.FStore.countFieldKey: FieldValue.increment(Int64(1))
+            //            K.FStore.countFieldKey: FieldValue.increment(Int64(1))
+            K.FStore.countFieldKey: FieldValue.increment(card.count)
         ], merge: true)
         
         /// Save total count
         docRefForTotal.setData([
-            K.FStore.countFieldKey: FieldValue.increment(Int64(1))
+            //            K.FStore.countFieldKey: FieldValue.increment(Int64(1))
+            K.FStore.countFieldKey: FieldValue.increment(card.count)
         ], merge: true)
         
     }

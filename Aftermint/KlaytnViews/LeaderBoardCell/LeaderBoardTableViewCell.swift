@@ -121,6 +121,7 @@ final class LeaderBoardTableViewCell: UITableViewCell {
         self.nftImageView.image = nil
         self.nftNameLabel.text = nil
         self.touchScoreLabel.text = nil
+        self.contentView.backgroundColor = nil
     }
     
     // MARK: - Public

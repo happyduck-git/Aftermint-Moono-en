@@ -36,6 +36,7 @@ final class TemplateService {
         templateQueue.sync {
             if let data = try? Data(contentsOf: TemplateService.templateFileURL),
                let templates = try? JSONDecoder().decode([Template].self, from: data) {
+                print("templateFileURL: \(TemplateService.templateFileURL)")
                 return templates
             }
             return []

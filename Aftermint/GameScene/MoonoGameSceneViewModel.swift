@@ -10,22 +10,15 @@ import Foundation
 final class MoonoGameSceneViewModel {
     
     let fireStoreRepository = FirestoreRepository.shared
-    let randomMoonoData: Card = MoonoMockMetaData().getData(at: 0)
+    ///TEMP: Using mock data
+    let randomMoonoData: Card = MoonoMockMetaData().getOneMockData()
     
-    //TODO: Need to change from dummy data to realtime data
-    var count: Int64 = 0 {
-        willSet {
-            
-            print("Current Moono NFT in Game: \(randomMoonoData.tokenId)")
-            saveCountNumberOfCard(imageUri: randomMoonoData.imageUri,
-                                  collectionId: randomMoonoData.collectionId,
-                                  tokenId: randomMoonoData.tokenId,
-                                  count: newValue)
-        }
-    }
-    
-    func increaseTouchCountByOne() {
-        self.count += 1
+    /// Save increase touch count of a certain card to Firestore
+    func increaseTouchCount(_ number: Int64) {
+        saveCountNumberOfCard(imageUri: randomMoonoData.imageUri,
+                              collectionId: randomMoonoData.collectionId,
+                              tokenId: randomMoonoData.tokenId,
+                              count: number)
     }
     
     func saveCountNumberOfCard(imageUri: String,
@@ -38,9 +31,8 @@ final class MoonoGameSceneViewModel {
                               collectionId: collectionId,
                               tokenId: tokenId,
                               count: count)
-        #if DEBUG
         fireStoreRepository.saveCard(card)
-        #endif
+
     }
     
 }
