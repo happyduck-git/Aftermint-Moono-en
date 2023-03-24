@@ -10,7 +10,6 @@
 		240121AA29A7B49200F60BDA /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240121A929A7B49200F60BDA /* Coordinator.swift */; };
 		240121AD29A7B6DF00F60BDA /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240121AC29A7B6DF00F60BDA /* AppCoordinator.swift */; };
 		24097B1A2989530000F92366 /* NftCardCellBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24097B192989530000F92366 /* NftCardCellBackView.swift */; };
-		24097B22298D515E00F92366 /* MarketViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24097B21298D515E00F92366 /* MarketViewReactor.swift */; };
 		24097B25298E952600F92366 /* MarketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24097B24298E952600F92366 /* MarketCell.swift */; };
 		24097B7929913C2E00F92366 /* MarketDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24097B7829913C2E00F92366 /* MarketDetailViewController.swift */; };
 		24097B7C29913E9000F92366 /* Pulley in Frameworks */ = {isa = PBXBuildFile; productRef = 24097B7B29913E9000F92366 /* Pulley */; };
@@ -422,7 +421,6 @@
 		93A4B81A2991CFC100146FD8 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 93A4B8192991CFC100146FD8 /* FSCalendar */; };
 		93A4B8692994E5A600146FD8 /* CalendarViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A4B8682994E5A600146FD8 /* CalendarViewReactor.swift */; };
 		93C32FBE29B9A69700DB3CB3 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C32FBD29B9A69700DB3CB3 /* GameViewController.swift */; };
-		93C32FC129BAC2DD00DB3CB3 /* LeaderBoardBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C32FC029BAC2DD00DB3CB3 /* LeaderBoardBottomSheetViewController.swift */; };
 		93C32FC329BB000600DB3CB3 /* NftCardCellPropertyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C32FC229BB000600DB3CB3 /* NftCardCellPropertyView.swift */; };
 		93C32FC529BB004400DB3CB3 /* NftCardCellPropertyItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C32FC429BB004400DB3CB3 /* NftCardCellPropertyItemView.swift */; };
 		93FA0FE5298C960D00F3B2E3 /* BellyGomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FA0FE4298C960D00F3B2E3 /* BellyGomFont.swift */; };
@@ -432,7 +430,6 @@
 		240121A929A7B49200F60BDA /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		240121AC29A7B6DF00F60BDA /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		24097B192989530000F92366 /* NftCardCellBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftCardCellBackView.swift; sourceTree = "<group>"; };
-		24097B21298D515E00F92366 /* MarketViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewReactor.swift; sourceTree = "<group>"; };
 		24097B24298E952600F92366 /* MarketCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCell.swift; sourceTree = "<group>"; };
 		24097B7829913C2E00F92366 /* MarketDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDetailViewController.swift; sourceTree = "<group>"; };
 		24097B7D29913EFD00F92366 /* BenefitTabBottomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenefitTabBottomViewController.swift; sourceTree = "<group>"; };
@@ -827,7 +824,6 @@
 		93A4B8162991CF3500146FD8 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		93A4B8682994E5A600146FD8 /* CalendarViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewReactor.swift; sourceTree = "<group>"; };
 		93C32FBD29B9A69700DB3CB3 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		93C32FC029BAC2DD00DB3CB3 /* LeaderBoardBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardBottomSheetViewController.swift; sourceTree = "<group>"; };
 		93C32FC229BB000600DB3CB3 /* NftCardCellPropertyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftCardCellPropertyView.swift; sourceTree = "<group>"; };
 		93C32FC429BB004400DB3CB3 /* NftCardCellPropertyItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftCardCellPropertyItemView.swift; sourceTree = "<group>"; };
 		93FA0FE4298C960D00F3B2E3 /* BellyGomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellyGomFont.swift; sourceTree = "<group>"; };
@@ -879,7 +875,6 @@
 			isa = PBXGroup;
 			children = (
 				939DE055297A246B00EFA71E /* MarketViewController.swift */,
-				24097B21298D515E00F92366 /* MarketViewReactor.swift */,
 				24097B7829913C2E00F92366 /* MarketDetailViewController.swift */,
 			);
 			path = MarketVC;
@@ -912,7 +907,6 @@
 				24F9FFB4298424DF00E534A1 /* LottieTemplateCell.swift */,
 				24097B192989530000F92366 /* NftCardCellBackView.swift */,
 				24097B24298E952600F92366 /* MarketCell.swift */,
-				24097B7D29913EFD00F92366 /* BenefitTabBottomViewController.swift */,
 				24097B7F299154E200F92366 /* UtilityClaimBottomSheet.swift */,
 				93C32FC229BB000600DB3CB3 /* NftCardCellPropertyView.swift */,
 				93C32FC429BB004400DB3CB3 /* NftCardCellPropertyItemView.swift */,
@@ -2272,7 +2266,6 @@
 		939DE04E297A223100EFA71E /* KlaytnViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				93C32FBF29BAC2C900DB3CB3 /* LeaderBoardBottomSheetViewController */,
 				93C32FBC29B9A68700DB3CB3 /* GameVC */,
 				93C32FBB29B9A52500DB3CB3 /* TabBarVC */,
 				93C32FBA29B9A4B400DB3CB3 /* HomeVC */,
@@ -2284,6 +2277,7 @@
 				93297784298798CA00C76AB5 /* LoginVC */,
 				24F9FFB62986612500E534A1 /* LottieTemplateVC */,
 				939DE053297A242500EFA71E /* BenefitViewController.swift */,
+				24097B7D29913EFD00F92366 /* BenefitTabBottomViewController.swift */,
 				939DE057297A24A400EFA71E /* SettingViewController.swift */,
 				360D739F2987CA2A00D109C3 /* DevHankViewController.swift */,
 				93A4B7F72990C0C600146FD8 /* BottomSheetViewController.swift */,
@@ -2376,14 +2370,6 @@
 				93C32FBD29B9A69700DB3CB3 /* GameViewController.swift */,
 			);
 			path = GameVC;
-			sourceTree = "<group>";
-		};
-		93C32FBF29BAC2C900DB3CB3 /* LeaderBoardBottomSheetViewController */ = {
-			isa = PBXGroup;
-			children = (
-				93C32FC029BAC2DD00DB3CB3 /* LeaderBoardBottomSheetViewController.swift */,
-			);
-			path = LeaderBoardBottomSheetViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2659,7 +2645,6 @@
 				3620690829B88789008764BE /* MoonoNft.swift in Sources */,
 				3619B0DB29790AC50051C387 /* MediaType.swift in Sources */,
 				24097B7929913C2E00F92366 /* MarketDetailViewController.swift in Sources */,
-				24097B22298D515E00F92366 /* MarketViewReactor.swift in Sources */,
 				3619B0C929790AC50051C387 /* Date.swift in Sources */,
 				3619B19429790AC60051C387 /* PolygonNode.swift in Sources */,
 				93A4B8072990D6A100146FD8 /* UtilityDetailViewController.swift in Sources */,
@@ -2848,7 +2833,6 @@
 				3619B1D429790AC60051C387 /* CGFloatExtensions.swift in Sources */,
 				3619B0EC29790AC50051C387 /* AccessTokenWithSecret.swift in Sources */,
 				9300BB5829C8106200C67A29 /* BottomSheetView.swift in Sources */,
-				93C32FC129BAC2DD00DB3CB3 /* LeaderBoardBottomSheetViewController.swift in Sources */,
 				24ED33AC29BEBCDD00C2D4E1 /* NukeImageLoader.swift in Sources */,
 				2481E1DC297C48E700187BB9 /* UIImage.swift in Sources */,
 				3619B15029790AC60051C387 /* LottieLogger.swift in Sources */,

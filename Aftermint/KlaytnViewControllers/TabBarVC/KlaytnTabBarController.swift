@@ -11,7 +11,6 @@ class KlaytnTabViewController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,25 +30,29 @@ class KlaytnTabViewController: UITabBarController, UITabBarControllerDelegate {
         tabBar.backgroundColor = .white
         
         let klaytnHomeVC = KlaytnHomeViewController()
-        klaytnHomeVC.tabBarItem.image = UIImage(named: "main_off")?.withRenderingMode(.alwaysOriginal)
-        klaytnHomeVC.tabBarItem.selectedImage = UIImage(named: "main_on")?.withRenderingMode(.alwaysOriginal)
+        klaytnHomeVC.tabBarItem.image = UIImage(named: TabBarAsset.mainOff.rawValue)?.withRenderingMode(.alwaysOriginal)
+        klaytnHomeVC.tabBarItem.selectedImage = UIImage(named: TabBarAsset.mainOn.rawValue)?.withRenderingMode(.alwaysOriginal)
         
         let benefitVC = BenefitViewController()
         let benefitNaviVC = UINavigationController(rootViewController: benefitVC)
-        benefitNaviVC.tabBarItem.image = UIImage(named: "gift_off")?.withRenderingMode(.alwaysOriginal)
-        benefitNaviVC.tabBarItem.selectedImage = UIImage(named: "gift_on")?.withRenderingMode(.alwaysOriginal)
+        benefitNaviVC.tabBarItem.image = UIImage(named: TabBarAsset.giftOff.rawValue)?.withRenderingMode(.alwaysOriginal)
+        benefitNaviVC.tabBarItem.selectedImage = UIImage(named: TabBarAsset.giftOn.rawValue)?.withRenderingMode(.alwaysOriginal)
         
         let marketVC = MarketViewController()
-        marketVC.tabBarItem.image = UIImage(named: "market_off")?.withRenderingMode(.alwaysOriginal)
-        marketVC.tabBarItem.selectedImage = UIImage(named: "market_on")?.withRenderingMode(.alwaysOriginal)
+        marketVC.tabBarItem.image = UIImage(named: TabBarAsset.marketOff.rawValue)?.withRenderingMode(.alwaysOriginal)
+        marketVC.tabBarItem.selectedImage = UIImage(named: TabBarAsset.marketOn.rawValue)?.withRenderingMode(.alwaysOriginal)
 
-        let gameVC = GameViewController()
-        gameVC.tabBarItem.image = UIImage(named: "game_off")?.withRenderingMode(.alwaysOriginal)
-        gameVC.tabBarItem.selectedImage = UIImage(named: "game_on")?.withRenderingMode(.alwaysOriginal)
+        
+        let gameSceneVM = MoonoGameSceneViewModel()
+        let leaderBoardListViewModel = LeaderBoardTableViewCellListViewModel()
+        let gameVC = GameViewController(gameSceneVM: gameSceneVM,
+                                        leaderBoardListViewModel: leaderBoardListViewModel)
+        gameVC.tabBarItem.image = UIImage(named: TabBarAsset.gameOff.rawValue)?.withRenderingMode(.alwaysOriginal)
+        gameVC.tabBarItem.selectedImage = UIImage(named: TabBarAsset.gameOn.rawValue)?.withRenderingMode(.alwaysOriginal)
         
         let settingVC = SettingViewController()
-        settingVC.tabBarItem.image = UIImage(named: "setting_off")?.withRenderingMode(.alwaysOriginal)
-        settingVC.tabBarItem.selectedImage = UIImage(named: "setting_on")?.withRenderingMode(.alwaysOriginal)
+        settingVC.tabBarItem.image = UIImage(named: TabBarAsset.settingOff.rawValue)?.withRenderingMode(.alwaysOriginal)
+        settingVC.tabBarItem.selectedImage = UIImage(named: TabBarAsset.settingOn.rawValue)?.withRenderingMode(.alwaysOriginal)
 
         self.viewControllers = [klaytnHomeVC, benefitNaviVC, marketVC, gameVC, settingVC]
 

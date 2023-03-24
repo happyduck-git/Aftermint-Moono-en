@@ -8,14 +8,11 @@
 import UIKit
 
 protocol BottomSheetViewDelegate: AnyObject {
-
     func tempFetchData(data: [String: Int64])
-
 }
 
 final class BottomSheetView: PassThroughView {
     
-//    var viewModel: LeaderBoardTableViewCellListViewModel = LeaderBoardTableViewCellListViewModel()
     var viewModel: LeaderBoardTableViewCellListViewModel?
     
     weak var bottomSheetDelegate: BottomSheetViewDelegate?
@@ -121,12 +118,14 @@ final class BottomSheetView: PassThroughView {
         self.viewModel?.getAllNftRankCellViewModels { result in
             switch result {
             case .success(let viewModels):
-                self.viewModel?.viewModelList = viewModels
+                self.viewModel?.viewModelList.value = viewModels
                 self.tempTouchCountList = self.fetchTouchCount(with: viewModels)
                 self.bottomSheetDelegate?.tempFetchData(data: self.tempTouchCountList)
+                
                 DispatchQueue.main.async {
                     self.leaderBoardTableView.reloadData()
                 }
+                
             case .failure(let failure):
                 print("Error getting viewmodels : \(failure)")
             }
@@ -264,13 +263,13 @@ extension BottomSheetView: UITableViewDelegate, UITableViewDataSource {
     private func cellRankImageAt(_ indexPathRow: Int) -> UIImage? {
         switch indexPathRow {
         case 0:
-            return UIImage(named: RankImage.firstPlace.rawValue)
+            return UIImage(named: LeaderBoard.firstPlace.rawValue)
         case 1:
-            return UIImage(named: RankImage.secondPlace.rawValue)
+            return UIImage(named: LeaderBoard.secondPlace.rawValue)
         case 2:
-            return UIImage(named: RankImage.thirdPlace.rawValue)
+            return UIImage(named: LeaderBoard.thirdPlace.rawValue)
         default:
-            return UIImage(named: RankImage.others.rawValue)
+            return UIImage(named: LeaderBoard.markImageName.rawValue)
         }
     }
     

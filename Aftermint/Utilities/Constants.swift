@@ -17,7 +17,7 @@ struct K {
     struct Wallet {
         static let temporaryAddress = "0x6a5fe8B4718bC147ba13BD8Dfb31eC6097bfabcB"
     }
-
+    
     /// Firebase firestore related constants
     struct FStore {
         static let nftCardCollectionName: String = "Card"
@@ -35,9 +35,28 @@ struct K {
 enum LeaderBoard: String {
     case title = "Leader board"
     case markImageName = "leader-board-mark"
+    case firstPlace = "1st_place_medal"
+    case secondPlace = "2nd_place_medal"
+    case thirdPlace = "3rd_place_medal"
 }
 
+/// GameScene related constants
 enum GameSceneAsset: String {
     case particles = "SparkParticle.sks"
     case moonoImage = "game_moono_mock"
 }
+
+/// TabBarController related constants
+enum TabBarAsset: String {
+    case mainOn = "main_on"
+    case mainOff = "main_off"
+    case giftOn = "gift_on"
+    case giftOff = "gift_off"
+    case marketOff = "market_off"
+    case marketOn = "market_on"
+    case gameOn = "game_on"
+    case gameOff = "game_off"
+    case settingOn = "setting_on"
+    case settingOff = "setting_off"
+}
+

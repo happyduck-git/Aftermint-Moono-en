@@ -10,11 +10,8 @@ import SpriteKit
 
 final class GameViewController: UIViewController {
     
-    private let leaderBoardBottomSheetVC = LeaderBoardBottomSheetViewController()
-//    private let gameVCViewModel: GameViewControllerViewModel = GameViewControllerViewModel()
-
-    private let gameSceneViewModel: MoonoGameSceneViewModel = MoonoGameSceneViewModel()
-    var leaderBoardViewModel: LeaderBoardTableViewCellListViewModel = LeaderBoardTableViewCellListViewModel()
+    private let gameSceneViewModel: MoonoGameSceneViewModel
+    private var leaderBoardListViewModel: LeaderBoardTableViewCellListViewModel
     
     // MARK: - UI Elements
     private let nftImageView: UIImageView = {
@@ -78,7 +75,7 @@ final class GameViewController: UIViewController {
     }()
     
     private lazy var bottomSheetView: BottomSheetView = {
-        let bottomSheet = BottomSheetView(frame: .zero, vm: leaderBoardViewModel)
+        let bottomSheet = BottomSheetView(frame: .zero, vm: leaderBoardListViewModel)
         bottomSheet.bottomSheetColor = AftermintColor.backgroundNavy
         bottomSheet.barViewColor = .darkGray
         bottomSheet.translatesAutoresizingMaskIntoConstraints = false
@@ -88,6 +85,19 @@ final class GameViewController: UIViewController {
     private var tempTouchCountList: [String: Int64] {
         print("\(self.bottomSheetView.tempTouchCountList)")
         return self.bottomSheetView.tempTouchCountList
+    }
+    
+    // MARK: - Init
+    init(gameSceneVM: MoonoGameSceneViewModel,
+         leaderBoardListViewModel: LeaderBoardTableViewCellListViewModel
+    ) {
+        self.gameSceneViewModel = gameSceneVM
+        self.leaderBoardListViewModel = leaderBoardListViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Life cycle

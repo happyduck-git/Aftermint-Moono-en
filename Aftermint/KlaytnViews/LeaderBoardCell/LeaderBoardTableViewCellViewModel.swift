@@ -7,24 +7,18 @@
 
 import UIKit.UIImage
 
-enum RankImage: String {
-    case firstPlace = "1st_place_medal"
-    case secondPlace = "2nd_place_medal"
-    case thirdPlace = "3rd_place_medal"
-    case others = "leader-board-mark"
-}
-
-class LeaderBoardTableViewCellListViewModel {
+final class LeaderBoardTableViewCellListViewModel {
     
-    var viewModelList: [LeaderBoardTableViewCellViewModel] = []
+    var viewModelList: Box<[LeaderBoardTableViewCellViewModel]>  = Box([])
     let fireStoreRepository = FirestoreRepository.shared
     
     func numberOfRowsInSection(at section: Int) -> Int {
-        return self.viewModelList.count
+         return self.viewModelList.value?.count ?? 0
     }
     
-    func modelAt(_ index: Int) -> LeaderBoardTableViewCellViewModel {
-        return self.viewModelList[index]
+    func modelAt(_ index: Int) -> LeaderBoardTableViewCellViewModel? {
+        guard let viewModel: LeaderBoardTableViewCellViewModel = self.viewModelList.value?[index] else { return nil }
+        return viewModel
     }
     
     func getAllNftRankCellViewModels(completion: @escaping (Result<[LeaderBoardTableViewCellViewModel], Error>) -> ()) {
@@ -32,7 +26,7 @@ class LeaderBoardTableViewCellListViewModel {
         self.fireStoreRepository.getAllCard { cardsList in
             
             guard let cards = cardsList,
-                  let rankImage = UIImage(named: RankImage.firstPlace.rawValue)
+                  let rankImage = UIImage(named: LeaderBoard.firstPlace.rawValue)
             else { return }
             
             let initialRank = 1
@@ -61,7 +55,7 @@ extension LeaderBoardTableViewCellListViewModel {
     
 }
 
-class LeaderBoardTableViewCellViewModel {
+final class LeaderBoardTableViewCellViewModel {
     
     var rankImage: UIImage
     var rank: Int
