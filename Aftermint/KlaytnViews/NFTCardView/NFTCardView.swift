@@ -19,7 +19,7 @@ protocol NFTCardViewDelegate: AnyObject {
 class NFTCardView: UIView {
     
     let prefetcher = ImagePrefetcher()
-    var viewModel: NFTCardViewModel = NFTCardViewModel()
+    var viewModel: NFTCardViewModel
     var nftSelected: [Bool] = []
     
     // MARK: - UIElements
@@ -69,8 +69,9 @@ class NFTCardView: UIView {
     
     // MARK: - Init
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(vm: NFTCardViewModel) {
+        self.viewModel = vm
+        super.init(frame: .zero)
         setUI()
         layout()
         setDelegate()

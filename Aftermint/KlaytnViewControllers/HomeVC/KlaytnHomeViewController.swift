@@ -18,7 +18,8 @@ class KlaytnHomeViewController: UIViewController {
     }()
     
     private let nftCardView: NFTCardView = {
-        let cardView = NFTCardView()
+        let vm = NFTCardViewModel()
+        let cardView = NFTCardView(vm: vm)
         cardView.accessibilityIdentifier = "nftCardView"
         cardView.translatesAutoresizingMaskIntoConstraints = false
         return cardView
