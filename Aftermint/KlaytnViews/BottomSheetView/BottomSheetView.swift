@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import Nuke
 
 protocol BottomSheetViewDelegate: AnyObject {
     func tempFetchData(data: [String: Int64])
 }
 
 final class BottomSheetView: PassThroughView {
+    
+    let prefetcher = ImagePrefetcher()
     
     var viewModel: LeaderBoardTableViewCellListViewModel?
     
@@ -288,8 +291,34 @@ extension BottomSheetView: UITableViewDelegate, UITableViewDataSource {
     private func setDelegate() {
         leaderBoardTableView.delegate = self
         leaderBoardTableView.dataSource = self
+        leaderBoardTableView.prefetchDataSource = self
     }
     
+}
+
+extension BottomSheetView: UITableViewDataSourcePrefetching {
+    
+    /// PretchImageAt
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        let urlStrings: [String] = indexPaths.compactMap {
+            self.viewModel?.modelAt($0.row)?.nftImage
+        }
+        let urls: [URL] = urlStrings.compactMap {
+            URL(string: $0)
+        }
+        prefetcher.startPrefetching(with: urls)
+    }
+
+    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        let urlStrings: [String] = indexPaths.compactMap {
+            self.viewModel?.modelAt($0.row)?.nftImage
+        }
+        let urls: [URL] = urlStrings.compactMap {
+            URL(string: $0)
+        }
+        prefetcher.stopPrefetching(with: urls)
+    }
+
 }
 
 // MARK: - Enums

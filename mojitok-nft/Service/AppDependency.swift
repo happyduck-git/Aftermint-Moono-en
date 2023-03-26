@@ -16,13 +16,15 @@ struct AppDependency {
         let nftRepository = NFTRepository.shared
         let twitterService = TwitterService.shared
         let userService = UserService.shared
-                
+         
+        /// Currently not in use
+        /*
         let templateShareViewReactorFactory = TemplateShareViewReactor.Factory(dependency: .init(twitterService: twitterService, userService: userService))
         
         let templateCreateViewReactorFactory = TemplateCreateViewReactor.Factory(dependency: .init(templateShareViewReactorFactory: templateShareViewReactorFactory, templateRepository: templateRepository))
-                
-        let homeViewReactor = HomeViewReactor(dependency: .init(templateCreateViewReactorFactory: templateCreateViewReactorFactory, walletRepository: walletRepository, nftRepository: nftRepository), payload: .init())
         
+         let homeViewReactor = HomeViewReactor(dependency: .init(templateCreateViewReactorFactory: templateCreateViewReactorFactory, walletRepository: walletRepository, nftRepository: nftRepository), payload: .init())
+         */
         
         let templateShareViewReactorFactory2 = TemplateShareViewReactor2.Factory(dependency: .init(twitterService: twitterService, userService: userService))
         

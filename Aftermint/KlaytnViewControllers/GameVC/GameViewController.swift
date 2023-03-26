@@ -125,15 +125,26 @@ final class GameViewController: UIViewController {
         self.navigationBarSetup()
     }
     
+    var timer: Timer = Timer()
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        ///Set Timer scheduler to repeat certain action
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            print("Timer in working...")
+        }
     }
     
     override func viewWillLayoutSubviews() {
         nftImageView.layer.cornerRadius = nftImageView.frame.size.width / 2
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        ///Disable the timer when the view disappeared
+        timer.invalidate()
+    }
     private func navigationBarSetup() {
         
         self.tabBarController?.navigationItem.setHidesBackButton(true, animated: false)
