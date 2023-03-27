@@ -45,11 +45,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             var rootNaviVC: UINavigationController?
             
             let loginVCDependency = dependency.loginViewControllerDependency
-            let loginVC = LoginViewController(reactor: loginVCDependency.reactor(),
-                                              startVCDependency: <#StartViewController.Dependency#>)
-            
+            let startViewDependency = dependency.startViewControllerDependency
             let mainTabVCDependency = dependency.klaytnTabBarViewControllerDependency
-            let mainTabVC = KlaytnTabViewController(vm: mainTabVCDependency.leaderBoardListViewModel())
+            let lottieVCDependency = dependency.lottieViewControllerDependency
+            
+            let loginVC = LoginViewController(reactor: loginVCDependency.reactor(),
+                                              startVCDependency: startViewDependency,
+                                              mainTabBarVCDependency: mainTabVCDependency,
+                                              lottieVCDependency: lottieVCDependency
+                                              )
+            
+            let mainTabVC = KlaytnTabViewController(
+                vm: mainTabVCDependency.leaderBoardListViewModel(),
+                homeViewControllerDependency: mainTabVCDependency.homeViewControllerDependency,
+                lottieViewControllerDependency: lottieVCDependency)
             
             if token == nil {
                 rootNaviVC = UINavigationController(rootViewController: loginVC)

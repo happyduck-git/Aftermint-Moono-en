@@ -11,6 +11,7 @@ class StartViewController: UIViewController {
     
     // MARK: - Dependency
     private let mainTabBarViewControllerDependency: KlaytnTabViewController.Dependency
+    private let lottieViewControllerDependency: LottieViewController.Dependency
     
     // MARK: - UI Elements
     private let walletConnectImageView: UIImageView = {
@@ -62,8 +63,12 @@ class StartViewController: UIViewController {
     }()
     
     // MARK: - Init
-    init(mainTabBarViewControllerDependency: KlaytnTabViewController.Dependency) {
+    init(mainTabBarViewControllerDependency: KlaytnTabViewController.Dependency,
+         lottieViewControllerDependency: LottieViewController.Dependency
+    ) {
         self.mainTabBarViewControllerDependency = mainTabBarViewControllerDependency
+        self.lottieViewControllerDependency = lottieViewControllerDependency
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -139,7 +144,11 @@ class StartViewController: UIViewController {
 //    }
     
     @objc private func startButtonTapped() {
-        let vc = KlaytnTabViewController(vm: mainTabBarViewControllerDependency.leaderBoardListViewModel())
+        let vc = KlaytnTabViewController(
+            vm: mainTabBarViewControllerDependency.leaderBoardListViewModel(),
+            homeViewControllerDependency: mainTabBarViewControllerDependency.homeViewControllerDependency,
+            lottieViewControllerDependency: lottieViewControllerDependency)
+//        let vc = KlaytnTabViewController(vm: mainTabBarViewControllerDependency.leaderBoardListViewModel())
         navigationController?.pushViewController(vc, animated: true)
     }
 }

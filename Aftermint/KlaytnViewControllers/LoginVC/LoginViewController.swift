@@ -13,17 +13,24 @@ import RxCocoa
 class LoginViewController: UIViewController, View, Coordinating {
     
     // MARK: - Dependency
-    let startVCDependency: StartViewController.Dependency
+    private var startVCDependency: StartViewController.Dependency
+    private var mainTabBarVCDependency: KlaytnTabViewController.Dependency
+    private let lottieViewControllerDependency: LottieViewController.Dependency
     
     var coordinator: Coordinator?
     var disposeBag: DisposeBag = DisposeBag()
     
     // MARK: - Init
     init(reactor: LoginViewReactor,
-         startVCDependency: StartViewController.Dependency) {
+         startVCDependency: StartViewController.Dependency,
+         mainTabBarVCDependency: KlaytnTabViewController.Dependency,
+         lottieVCDependency: LottieViewController.Dependency
+    ) {
+        self.startVCDependency = startVCDependency
+        self.mainTabBarVCDependency = mainTabBarVCDependency
+        self.lottieViewControllerDependency = lottieVCDependency
         super.init(nibName: nil, bundle: nil)
         self.reactor = reactor
-        self.startVCDependency = startVCDependency
     }
     
     required init?(coder: NSCoder) {
@@ -128,12 +135,17 @@ class LoginViewController: UIViewController, View, Coordinating {
         /// NOTE: Temporarily push directly to KlaytnTabViewController;
         /// Will connect to FavorletWallet application later in the future
         let vm = LeaderBoardTableViewCellListViewModel() //Need adopt appDependency
-        let homeVC = KlaytnTabViewController(vm: mainTabBarViewControllerDependency.leaderBoardListViewModel())
+        let homeVC = KlaytnTabViewController(
+            vm: mainTabBarVCDependency.leaderBoardListViewModel(),
+            homeViewControllerDependency: mainTabBarVCDependency.homeViewControllerDependency,
+            lottieViewControllerDependency: lottieViewControllerDependency)
         navigationController?.pushViewController(homeVC, animated: true)
     }
     
     private func connectKaikasWallet() { //change the name of the function to openStartVC
-        let startVC = StartViewController(mainTabBarViewControllerDependency: <#T##KlaytnTabViewController.Dependency#>)
+        let startVC = StartViewController(
+            mainTabBarViewControllerDependency: mainTabBarVCDependency,
+            lottieViewControllerDependency: lottieViewControllerDependency)
         navigationController?.pushViewController(startVC, animated: true)
         
     }

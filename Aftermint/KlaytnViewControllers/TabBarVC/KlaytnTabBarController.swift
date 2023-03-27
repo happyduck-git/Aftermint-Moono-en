@@ -10,10 +10,17 @@ import UIKit
 class KlaytnTabViewController: UITabBarController, UITabBarControllerDelegate {
     
     let leaderBoardListViewModel: LeaderBoardTableViewCellListViewModel
+    let homeViewControllerDependency: KlaytnHomeViewController.Dependency
+    let lottieVCDependency: LottieViewController.Dependency
     
     // MARK: - Init
-    init(vm: LeaderBoardTableViewCellListViewModel) {
+    init(vm: LeaderBoardTableViewCellListViewModel,
+         homeViewControllerDependency: KlaytnHomeViewController.Dependency,
+         lottieViewControllerDependency: LottieViewController.Dependency
+    ) {
         self.leaderBoardListViewModel = vm
+        self.homeViewControllerDependency = homeViewControllerDependency
+        self.lottieVCDependency = lottieViewControllerDependency
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,7 +49,9 @@ class KlaytnTabViewController: UITabBarController, UITabBarControllerDelegate {
     private func setTabBarItems() {
         tabBar.backgroundColor = .white
         
-        let klaytnHomeVC = KlaytnHomeViewController()
+        let klaytnHomeVC = KlaytnHomeViewController(
+            reactor: homeViewControllerDependency.homeViewReactor,
+            lottieViewControllerDependency: lottieVCDependency)
         klaytnHomeVC.tabBarItem.image = UIImage(named: TabBarAsset.mainOff.rawValue)?.withRenderingMode(.alwaysOriginal)
         klaytnHomeVC.tabBarItem.selectedImage = UIImage(named: TabBarAsset.mainOn.rawValue)?.withRenderingMode(.alwaysOriginal)
         
@@ -55,7 +64,6 @@ class KlaytnTabViewController: UITabBarController, UITabBarControllerDelegate {
         marketVC.tabBarItem.image = UIImage(named: TabBarAsset.marketOff.rawValue)?.withRenderingMode(.alwaysOriginal)
         marketVC.tabBarItem.selectedImage = UIImage(named: TabBarAsset.marketOn.rawValue)?.withRenderingMode(.alwaysOriginal)
 
-//        let leaderBoardListViewModel = LeaderBoardTableViewCellListViewModel()
         let gameVC = GameViewController(leaderBoardListViewModel: self.leaderBoardListViewModel)
         gameVC.tabBarItem.image = UIImage(named: TabBarAsset.gameOff.rawValue)?.withRenderingMode(.alwaysOriginal)
         gameVC.tabBarItem.selectedImage = UIImage(named: TabBarAsset.gameOn.rawValue)?.withRenderingMode(.alwaysOriginal)

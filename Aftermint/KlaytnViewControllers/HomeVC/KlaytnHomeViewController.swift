@@ -9,6 +9,9 @@ import UIKit
 
 class KlaytnHomeViewController: UIViewController {
     
+    var reactor: HomeViewReactor2
+    var lottieVCDependency: LottieViewController.Dependency
+    
     //MARK: - UIElements
     
     private let welcomeUpperView: WelcomeUpperView = {
@@ -32,6 +35,19 @@ class KlaytnHomeViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    //MARK: - Init
+    init(reactor: HomeViewReactor2,
+         lottieViewControllerDependency: LottieViewController.Dependency) {
+        self.reactor = reactor
+        self.lottieVCDependency = lottieViewControllerDependency
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     //MARK: - Life cycle
     
@@ -107,19 +123,23 @@ extension KlaytnHomeViewController: NFTCardViewDelegate {
 extension KlaytnHomeViewController {
  
     private func makeReactorByGall3ry3(nft: MoonoNft) -> LottieViewReactor {
-        let appDependency = AppDependency.resolve()
-        return appDependency.homeViewReactor.dependency
-            .lottieViewReactorFactory.create(
-                payload: .init(nft: makeOpenSeaNftByGall3ry3(moonoNft: nft), format: .video)
-            )
+//        let appDependency = AppDependency.resolve()
+//        return appDependency.homeViewReactor.dependency
+//            .lottieViewReactorFactory.create(
+//                payload: .init(nft: makeOpenSeaNftByGall3ry3(moonoNft: nft), format: .video)
+//            )
+        
+        return reactor.dependency.lottieViewReactorFactory.create(payload: .init(nft: makeOpenSeaNftByGall3ry3(moonoNft: nft), format: .video))
+        
     }
     
     private func makeMockMoonoReactorByGall3ry3() -> LottieViewReactor {
-        let appDependency = AppDependency.resolve()
-        return appDependency.homeViewReactor.dependency
-            .lottieViewReactorFactory.create(
-                payload: .init(nft: makeMockOpenSeaMoonoNftByGall3ry3(), format: .video)
-            )
+//        let appDependency = AppDependency.resolve()
+//        return appDependency.homeViewReactor.dependency
+//            .lottieViewReactorFactory.create(
+//                payload: .init(nft: makeMockOpenSeaMoonoNftByGall3ry3(), format: .video)
+//            )
+        return reactor.dependency.lottieViewReactorFactory.create(payload: .init(nft: makeMockOpenSeaMoonoNftByGall3ry3(), format: .video))
     }
     
     private func makeOpenSeaNftByGall3ry3(moonoNft: MoonoNft) -> OpenSeaNFT {
