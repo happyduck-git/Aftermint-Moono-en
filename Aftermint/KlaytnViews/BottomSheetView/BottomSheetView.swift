@@ -9,7 +9,7 @@ import UIKit
 import Nuke
 
 protocol BottomSheetViewDelegate: AnyObject {
-    func tempFetchData(data: [String: Int64])
+    func dataFetched()
 }
 
 final class BottomSheetView: PassThroughView {
@@ -20,8 +20,6 @@ final class BottomSheetView: PassThroughView {
     
     weak var bottomSheetDelegate: BottomSheetViewDelegate?
     var tempTouchCountList: [String: Int64] = [:]
-    // viewModel.viewModelList -> forEach -> filter by elements tokenId(which is nftName)
-    // in GameVC, if the tokenId matches, get its touchCount and update scoreLabel.text
     
     // MARK: - UI Elements
     
@@ -65,7 +63,7 @@ final class BottomSheetView: PassThroughView {
         return label
     }()
     
-    private let leaderBoardTableView: UITableView = {
+    let leaderBoardTableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = AftermintColor.backgroundNavy
         table.alpha = 0.0
@@ -124,7 +122,7 @@ final class BottomSheetView: PassThroughView {
             case .success(let viewModels):
                 self.viewModel?.viewModelList.value = viewModels
                 self.tempTouchCountList = self.fetchTouchCount(with: viewModels)
-                self.bottomSheetDelegate?.tempFetchData(data: self.tempTouchCountList)
+                self.bottomSheetDelegate?.dataFetched()
                 
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 0.6) {
@@ -274,7 +272,7 @@ extension BottomSheetView: UITableViewDelegate, UITableViewDataSource {
         return 60
     }
     
-    /// Determine cell image 
+    /// Determine cell image
     private func cellRankImageAt(_ indexPathRow: Int) -> UIImage? {
         switch indexPathRow {
         case 0:

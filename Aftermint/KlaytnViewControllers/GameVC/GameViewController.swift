@@ -10,17 +10,21 @@ import SpriteKit
 
 final class GameViewController: UIViewController {
     
-    private let gameSceneViewModel: MoonoGameSceneViewModel
-    private var leaderBoardListViewModel: LeaderBoardTableViewCellListViewModel
+    // MARK: - Constants
+    private var nftGradeLabelText: String = "/ Moono week"
+    private var initialTouchScore: Int = 0
     
-    private var initialCount: Int64 = 0
-    private var touchCount: Int64 = 0 {
+    // MARK: - Dependency
+    private var leaderBoardListViewModel: LeaderBoardTableViewCellListViewModel
+    private var scene: MoonoGameScene?
+    
+    private var touchCount: Int64 = 0
+    private var touchCountToShow: Int64 = 0 {
         didSet {
-            print("Initial count: \(self.initialCount)")
-            print("Touch count: \(self.touchCount)")
-            self.touchCountLabel.text = "\(self.initialCount + self.touchCount)"
+            self.touchCountLabel.text = "\(self.touchCountToShow)"
         }
     }
+    
     // MARK: - UI Elements
     private let nftImageView: UIImageView = {
         let imageView = UIImageView()
@@ -56,17 +60,18 @@ final class GameViewController: UIViewController {
         return label
     }()
     
-    private let nftGradeLabel: UILabel = {
+    private lazy var nftGradeLabel: UILabel = {
         let label = UILabel()
-        label.text = "/ Moono week"
+        label.text = self.nftGradeLabelText
         label.textColor = .white
         label.font = BellyGomFont.header06
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let touchCountLabel: UILabel = {
+    private lazy var touchCountLabel: UILabel = {
         let label = UILabel()
+        label.text = "\(self.initialTouchScore)"
         label.textColor = .white
         label.font = BellyGomFont.header03
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -96,10 +101,7 @@ final class GameViewController: UIViewController {
     }
     
     // MARK: - Init
-    init(gameSceneVM: MoonoGameSceneViewModel,
-         leaderBoardListViewModel: LeaderBoardTableViewCellListViewModel
-    ) {
-        self.gameSceneViewModel = gameSceneVM
+    init(leaderBoardListViewModel: LeaderBoardTableViewCellListViewModel) {
         self.leaderBoardListViewModel = leaderBoardListViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -131,8 +133,9 @@ final class GameViewController: UIViewController {
         super.viewDidAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         ///Set Timer scheduler to repeat certain action
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-//            print("Timer in working...")
+        timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { _ in
+            print("Accumulated touchCount: \(self.touchCount)")
+            self.leaderBoardListViewModel.increaseTouchCount(self.touchCount)
         }
     }
     
@@ -150,7 +153,7 @@ final class GameViewController: UIViewController {
         self.tabBarController?.navigationItem.setHidesBackButton(true, animated: false)
         self.tabBarController?.navigationItem.title = ""
         
-        let logo = UIImage(named: "game_logo")
+        let logo = UIImage(named: NavigationBarAsset.gameVCLogo.rawValue)
         let myImageView = UIImageView(image: logo)
         let leftBar: UIBarButtonItem = UIBarButtonItem(customView: myImageView)
         self.tabBarController?.navigationItem.leftBarButtonItem = leftBar
@@ -199,7 +202,8 @@ extension GameViewController {
     private func setGameScene() {
         let width = view.frame.size.width
         let height = view.frame.size.height
-        let scene: MoonoGameScene = MoonoGameScene(size: CGSize(width: width, height: height), vm: gameSceneViewModel)
+        scene = MoonoGameScene(size: CGSize(width: width, height: height))
+        guard let scene = scene else { return }
         scene.gameSceneDelegate = self
         scene.backgroundColor = AftermintColor.backgroundLightBlue
         scene.scaleMode = .aspectFit
@@ -207,7 +211,7 @@ extension GameViewController {
     }
     
     private func configureProfileInfo() {
-        let card = gameSceneViewModel.randomMoonoData
+        let card = leaderBoardListViewModel.randomMoonoData
         let url = URL(string: card.imageUri)
         NukeImageLoader.loadImageUsingNuke(url: url) { image in
             self.nftImageView.image = image
@@ -220,6 +224,7 @@ extension GameViewController: MoonoGameSceneDelegate {
     
     func didReceiveTouchCount(number: Int64) {
         print("Touch received: \(number)")
+        self.touchCountToShow += number
         self.touchCount += number
     }
 
@@ -228,12 +233,8 @@ extension GameViewController: MoonoGameSceneDelegate {
 //TODO: Export this logic to GameVCViewModel
 extension GameViewController: BottomSheetViewDelegate {
     
-    ///TEMP: Use Moono#81 for the demo purpose
-    func tempFetchData(data: [String : Int64]) {
-        let mockCard = MoonoMockMetaData().getOneMockData()
-        let count = data[mockCard.tokenId]
-        self.initialCount = count ?? 0
-        self.touchCountLabel.text = "\(count ?? 0)"
+    ///Get notified when the data saved to firestore
+    func dataFetched() {
         self.touchCount = 0
     } 
 

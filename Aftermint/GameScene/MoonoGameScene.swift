@@ -15,10 +15,8 @@ final class MoonoGameScene: SKScene {
     
     weak var gameSceneDelegate: MoonoGameSceneDelegate?
     
-    var vm: MoonoGameSceneViewModel?
-    
     // MARK: - Game Elements
-    
+    private let numberToIncrease: Int64 = 1
     //Nodes
     private var particles: SKEmitterNode?
     private var moonoImage: SKSpriteNode?
@@ -26,30 +24,6 @@ final class MoonoGameScene: SKScene {
     //Actions
     private let touchFadeOut: SKAction = SKAction.fadeOut(withDuration: 0.1)
     private let touchFadeIn: SKAction = SKAction.fadeIn(withDuration: 0.1)
-    
-    var touchCount: Int64 = 0
-    var isImageNodeTouched: Bool = false {
-        didSet {
-            if !oldValue && self.isImageNodeTouched {
-                DispatchQueue.global().asyncAfter(deadline: .now() + 5.0) {
-                    self.isImageNodeTouched = false
-                    print("Accumulated touchCount: \(self.touchCount)")
-                    self.vm?.increaseTouchCount(self.touchCount)
-                    self.touchCount = 0
-                }
-            }
-        }
-    }
-    
-    // MARK: - Initialize
-    init(size: CGSize, vm: MoonoGameSceneViewModel) {
-        super.init(size: size)
-        self.vm = vm
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     // MARK: - Life cycle
     /// Indicates when the scene is presented by a view.
@@ -88,9 +62,7 @@ final class MoonoGameScene: SKScene {
     
     //MARK: - Touch Handling
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.isImageNodeTouched = true
-        let numberToIncrease: Int64 = 1
-        self.touchCount += numberToIncrease
+        
         gameSceneDelegate?.didReceiveTouchCount(number: numberToIncrease)
         
         particles?.removeFromParent()

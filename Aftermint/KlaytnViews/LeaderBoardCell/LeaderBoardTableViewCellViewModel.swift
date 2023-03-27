@@ -10,6 +10,8 @@ import UIKit.UIImage
 final class LeaderBoardTableViewCellListViewModel {
     
     var viewModelList: Box<[LeaderBoardTableViewCellViewModel]>  = Box([])
+    var touchCount: Box<Int> = Box(0)
+    
     let fireStoreRepository = FirestoreRepository.shared
     
     func numberOfRowsInSection(at section: Int) -> Int {
@@ -44,6 +46,36 @@ final class LeaderBoardTableViewCellListViewModel {
         }
         completion(.failure(LeaderBoardTableViewCellListError.nftFetchError))
     }
+    
+    ///TEMP: Using mock data
+    let randomMoonoData: Card = MoonoMockMetaData().getOneMockData()
+    
+    /// Save increase touch count of a certain card to Firestore
+    func increaseTouchCount(_ number: Int64) {
+        saveCountNumberOfCard(imageUri: randomMoonoData.imageUri,
+                              collectionId: randomMoonoData.collectionId,
+                              tokenId: randomMoonoData.tokenId,
+                              count: number)
+    }
+    
+    func saveCountNumberOfCard(imageUri: String,
+                               collectionId: String,
+                               tokenId: String,
+                               count: Int64)
+    {
+        
+        let card: Card = Card(imageUri: imageUri,
+                              collectionId: collectionId,
+                              tokenId: tokenId,
+                              count: count)
+        let collection: NftCollection = NftCollection(collectionId: K.ContractAddress.moono,
+                                                      collectionLogoImage: "N/A",
+                                                      count: count)
+        fireStoreRepository.saveCard(card)
+        fireStoreRepository.saveCollection(collection)
+
+    }
+    
 }
 // MARK: - Custom Error type
 extension LeaderBoardTableViewCellListViewModel {

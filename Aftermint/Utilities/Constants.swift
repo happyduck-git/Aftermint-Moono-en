@@ -63,3 +63,6 @@ enum TabBarAsset: String {
     case settingOff = "setting_off"
 }
 
+enum NavigationBarAsset: String {
+    case gameVCLogo = "game_logo"
+}

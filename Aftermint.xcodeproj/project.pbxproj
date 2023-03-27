@@ -384,7 +384,6 @@
 		9300BB6329C8222300C67A29 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB6229C8222300C67A29 /* Card.swift */; };
 		9300BB6629C8226900C67A29 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB6529C8226900C67A29 /* Storable.swift */; };
 		9300BB6929C8280100C67A29 /* NftCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB6829C8280100C67A29 /* NftCollection.swift */; };
-		9300BB6F29C8320D00C67A29 /* MoonoGameSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB6E29C8320D00C67A29 /* MoonoGameSceneViewModel.swift */; };
 		9300BB7629C840FD00C67A29 /* MoonoMockMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BB7529C840FD00C67A29 /* MoonoMockMetaData.swift */; };
 		93199EF12989EDE1008D532B /* KASConnectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93199EF02989EDE1008D532B /* KASConnectService.swift */; };
 		93199EF4298A06A4008D532B /* KasWalletRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93199EF3298A06A4008D532B /* KasWalletRepository.swift */; };
@@ -785,7 +784,6 @@
 		9300BB6229C8222300C67A29 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		9300BB6529C8226900C67A29 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		9300BB6829C8280100C67A29 /* NftCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftCollection.swift; sourceTree = "<group>"; };
-		9300BB6E29C8320D00C67A29 /* MoonoGameSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonoGameSceneViewModel.swift; sourceTree = "<group>"; };
 		9300BB7429C8382300C67A29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9300BB7529C840FD00C67A29 /* MoonoMockMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonoMockMetaData.swift; sourceTree = "<group>"; };
 		93199EF02989EDE1008D532B /* KASConnectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KASConnectService.swift; sourceTree = "<group>"; };
@@ -2157,7 +2155,6 @@
 			isa = PBXGroup;
 			children = (
 				9300BB2729C44AD400C67A29 /* MoonoGameScene.swift */,
-				9300BB6E29C8320D00C67A29 /* MoonoGameSceneViewModel.swift */,
 				9300BB2929C44C6400C67A29 /* SparkParticle.sks */,
 				9300BB2A29C44C6400C67A29 /* Assets.xcassets */,
 			);
@@ -2739,7 +2736,6 @@
 				3619B16829790AC60051C387 /* ValueProviderStore.swift in Sources */,
 				935E6A822982619200D94DA6 /* LottieViewController.swift in Sources */,
 				3619B0D129790AC50051C387 /* UICollectionReusableView.swift in Sources */,
-				9300BB6F29C8320D00C67A29 /* MoonoGameSceneViewModel.swift in Sources */,
 				3619B1FA29790AC60051C387 /* NewVideoRenderer.swift in Sources */,
 				3619B13A29790AC60051C387 /* AnimationViewInitializers.swift in Sources */,
 				24F9FFB82986615E00E534A1 /* LottieViewReactor.swift in Sources */,
