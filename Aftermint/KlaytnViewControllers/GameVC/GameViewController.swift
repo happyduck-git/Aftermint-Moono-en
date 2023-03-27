@@ -132,7 +132,7 @@ final class GameViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         ///Set Timer scheduler to repeat certain action
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            print("Timer in working...")
+//            print("Timer in working...")
         }
     }
     

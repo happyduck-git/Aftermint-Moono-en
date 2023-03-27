@@ -20,12 +20,15 @@ struct K {
     
     /// Firebase firestore related constants
     struct FStore {
-        static let nftCardCollectionName: String = "Card"
+        static let nftCardCollectionName: String = "NFT"
+        static let nftCollectionCollectionName: String = "Collection"
+        static let nftCollectionDocumentName: String = "Moono"
         static let collectionIdFieldKey: String = "collectionId"
-        static let imageUriFieldKey: String = "imageUri"
+        static let imageUriFieldKey: String = "imageUrl"
         static let collectionLogoImageFieldKey: String = "collectionLogoImage"
         static let tokenIdFieldKey: String = "tokenId"
-        static let countFieldKey: String = "count"
+        static let countFieldKey: String = "touchCount"
+        ///Currently not in use
         static let totalDocumentName: String = "Total Count"
     }
     

@@ -31,7 +31,11 @@ final class MoonoGameSceneViewModel {
                               collectionId: collectionId,
                               tokenId: tokenId,
                               count: count)
+        let collection: NftCollection = NftCollection(collectionId: K.ContractAddress.moono,
+                                                      collectionLogoImage: "N/A",
+                                                      count: count)
         fireStoreRepository.saveCard(card)
+        fireStoreRepository.saveCollection(collection)
 
     }
     

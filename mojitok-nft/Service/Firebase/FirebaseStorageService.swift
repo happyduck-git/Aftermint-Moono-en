@@ -27,7 +27,7 @@ final class FirebaseStorageService {
     private init() {
         self.storage = Storage.storage().reference()
     }
-    
+    /// Currently not in use: Consider using this method instead of the one below
     func getFile(folderPath: FirebaseUrlPath, fileName: String, completion: @escaping (Data?) -> Void) {
         let urlString = folderPath.rawValue + "/" + fileName
         self.getFile(urlString: urlString, completion: completion)
