@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>315795069209-pbpp9u9nivacm47n0vqh0o8r1dqp2kar.apps.googleusercontent.com</string>
+	<string>160705959973-mffvg76ccte378o3afnfpnktncpn3str.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.315795069209-pbpp9u9nivacm47n0vqh0o8r1dqp2kar</string>
+	<string>com.googleusercontent.apps.160705959973-mffvg76ccte378o3afnfpnktncpn3str</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAM-shFGVJfGtUeT_VjcnmA7CsE8jPAsMQ</string>
+	<string>AIzaSyBgH-FIvSCbbIe5wcDKcmqIYC853HZBZpQ</string>
 	<key>GCM_SENDER_ID</key>
-	<string>315795069209</string>
+	<string>160705959973</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>net.platfarm.Aftermint-moono</string>
 	<key>PROJECT_ID</key>
-	<string>gallery3-ios</string>
+	<string>aftermint-9ac24</string>
 	<key>STORAGE_BUCKET</key>
-	<string>gallery3-ios.appspot.com</string>
+	<string>aftermint-9ac24.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:315795069209:ios:a3f6f95fa53c3d1c460d88</string>
+	<string>1:160705959973:ios:e9e13c96a453909a1ec7cc</string>
 </dict>
 </plist>

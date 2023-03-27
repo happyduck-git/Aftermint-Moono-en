@@ -90,15 +90,14 @@ final class TemplateService {
                     let thumbnailSemaphore = DispatchSemaphore(value: 0)
                     var thumbnailData: Data?
                     self?.removeTemplate(template: remoteTemplate)
-                    //TODO: Change file path from `/template/file/` to `/template/lottie_resources/`
-                    FirebaseStorageService.shared.getFile(urlString: "/template/file/\(remoteTemplate.lottieFileName)") { data in
+
+                    FirebaseStorageService.shared.getFile(urlString: "/template/lottie_resources/\(remoteTemplate.lottieFileName)") { data in
                         fileData = data
                         fileSemaphore.signal()
                     }
                     fileSemaphore.wait()
                     
-                    //TODO: Change file path `lottie_thumbnails`
-                    FirebaseStorageService.shared.getFile(urlString: "/template/thumbnail/\(remoteTemplate.thumbnailImageName)") { data in
+                    FirebaseStorageService.shared.getFile(urlString: "/template/lottie_thumbnails/\(remoteTemplate.thumbnailImageName)") { data in
                         thumbnailData = data
                         thumbnailSemaphore.signal()
                     }
