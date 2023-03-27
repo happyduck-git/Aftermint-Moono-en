@@ -9,6 +9,9 @@ import UIKit
 
 class StartViewController: UIViewController {
     
+    // MARK: - Dependency
+    private let mainTabBarViewControllerDependency: KlaytnTabViewController.Dependency
+    
     // MARK: - UI Elements
     private let walletConnectImageView: UIImageView = {
         let imageView = UIImageView()
@@ -57,6 +60,15 @@ class StartViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    // MARK: - Init
+    init(mainTabBarViewControllerDependency: KlaytnTabViewController.Dependency) {
+        self.mainTabBarViewControllerDependency = mainTabBarViewControllerDependency
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -127,7 +139,7 @@ class StartViewController: UIViewController {
 //    }
     
     @objc private func startButtonTapped() {
-        let vc = KlaytnTabViewController()
+        let vc = KlaytnTabViewController(vm: mainTabBarViewControllerDependency.leaderBoardListViewModel())
         navigationController?.pushViewController(vc, animated: true)
     }
 }

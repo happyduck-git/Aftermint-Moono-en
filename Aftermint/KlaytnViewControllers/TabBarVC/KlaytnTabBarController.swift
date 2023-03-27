@@ -9,6 +9,19 @@ import UIKit
 
 class KlaytnTabViewController: UITabBarController, UITabBarControllerDelegate {
     
+    let leaderBoardListViewModel: LeaderBoardTableViewCellListViewModel
+    
+    // MARK: - Init
+    init(vm: LeaderBoardTableViewCellListViewModel) {
+        self.leaderBoardListViewModel = vm
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -42,8 +55,8 @@ class KlaytnTabViewController: UITabBarController, UITabBarControllerDelegate {
         marketVC.tabBarItem.image = UIImage(named: TabBarAsset.marketOff.rawValue)?.withRenderingMode(.alwaysOriginal)
         marketVC.tabBarItem.selectedImage = UIImage(named: TabBarAsset.marketOn.rawValue)?.withRenderingMode(.alwaysOriginal)
 
-        let leaderBoardListViewModel = LeaderBoardTableViewCellListViewModel()
-        let gameVC = GameViewController(leaderBoardListViewModel: leaderBoardListViewModel)
+//        let leaderBoardListViewModel = LeaderBoardTableViewCellListViewModel()
+        let gameVC = GameViewController(leaderBoardListViewModel: self.leaderBoardListViewModel)
         gameVC.tabBarItem.image = UIImage(named: TabBarAsset.gameOff.rawValue)?.withRenderingMode(.alwaysOriginal)
         gameVC.tabBarItem.selectedImage = UIImage(named: TabBarAsset.gameOn.rawValue)?.withRenderingMode(.alwaysOriginal)
         

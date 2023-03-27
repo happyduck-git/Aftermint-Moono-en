@@ -13,6 +13,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    private let dependency: AppDependency
+    
+    private override init() {
+        self.dependency = AppDependency.resolve()
+        super.init()
+    }
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         if let windowScene = scene as? UIWindowScene {
@@ -37,15 +44,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let token = UserDefaults.standard.string(forKey: KasWalletRepository.shared.getWalletKey())
             var rootNaviVC: UINavigationController?
             
+            let loginVCDependency = dependency.loginViewControllerDependency
+            let loginVC = LoginViewController(reactor: loginVCDependency.reactor(),
+                                              startVCDependency: <#StartViewController.Dependency#>)
+            
+            let mainTabVCDependency = dependency.klaytnTabBarViewControllerDependency
+            let mainTabVC = KlaytnTabViewController(vm: mainTabVCDependency.leaderBoardListViewModel())
+            
             if token == nil {
-                let reactor: LoginViewReactor = LoginViewReactor()
-                let loginVC = LoginViewController(reactor: reactor)
                 rootNaviVC = UINavigationController(rootViewController: loginVC)
             } else {
-                let homeVC = KlaytnTabViewController()
-                rootNaviVC = UINavigationController(rootViewController: homeVC)
+                rootNaviVC = UINavigationController(rootViewController: mainTabVC)
             }
-
             
             window.rootViewController = rootNaviVC
             self.window = window

@@ -9,6 +9,8 @@ import Foundation
 
 struct AppDependency {
     let homeViewReactor: HomeViewReactor2
+    let loginViewControllerDependency: LoginViewController.Dependency
+    let klaytnTabBarViewControllerDependency: KlaytnTabViewController.Dependency
     
     static func resolve() -> AppDependency {
         let templateRepository = TemplateRepository.shared
@@ -34,6 +36,37 @@ struct AppDependency {
         
         let homeViewReactor2 = HomeViewReactor2(dependency: .init(templateCreateViewReactorFactory: templateCreateViewReactorFactory2, lottieViewReactorFactory: lottieViewReactorFactory, walletRepository: walletRepository, nftRepository: nftRepository), payload: .init())
         
-        return .init(homeViewReactor: homeViewReactor2)
+        let mainTabBarControllerDependency: KlaytnTabViewController.Dependency = .init {
+            LeaderBoardTableViewCellListViewModel()
+        }
+        
+        let startViewControllerDependency: StartViewController.Dependency = .init(mainTabBarViewControllerDependency: mainTabBarControllerDependency)
+        
+        let loginViewControllerDependency: LoginViewController.Dependency = .init(reactor: {
+            LoginViewReactor()
+        }, startViewControllerDependency: startViewControllerDependency)
+        
+        return .init(homeViewReactor: homeViewReactor2,
+                     loginViewControllerDependency: loginViewControllerDependency,
+                     klaytnTabBarViewControllerDependency: mainTabBarControllerDependency)
+    }
+}
+
+extension LoginViewController {
+    struct Dependency {
+        let reactor: () -> LoginViewReactor
+        let startViewControllerDependency: StartViewController.Dependency
+    }
+}
+
+extension StartViewController {
+    struct Dependency {
+        let mainTabBarViewControllerDependency: KlaytnTabViewController.Dependency
+    }
+}
+
+extension KlaytnTabViewController {
+    struct Dependency {
+        let leaderBoardListViewModel: () -> LeaderBoardTableViewCellListViewModel
     }
 }

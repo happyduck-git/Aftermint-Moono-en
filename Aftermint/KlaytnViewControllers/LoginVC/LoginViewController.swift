@@ -12,13 +12,18 @@ import RxCocoa
 
 class LoginViewController: UIViewController, View, Coordinating {
     
+    // MARK: - Dependency
+    let startVCDependency: StartViewController.Dependency
+    
     var coordinator: Coordinator?
     var disposeBag: DisposeBag = DisposeBag()
     
     // MARK: - Init
-    init(reactor: LoginViewReactor) {
+    init(reactor: LoginViewReactor,
+         startVCDependency: StartViewController.Dependency) {
         super.init(nibName: nil, bundle: nil)
         self.reactor = reactor
+        self.startVCDependency = startVCDependency
     }
     
     required init?(coder: NSCoder) {
@@ -122,12 +127,13 @@ class LoginViewController: UIViewController, View, Coordinating {
     private func connectFavorletWallet() {
         /// NOTE: Temporarily push directly to KlaytnTabViewController;
         /// Will connect to FavorletWallet application later in the future
-        let homeVC = KlaytnTabViewController()
+        let vm = LeaderBoardTableViewCellListViewModel() //Need adopt appDependency
+        let homeVC = KlaytnTabViewController(vm: mainTabBarViewControllerDependency.leaderBoardListViewModel())
         navigationController?.pushViewController(homeVC, animated: true)
     }
     
     private func connectKaikasWallet() { //change the name of the function to openStartVC
-        let startVC = StartViewController()
+        let startVC = StartViewController(mainTabBarViewControllerDependency: <#T##KlaytnTabViewController.Dependency#>)
         navigationController?.pushViewController(startVC, animated: true)
         
     }
