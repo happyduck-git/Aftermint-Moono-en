@@ -216,7 +216,9 @@ extension GameViewController {
         NukeImageLoader.loadImageUsingNuke(url: url) { image in
             self.nftImageView.image = image
         }
-        self.nftNameLabel.text = "\(card.tokenId) "
+        
+        let nftName = card.tokenId.replacingOccurrences(of: "___", with: " #")
+        self.nftNameLabel.text = "\(nftName) "
     }
 }
 
