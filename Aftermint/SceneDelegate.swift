@@ -44,21 +44,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let token = UserDefaults.standard.string(forKey: KasWalletRepository.shared.getWalletKey())
             var rootNaviVC: UINavigationController?
             
+            /* Dependency */
             let loginVCDependency = dependency.loginViewControllerDependency
             let startViewDependency = dependency.startViewControllerDependency
             let mainTabVCDependency = dependency.klaytnTabBarViewControllerDependency
             let lottieVCDependency = dependency.lottieViewControllerDependency
+            let bookmarkVCDependency = dependency.bookmarkViewControllerDependency
+            let calendarVCDependency = dependency.calendarViewControllerDependency
             
-            let loginVC = LoginViewController(reactor: loginVCDependency.reactor(),
-                                              startVCDependency: startViewDependency,
-                                              mainTabBarVCDependency: mainTabVCDependency,
-                                              lottieVCDependency: lottieVCDependency
-                                              )
+            let loginVC = LoginViewController(
+                reactor: loginVCDependency.reactor(),
+                startVCDependency: startViewDependency,
+                mainTabBarVCDependency: mainTabVCDependency,
+                lottieVCDependency: lottieVCDependency,
+                bookmarkVCDependency: bookmarkVCDependency,
+                calendarVCDependency: calendarVCDependency
+            )
             
             let mainTabVC = KlaytnTabViewController(
                 vm: mainTabVCDependency.leaderBoardListViewModel(),
                 homeViewControllerDependency: mainTabVCDependency.homeViewControllerDependency,
-                lottieViewControllerDependency: lottieVCDependency)
+                lottieViewControllerDependency: lottieVCDependency,
+                bookmarkVCDependency: bookmarkVCDependency,
+                calendarVCDependency: calendarVCDependency
+            )
             
             if token == nil {
                 rootNaviVC = UINavigationController(rootViewController: loginVC)

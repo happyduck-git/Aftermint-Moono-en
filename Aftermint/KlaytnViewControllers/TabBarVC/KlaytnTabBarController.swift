@@ -9,18 +9,34 @@ import UIKit
 
 class KlaytnTabViewController: UITabBarController, UITabBarControllerDelegate {
     
-    let leaderBoardListViewModel: LeaderBoardTableViewCellListViewModel
-    let homeViewControllerDependency: KlaytnHomeViewController.Dependency
-    let lottieVCDependency: LottieViewController.Dependency
+    
+    struct Dependency {
+        let leaderBoardListViewModel: () -> LeaderBoardTableViewCellListViewModel
+        let homeViewControllerDependency: KlaytnHomeViewController.Dependency
+//        let lottieVCDependency: LottieViewController.Dependency
+        let bookmarkVCDependency: BookmarkViewController.Dependency
+        let calendarVCDependency: CalendarViewController.Dependency
+    }
+    
+    
+    private let leaderBoardListViewModel: LeaderBoardTableViewCellListViewModel
+    private let homeViewControllerDependency: KlaytnHomeViewController.Dependency
+    private let lottieVCDependency: LottieViewController.Dependency
+    private let bookmarkVCDependency: BookmarkViewController.Dependency
+    private let calendarVCDependency: CalendarViewController.Dependency
     
     // MARK: - Init
     init(vm: LeaderBoardTableViewCellListViewModel,
          homeViewControllerDependency: KlaytnHomeViewController.Dependency,
-         lottieViewControllerDependency: LottieViewController.Dependency
+         lottieViewControllerDependency: LottieViewController.Dependency,
+         bookmarkVCDependency: BookmarkViewController.Dependency,
+         calendarVCDependency: CalendarViewController.Dependency
     ) {
         self.leaderBoardListViewModel = vm
         self.homeViewControllerDependency = homeViewControllerDependency
         self.lottieVCDependency = lottieViewControllerDependency
+        self.bookmarkVCDependency = bookmarkVCDependency
+        self.calendarVCDependency = calendarVCDependency
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -49,13 +65,13 @@ class KlaytnTabViewController: UITabBarController, UITabBarControllerDelegate {
     private func setTabBarItems() {
         tabBar.backgroundColor = .white
         
-        let klaytnHomeVC = KlaytnHomeViewController(
-            reactor: homeViewControllerDependency.homeViewReactor,
-            lottieViewControllerDependency: lottieVCDependency)
+        let klaytnHomeVC = KlaytnHomeViewController(reactor: homeViewControllerDependency.homeViewReactor,
+                                                    lottieViewControllerDependency: lottieVCDependency)
         klaytnHomeVC.tabBarItem.image = UIImage(named: TabBarAsset.mainOff.rawValue)?.withRenderingMode(.alwaysOriginal)
         klaytnHomeVC.tabBarItem.selectedImage = UIImage(named: TabBarAsset.mainOn.rawValue)?.withRenderingMode(.alwaysOriginal)
         
-        let benefitVC = BenefitViewController()
+        let benefitVC = BenefitViewController(bookmarkVCDependency: bookmarkVCDependency,
+                                              calendarVCDependency: calendarVCDependency)
         let benefitNaviVC = UINavigationController(rootViewController: benefitVC)
         benefitNaviVC.tabBarItem.image = UIImage(named: TabBarAsset.giftOff.rawValue)?.withRenderingMode(.alwaysOriginal)
         benefitNaviVC.tabBarItem.selectedImage = UIImage(named: TabBarAsset.giftOn.rawValue)?.withRenderingMode(.alwaysOriginal)

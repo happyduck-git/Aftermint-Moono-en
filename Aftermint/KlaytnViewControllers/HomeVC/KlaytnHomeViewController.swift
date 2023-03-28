@@ -9,6 +9,11 @@ import UIKit
 
 class KlaytnHomeViewController: UIViewController {
     
+    struct Dependency {
+        let homeViewReactor: HomeViewReactor2
+        let lottieViewControllerDependency: LottieViewController.Dependency
+    }
+    
     var reactor: HomeViewReactor2
     var lottieVCDependency: LottieViewController.Dependency
     

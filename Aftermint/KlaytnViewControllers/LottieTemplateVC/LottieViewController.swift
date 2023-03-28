@@ -16,6 +16,11 @@ import Nuke
 
 class LottieViewController: UIViewController, View {
     
+    // MARK: - Dependency
+    struct Dependency {
+        let factory: LottieViewReactor.Factory
+    }
+    
     var disposeBag = DisposeBag()
     
     //MARK: - Init
@@ -74,10 +79,7 @@ class LottieViewController: UIViewController, View {
         label.textAlignment = .center
         label.font = BellyGomFont.header05
         label.numberOfLines = 0
-        label.text = """
-                    월요병아리님의 NFT를 가장 중요한 정보와 함께 자랑하세요!
-                    모두가 주목할 거에요. 🗝️
-                    """
+        label.text = LottieAsset.description.rawValue
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -92,21 +94,21 @@ class LottieViewController: UIViewController, View {
     
     private let refreshButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "refresh"), for: .normal)
+        button.setImage(UIImage(named: LottieAsset.refreshButton.rawValue), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
     private let undoButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "undo"), for: .normal)
+        button.setImage(UIImage(named: LottieAsset.undoButton.rawValue), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
     private let redoButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "redo"), for: .normal)
+        button.setImage(UIImage(named: LottieAsset.redoButton.rawValue), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -126,7 +128,7 @@ class LottieViewController: UIViewController, View {
 
     private lazy var shareButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "share_button"), for: .normal)
+        button.setImage(UIImage(named: LottieAsset.sharedButton.rawValue), for: .normal)
         button.imageView?.layer.masksToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -134,7 +136,7 @@ class LottieViewController: UIViewController, View {
     
     private let barButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "back"), for: .normal)
+        button.setImage(UIImage(named: LottieAsset.backButton.rawValue), for: .normal)
         return button
     }()
 
@@ -229,7 +231,7 @@ class LottieViewController: UIViewController, View {
     }
 
     private func setBarButtonItem() {
-        let backButtonImage: UIImage? = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal)
+        let backButtonImage: UIImage? = UIImage(named: LottieAsset.backButton.rawValue)?.withRenderingMode(.alwaysOriginal)
         let buttonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backToHomeVC))
         self.navigationItem.leftBarButtonItem = buttonItem
     }

@@ -34,6 +34,32 @@ struct K {
     
 }
 
+/// LoginController related constants
+enum LoginAsset: String {
+    case backgroundImage = "moono_login_image"
+    case loginDescription =  "멤버십 서비스 이용을 위해 NFT 지갑을 연결해주세요."
+    case favorletButton = "favorletbutton"
+    case kaikasButton = "kaikasbutton"
+}
+
+/// LottieController related constants
+enum LottieAsset: String {
+    case description =  """
+    월요병아리님의 NFT를 가장 중요한 정보와 함께 자랑하세요!
+    모두가 주목할 거에요. 🗝️
+    """
+    case refreshButton = "refresh"
+    case redoButton = "redo"
+    case undoButton = "undo"
+    case sharedButton = "share_button"
+    case backButton = "back"
+}
+
+/// GameController related constants
+enum GameAsset: String {
+    case gameVCLogo = "game_logo"
+}
+
 /// GameViewController Bottom LeaderBoard related constants
 enum LeaderBoard: String {
     case title = "Leader board"
@@ -63,6 +89,8 @@ enum TabBarAsset: String {
     case settingOff = "setting_off"
 }
 
-enum NavigationBarAsset: String {
-    case gameVCLogo = "game_logo"
+/// MarketController related constants
+enum MarketAsset: String {
+    case dropDown = "dropdown_image"
+    case marketVCLogo = "marketplace_logo"
 }

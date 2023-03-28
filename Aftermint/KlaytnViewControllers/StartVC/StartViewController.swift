@@ -10,8 +10,14 @@ import UIKit
 class StartViewController: UIViewController {
     
     // MARK: - Dependency
+    struct Dependency {
+        let mainTabBarViewControllerDependency: KlaytnTabViewController.Dependency
+    }
+    
     private let mainTabBarViewControllerDependency: KlaytnTabViewController.Dependency
     private let lottieViewControllerDependency: LottieViewController.Dependency
+    private let bookmarkVCDependency: BookmarkViewController.Dependency
+    private let calendarVCDependency: CalendarViewController.Dependency
     
     // MARK: - UI Elements
     private let walletConnectImageView: UIImageView = {
@@ -64,10 +70,14 @@ class StartViewController: UIViewController {
     
     // MARK: - Init
     init(mainTabBarViewControllerDependency: KlaytnTabViewController.Dependency,
-         lottieViewControllerDependency: LottieViewController.Dependency
+         lottieViewControllerDependency: LottieViewController.Dependency,
+         bookmarkVCDependency: BookmarkViewController.Dependency,
+         calendarVCDependency: CalendarViewController.Dependency
     ) {
         self.mainTabBarViewControllerDependency = mainTabBarViewControllerDependency
         self.lottieViewControllerDependency = lottieViewControllerDependency
+        self.bookmarkVCDependency = bookmarkVCDependency
+        self.calendarVCDependency = calendarVCDependency
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -147,7 +157,10 @@ class StartViewController: UIViewController {
         let vc = KlaytnTabViewController(
             vm: mainTabBarViewControllerDependency.leaderBoardListViewModel(),
             homeViewControllerDependency: mainTabBarViewControllerDependency.homeViewControllerDependency,
-            lottieViewControllerDependency: lottieViewControllerDependency)
+            lottieViewControllerDependency: lottieViewControllerDependency,
+            bookmarkVCDependency: bookmarkVCDependency,
+            calendarVCDependency: calendarVCDependency
+        )
 //        let vc = KlaytnTabViewController(vm: mainTabBarViewControllerDependency.leaderBoardListViewModel())
         navigationController?.pushViewController(vc, animated: true)
     }

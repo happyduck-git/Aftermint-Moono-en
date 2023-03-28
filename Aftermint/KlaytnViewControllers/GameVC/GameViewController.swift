@@ -153,7 +153,7 @@ final class GameViewController: UIViewController {
         self.tabBarController?.navigationItem.setHidesBackButton(true, animated: false)
         self.tabBarController?.navigationItem.title = ""
         
-        let logo = UIImage(named: NavigationBarAsset.gameVCLogo.rawValue)
+        let logo = UIImage(named: GameAsset.gameVCLogo.rawValue)
         let myImageView = UIImageView(image: logo)
         let leftBar: UIBarButtonItem = UIBarButtonItem(customView: myImageView)
         self.tabBarController?.navigationItem.leftBarButtonItem = leftBar
