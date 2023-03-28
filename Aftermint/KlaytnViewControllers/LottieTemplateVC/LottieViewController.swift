@@ -44,6 +44,13 @@ class LottieViewController: UIViewController, View {
         UIImage(named: "fyi_off"), UIImage(named: "welcome_off"), UIImage(named: "gallery_off"), UIImage(named: "bought_off")
     ]
     
+    private let testCellVMList: [TemplateCellContent] = [
+        TemplateCellContent(emojiString: "🗝", title: "FYI", subTitle: "제일 가치로운"),
+        TemplateCellContent(emojiString: "🎉", title: "Welcome", subTitle: "환영합니다!"),
+        TemplateCellContent(emojiString: "🏙", title: "Gallery", subTitle: "멋진 갤러리처럼"),
+        TemplateCellContent(emojiString: "💰", title: "Just Bought", subTitle: "새로 샀어요"),
+    ]
+    
     //MARK: - UI Elements
     private let animationFrameView: UIView = {
         let view = UIView()
@@ -300,8 +307,10 @@ extension LottieViewController: UICollectionViewDelegate, UICollectionViewDataSo
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LottieTemplateCell.identifier, for: indexPath) as? LottieTemplateCell else {
             fatalError("Unsupported cell")
         }
-        cell.configure(with: templateOffImageList[indexPath.row])
-        cell.layer.cornerRadius = 20.0
+        cell.resetCell()
+        let vm = testCellVMList[indexPath.row]
+        cell.configure(emojiString: vm.emojiString, title: vm.title, subTitle: vm.subTitle)
+        
         return cell
     }
     
@@ -312,14 +321,13 @@ extension LottieViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         guard let cell = collectionView.cellForItem(at: indexPath) as? LottieTemplateCell else { return }
         
         cell.isOff = !cell.isOff
         if cell.isOff {
-            cell.configure(with: templateOffImageList[indexPath.row])
+            cell.removeGradientLayer()
         } else {
-            cell.configure(with: templateOnImageList[indexPath.row])
+            cell.setGradientColor()
         }
         
     }
@@ -329,9 +337,9 @@ extension LottieViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         cell.isOff = !cell.isOff
         if cell.isOff {
-            cell.configure(with: templateOffImageList[indexPath.row])
+            cell.removeGradientLayer()
         } else {
-            cell.configure(with: templateOnImageList[indexPath.row])
+            cell.setGradientColor()
         }
     }
 

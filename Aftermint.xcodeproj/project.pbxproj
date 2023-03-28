@@ -419,6 +419,7 @@
 		93A4B8172991CF3500146FD8 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A4B8162991CF3500146FD8 /* CalendarViewController.swift */; };
 		93A4B81A2991CFC100146FD8 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 93A4B8192991CFC100146FD8 /* FSCalendar */; };
 		93A4B8692994E5A600146FD8 /* CalendarViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A4B8682994E5A600146FD8 /* CalendarViewReactor.swift */; };
+		93BAFF1029D2C93300596999 /* CAGradientLayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFF0F29D2C93300596999 /* CAGradientLayer+Extensions.swift */; };
 		93C32FBE29B9A69700DB3CB3 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C32FBD29B9A69700DB3CB3 /* GameViewController.swift */; };
 		93C32FC329BB000600DB3CB3 /* NftCardCellPropertyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C32FC229BB000600DB3CB3 /* NftCardCellPropertyView.swift */; };
 		93C32FC529BB004400DB3CB3 /* NftCardCellPropertyItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C32FC429BB004400DB3CB3 /* NftCardCellPropertyItemView.swift */; };
@@ -822,6 +823,7 @@
 		93A4B8132990EAD700146FD8 /* UIScrollViewSuperTaps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewSuperTaps.swift; sourceTree = "<group>"; };
 		93A4B8162991CF3500146FD8 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		93A4B8682994E5A600146FD8 /* CalendarViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewReactor.swift; sourceTree = "<group>"; };
+		93BAFF0F29D2C93300596999 /* CAGradientLayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Extensions.swift"; sourceTree = "<group>"; };
 		93C32FBD29B9A69700DB3CB3 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		93C32FC229BB000600DB3CB3 /* NftCardCellPropertyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftCardCellPropertyView.swift; sourceTree = "<group>"; };
 		93C32FC429BB004400DB3CB3 /* NftCardCellPropertyItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftCardCellPropertyItemView.swift; sourceTree = "<group>"; };
@@ -1042,6 +1044,7 @@
 				3619AF3229790AC50051C387 /* UIButton.swift */,
 				3619AF3329790AC50051C387 /* UIImageView.swift */,
 				3619AF3429790AC50051C387 /* UICollectionReusableView.swift */,
+				93BAFF0F29D2C93300596999 /* CAGradientLayer+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2566,6 +2569,7 @@
 				3619B1E229790AC60051C387 /* AnimationContext.swift in Sources */,
 				3619B15729790AC60051C387 /* PointValueProvider.swift in Sources */,
 				3619B15B29790AC60051C387 /* LayerModel+makeAnimationLayer.swift in Sources */,
+				93BAFF1029D2C93300596999 /* CAGradientLayer+Extensions.swift in Sources */,
 				3619B12929790AC60051C387 /* OAuthSwiftRequestInterceptor.swift in Sources */,
 				3619B1F529790AC60051C387 /* TemplateShareViewController.swift in Sources */,
 				3619B1B529790AC60051C387 /* GradientFill.swift in Sources */,
