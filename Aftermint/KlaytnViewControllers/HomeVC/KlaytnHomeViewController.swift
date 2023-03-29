@@ -9,6 +9,14 @@ import UIKit
 
 class KlaytnHomeViewController: UIViewController {
     
+    struct Dependency {
+        let homeViewReactor: HomeViewReactor2
+        let lottieViewControllerDependency: LottieViewController.Dependency
+    }
+    
+    var reactor: HomeViewReactor2
+    var lottieVCDependency: LottieViewController.Dependency
+    
     //MARK: - UIElements
     
     private let welcomeUpperView: WelcomeUpperView = {
@@ -18,7 +26,8 @@ class KlaytnHomeViewController: UIViewController {
     }()
     
     private let nftCardView: NFTCardView = {
-        let cardView = NFTCardView()
+        let vm = NFTCardViewModel()
+        let cardView = NFTCardView(vm: vm)
         cardView.accessibilityIdentifier = "nftCardView"
         cardView.translatesAutoresizingMaskIntoConstraints = false
         return cardView
@@ -31,6 +40,19 @@ class KlaytnHomeViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    //MARK: - Init
+    init(reactor: HomeViewReactor2,
+         lottieViewControllerDependency: LottieViewController.Dependency) {
+        self.reactor = reactor
+        self.lottieVCDependency = lottieViewControllerDependency
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     //MARK: - Life cycle
     
@@ -48,13 +70,14 @@ class KlaytnHomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("KHVC will appear")
-        
+        nftCardView.prefetcher.isPaused = false
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         print("KHVC will disappear")
+        nftCardView.prefetcher.isPaused = true
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
@@ -92,32 +115,36 @@ class KlaytnHomeViewController: UIViewController {
 
 extension KlaytnHomeViewController: NFTCardViewDelegate {
 
-    
     func didTapTemplateButton() {
         
         let templateVC: LottieViewController = LottieViewController(reactor: makeMockMoonoReactorByGall3ry3())
         navigationController?.pushViewController(templateVC, animated: true)
         
     }
+    
 }
 
 // MARK: Extension for Lottie player of Gall3ry3
 extension KlaytnHomeViewController {
  
     private func makeReactorByGall3ry3(nft: MoonoNft) -> LottieViewReactor {
-        let appDependency = AppDependency.resolve()
-        return appDependency.homeViewReactor.dependency
-            .lottieViewReactorFactory.create(
-                payload: .init(nft: makeOpenSeaNftByGall3ry3(moonoNft: nft), format: .video)
-            )
+//        let appDependency = AppDependency.resolve()
+//        return appDependency.homeViewReactor.dependency
+//            .lottieViewReactorFactory.create(
+//                payload: .init(nft: makeOpenSeaNftByGall3ry3(moonoNft: nft), format: .video)
+//            )
+        
+        return reactor.dependency.lottieViewReactorFactory.create(payload: .init(nft: makeOpenSeaNftByGall3ry3(moonoNft: nft), format: .video))
+        
     }
     
     private func makeMockMoonoReactorByGall3ry3() -> LottieViewReactor {
-        let appDependency = AppDependency.resolve()
-        return appDependency.homeViewReactor.dependency
-            .lottieViewReactorFactory.create(
-                payload: .init(nft: makeMockOpenSeaMoonoNftByGall3ry3(), format: .video)
-            )
+//        let appDependency = AppDependency.resolve()
+//        return appDependency.homeViewReactor.dependency
+//            .lottieViewReactorFactory.create(
+//                payload: .init(nft: makeMockOpenSeaMoonoNftByGall3ry3(), format: .video)
+//            )
+        return reactor.dependency.lottieViewReactorFactory.create(payload: .init(nft: makeMockOpenSeaMoonoNftByGall3ry3(), format: .video))
     }
     
     private func makeOpenSeaNftByGall3ry3(moonoNft: MoonoNft) -> OpenSeaNFT {

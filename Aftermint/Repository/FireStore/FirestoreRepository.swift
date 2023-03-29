@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseCore
 import FirebaseFirestore
-import FirebaseFirestoreSwift
+//import FirebaseFirestoreSwift
 
 class FirestoreRepository {
 
@@ -18,23 +18,21 @@ class FirestoreRepository {
     let db = Firestore.firestore()
     
     func saveCard(_ card: Card) {
-        
         let docRefForCard = db.collection(K.FStore.nftCardCollectionName).document(card.tokenId)
-        let docRefForTotal = db.collection(K.FStore.nftCardCollectionName).document(K.FStore.totalDocumentName)
-        
         /// Save card data
         docRefForCard.setData([
-            K.FStore.collectionIdFieldKey: card.collectionId,
             K.FStore.imageUriFieldKey: card.imageUri,
-            K.FStore.tokenIdFieldKey: card.tokenId,
-            K.FStore.countFieldKey: FieldValue.increment(Int64(1))
+            K.FStore.countFieldKey: FieldValue.increment(card.count)
         ], merge: true)
         
-        /// Save total count
-        docRefForTotal.setData([
-            K.FStore.countFieldKey: FieldValue.increment(Int64(1))
-        ], merge: true)
+    }
+    
+    func saveCollection(_ collection: NftCollection) {
+        let docRefForCollection = db.collection(K.FStore.nftCollectionCollectionName).document(K.FStore.nftCollectionDocumentName)
         
+        docRefForCollection.setData([
+            K.FStore.countFieldKey: FieldValue.increment(collection.count)
+        ], merge: true)
     }
     
     
@@ -53,15 +51,16 @@ class FirestoreRepository {
                 
                 let documents = snapshot.documents
                 if !documents.isEmpty {
-                    let result: [Card] = documents.filter { doc in
-                        doc.documentID != K.FStore.totalDocumentName
-                    }.map { doc in
+                    let result: [Card] = documents
+                        .map { doc in
                         let data = doc.data()
-                        
+                        let documentId = doc.documentID
+                        let nftName = documentId.replacingOccurrences(of: "___", with: " #")
+                            
                         return Card(imageUri: data[K.FStore.imageUriFieldKey] as? String ?? "N/A",
-                                    collectionId: data[K.FStore.collectionIdFieldKey] as! String,
-                                    tokenId: data[K.FStore.tokenIdFieldKey] as! String,
-                                    count: data[K.FStore.countFieldKey] as! Int64)
+                                    collectionId: K.ContractAddress.moono,
+                                    tokenId: nftName,
+                                    count: data[K.FStore.countFieldKey] as? Int64 ?? 0)
                     }
  
                     completion(result)

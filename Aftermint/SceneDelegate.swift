@@ -13,10 +13,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    private let dependency: AppDependency
+    
+    private override init() {
+        self.dependency = AppDependency.resolve()
+        super.init()
+    }
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         if let windowScene = scene as? UIWindowScene {
-            var path: [AnyObject] = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true) as [AnyObject]
+            let path: [AnyObject] = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true) as [AnyObject]
             let folder: String = path[0] as! String
             print("Your NSUserDefaults are stored in this folder: %@/Preferences", folder)
             /* Gallery3 */
@@ -37,16 +44,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let token = UserDefaults.standard.string(forKey: KasWalletRepository.shared.getWalletKey())
             var rootNaviVC: UINavigationController?
             
-
+            /* Dependency */
+            let loginVCDependency = dependency.loginViewControllerDependency
+            let startViewDependency = dependency.startViewControllerDependency
+            let mainTabVCDependency = dependency.klaytnTabBarViewControllerDependency
+            let lottieVCDependency = dependency.lottieViewControllerDependency
+            let bookmarkVCDependency = dependency.bookmarkViewControllerDependency
+            let calendarVCDependency = dependency.calendarViewControllerDependency
+            
+            let loginVC = LoginViewController(
+                reactor: loginVCDependency.reactor(),
+                startVCDependency: startViewDependency,
+                mainTabBarVCDependency: mainTabVCDependency,
+                lottieVCDependency: lottieVCDependency,
+                bookmarkVCDependency: bookmarkVCDependency,
+                calendarVCDependency: calendarVCDependency
+            )
+            
+            let mainTabVC = KlaytnTabViewController(
+                vm: mainTabVCDependency.leaderBoardListViewModel(),
+                homeViewControllerDependency: mainTabVCDependency.homeViewControllerDependency,
+                lottieViewControllerDependency: lottieVCDependency,
+                bookmarkVCDependency: bookmarkVCDependency,
+                calendarVCDependency: calendarVCDependency
+            )
+            
             if token == nil {
-                let reactor: LoginViewReactor = LoginViewReactor()
-                let loginVC = LoginViewController(reactor: reactor)
                 rootNaviVC = UINavigationController(rootViewController: loginVC)
             } else {
-                let homeVC = KlaytnTabViewController()
-                rootNaviVC = UINavigationController(rootViewController: homeVC)
+                rootNaviVC = UINavigationController(rootViewController: mainTabVC)
             }
-
             
             window.rootViewController = rootNaviVC
             self.window = window

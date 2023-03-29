@@ -7,12 +7,16 @@
 
 import SpriteKit
 
+protocol MoonoGameSceneDelegate: AnyObject {
+    func didReceiveTouchCount(number: Int64)
+}
+
 final class MoonoGameScene: SKScene {
     
-    var vm: MoonoGameSceneViewModel?
+    weak var gameSceneDelegate: MoonoGameSceneDelegate?
     
     // MARK: - Game Elements
-    
+    private let numberToIncrease: Int64 = 1
     //Nodes
     private var particles: SKEmitterNode?
     private var moonoImage: SKSpriteNode?
@@ -20,16 +24,6 @@ final class MoonoGameScene: SKScene {
     //Actions
     private let touchFadeOut: SKAction = SKAction.fadeOut(withDuration: 0.1)
     private let touchFadeIn: SKAction = SKAction.fadeIn(withDuration: 0.1)
-    
-    // MARK: - Initialize
-    init(size: CGSize, vm: MoonoGameSceneViewModel) {
-        super.init(size: size)
-        self.vm = vm
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     // MARK: - Life cycle
     /// Indicates when the scene is presented by a view.
@@ -68,7 +62,9 @@ final class MoonoGameScene: SKScene {
     
     //MARK: - Touch Handling
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        vm?.increaseTouchCountByOne()
+        
+        gameSceneDelegate?.didReceiveTouchCount(number: numberToIncrease)
+        
         particles?.removeFromParent()
         particles = nil
         

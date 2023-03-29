@@ -6,22 +6,20 @@
 //
 
 import UIKit
+import Nuke
 
 protocol BottomSheetViewDelegate: AnyObject {
-
-    func tempFetchData(data: [String: Int64])
-
+    func dataFetched()
 }
 
 final class BottomSheetView: PassThroughView {
     
-//    var viewModel: LeaderBoardTableViewCellListViewModel = LeaderBoardTableViewCellListViewModel()
+    let prefetcher = ImagePrefetcher()
+    
     var viewModel: LeaderBoardTableViewCellListViewModel?
     
     weak var bottomSheetDelegate: BottomSheetViewDelegate?
     var tempTouchCountList: [String: Int64] = [:]
-    // viewModel.viewModelList -> forEach -> filter by elements tokenId(which is nftName)
-    // in GameVC, if the tokenId matches, get its touchCount and update scoreLabel.text
     
     // MARK: - UI Elements
     
@@ -65,11 +63,12 @@ final class BottomSheetView: PassThroughView {
         return label
     }()
     
-    private let leaderBoardTableView: UITableView = {
+    let leaderBoardTableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = AftermintColor.backgroundNavy
         table.alpha = 0.0
         table.register(LeaderBoardTableViewCell.self, forCellReuseIdentifier: LeaderBoardTableViewCell.identifier)
+        table.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10.0, right: 0)
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -121,12 +120,18 @@ final class BottomSheetView: PassThroughView {
         self.viewModel?.getAllNftRankCellViewModels { result in
             switch result {
             case .success(let viewModels):
-                self.viewModel?.viewModelList = viewModels
+                self.viewModel?.viewModelList.value = viewModels
                 self.tempTouchCountList = self.fetchTouchCount(with: viewModels)
-                self.bottomSheetDelegate?.tempFetchData(data: self.tempTouchCountList)
+                self.bottomSheetDelegate?.dataFetched()
+                
                 DispatchQueue.main.async {
-                    self.leaderBoardTableView.reloadData()
+                    UIView.animate(withDuration: 0.6) {
+                        self.leaderBoardTableView.reloadData()
+                        self.leaderBoardTableView.alpha = 1.0
+                    }
+                    
                 }
+                
             case .failure(let failure):
                 print("Error getting viewmodels : \(failure)")
             }
@@ -215,7 +220,6 @@ final class BottomSheetView: PassThroughView {
     
     /// Update top constraint of the bottom sheet by pan gesture offset
     private func updateConstraint(offset: Double) {
-
         bottomSheetViewTopConstraint?.constant = offset
         self.layoutIfNeeded()
     }
@@ -239,17 +243,24 @@ extension BottomSheetView: UITableViewDelegate, UITableViewDataSource {
             fatalError("ViewModel found to be nil")
         }
         
+        //TODO: Make below logic as a separate function -- (1)
+        ///Find currently used moononft's name from viewModels
+        if vm.nftName == MoonoMockMetaData().getOneMockData().tokenId {
+            DispatchQueue.main.async {
+                cell.contentView.backgroundColor = .systemBlue.withAlphaComponent(0.5)
+                cell.contentView.alpha = 0.5
+                UIView.animate(withDuration: 0.6) {
+                    cell.contentView.alpha = 1.0
+                }
+            }
+        }
+     
+        //TODO: Make below logic as a separate function -- (2)
         if indexPath.row <= 2 {
             vm.setRankImage(with: cellRankImageAt(indexPath.row))
         } else {
             cell.switchRankImageToLabel()
             vm.setRankNumberWithIndexPath(indexPath.row + 1)
-        }
-        
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.6) {
-                self.leaderBoardTableView.alpha = 1.0
-            }
         }
         
         cell.configure(with: vm)
@@ -261,24 +272,51 @@ extension BottomSheetView: UITableViewDelegate, UITableViewDataSource {
         return 60
     }
     
+    /// Determine cell image
     private func cellRankImageAt(_ indexPathRow: Int) -> UIImage? {
         switch indexPathRow {
         case 0:
-            return UIImage(named: RankImage.firstPlace.rawValue)
+            return UIImage(named: LeaderBoard.firstPlace.rawValue)
         case 1:
-            return UIImage(named: RankImage.secondPlace.rawValue)
+            return UIImage(named: LeaderBoard.secondPlace.rawValue)
         case 2:
-            return UIImage(named: RankImage.thirdPlace.rawValue)
+            return UIImage(named: LeaderBoard.thirdPlace.rawValue)
         default:
-            return UIImage(named: RankImage.others.rawValue)
+            return UIImage(named: LeaderBoard.markImageName.rawValue)
         }
     }
     
     private func setDelegate() {
         leaderBoardTableView.delegate = self
         leaderBoardTableView.dataSource = self
+        leaderBoardTableView.prefetchDataSource = self
     }
     
+}
+
+extension BottomSheetView: UITableViewDataSourcePrefetching {
+    
+    /// PretchImageAt
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        let urlStrings: [String] = indexPaths.compactMap {
+            self.viewModel?.modelAt($0.row)?.nftImage
+        }
+        let urls: [URL] = urlStrings.compactMap {
+            URL(string: $0)
+        }
+        prefetcher.startPrefetching(with: urls)
+    }
+
+    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        let urlStrings: [String] = indexPaths.compactMap {
+            self.viewModel?.modelAt($0.row)?.nftImage
+        }
+        let urls: [URL] = urlStrings.compactMap {
+            URL(string: $0)
+        }
+        prefetcher.stopPrefetching(with: urls)
+    }
+
 }
 
 // MARK: - Enums
@@ -318,7 +356,6 @@ extension BottomSheetView {
             let value = vm.touchScore
             result[key] = value
         }
-        
         return result
     }
 }

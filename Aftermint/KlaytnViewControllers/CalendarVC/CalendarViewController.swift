@@ -14,12 +14,17 @@ import Pulley
 
 class CalendarViewController: UIViewController {
     
+    struct Dependency {
+        let reactor: () -> CalendarViewReactor
+        let bottomSheetVC: BenefitTabBottomViewController
+    }
+    
+    private var bottomSheetVC: BenefitTabBottomViewController
+    
     var disposeBag: DisposeBag = DisposeBag()
     var calendarHeightConstraint: NSLayoutConstraint?
     
     //MARK: - UI Elements
-    private let bottomSheetVC: BenefitTabBottomViewController = BenefitTabBottomViewController()
-    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = AftermintColor.backgroundNavy
@@ -88,7 +93,9 @@ class CalendarViewController: UIViewController {
     }()
     
     //MARK: - Init
-    init(reactor: CalendarViewReactor) {
+    init(reactor: CalendarViewReactor,
+         bottomSheetVC: BenefitTabBottomViewController) {
+        self.bottomSheetVC = bottomSheetVC
         super.init(nibName: nil, bundle: nil)
         self.reactor = reactor
     }

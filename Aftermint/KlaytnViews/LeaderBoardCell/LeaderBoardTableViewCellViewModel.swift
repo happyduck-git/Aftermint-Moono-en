@@ -7,24 +7,20 @@
 
 import UIKit.UIImage
 
-enum RankImage: String {
-    case firstPlace = "1st_place_medal"
-    case secondPlace = "2nd_place_medal"
-    case thirdPlace = "3rd_place_medal"
-    case others = "leader-board-mark"
-}
-
-class LeaderBoardTableViewCellListViewModel {
+final class LeaderBoardTableViewCellListViewModel {
     
-    var viewModelList: [LeaderBoardTableViewCellViewModel] = []
+    var viewModelList: Box<[LeaderBoardTableViewCellViewModel]>  = Box([])
+    var touchCount: Box<Int> = Box(0)
+    
     let fireStoreRepository = FirestoreRepository.shared
     
     func numberOfRowsInSection(at section: Int) -> Int {
-        return self.viewModelList.count
+         return self.viewModelList.value?.count ?? 0
     }
     
-    func modelAt(_ index: Int) -> LeaderBoardTableViewCellViewModel {
-        return self.viewModelList[index]
+    func modelAt(_ index: Int) -> LeaderBoardTableViewCellViewModel? {
+        guard let viewModel: LeaderBoardTableViewCellViewModel = self.viewModelList.value?[index] else { return nil }
+        return viewModel
     }
     
     func getAllNftRankCellViewModels(completion: @escaping (Result<[LeaderBoardTableViewCellViewModel], Error>) -> ()) {
@@ -32,7 +28,7 @@ class LeaderBoardTableViewCellListViewModel {
         self.fireStoreRepository.getAllCard { cardsList in
             
             guard let cards = cardsList,
-                  let rankImage = UIImage(named: RankImage.firstPlace.rawValue)
+                  let rankImage = UIImage(named: LeaderBoard.firstPlace.rawValue)
             else { return }
             
             let initialRank = 1
@@ -50,6 +46,36 @@ class LeaderBoardTableViewCellListViewModel {
         }
         completion(.failure(LeaderBoardTableViewCellListError.nftFetchError))
     }
+    
+    ///TEMP: Using mock data
+    let randomMoonoData: Card = MoonoMockMetaData().getOneMockData()
+    
+    /// Save increase touch count of a certain card to Firestore
+    func increaseTouchCount(_ number: Int64) {
+        saveCountNumberOfCard(imageUri: randomMoonoData.imageUri,
+                              collectionId: randomMoonoData.collectionId,
+                              tokenId: randomMoonoData.tokenId,
+                              count: number)
+    }
+    
+    func saveCountNumberOfCard(imageUri: String,
+                               collectionId: String,
+                               tokenId: String,
+                               count: Int64)
+    {
+        
+        let card: Card = Card(imageUri: imageUri,
+                              collectionId: collectionId,
+                              tokenId: tokenId,
+                              count: count)
+        let collection: NftCollection = NftCollection(collectionId: K.ContractAddress.moono,
+                                                      collectionLogoImage: "N/A",
+                                                      count: count)
+        fireStoreRepository.saveCard(card)
+        fireStoreRepository.saveCollection(collection)
+
+    }
+    
 }
 // MARK: - Custom Error type
 extension LeaderBoardTableViewCellListViewModel {
@@ -61,7 +87,7 @@ extension LeaderBoardTableViewCellListViewModel {
     
 }
 
-class LeaderBoardTableViewCellViewModel {
+final class LeaderBoardTableViewCellViewModel {
     
     var rankImage: UIImage
     var rank: Int

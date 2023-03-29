@@ -11,6 +11,7 @@ import UIKit
 
 final class LeaderBoardBottomSheetViewController: UIViewController {
     
+    //TODO: Change this dependency to initialize dependecy
     var viewModel: LeaderBoardTableViewCellListViewModel = LeaderBoardTableViewCellListViewModel()
     
     // MARK: - UI Elements
