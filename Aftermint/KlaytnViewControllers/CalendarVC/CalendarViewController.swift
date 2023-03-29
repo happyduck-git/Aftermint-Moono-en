@@ -207,12 +207,15 @@ class CalendarViewController: UIViewController {
     }
     
     private func tapToUtilityVC() {
+        // Temporarily deactivated
+        /*
         let utilityDetailVC: UtilityDetailViewController = UtilityDetailViewController()
         bottomSheetVC.configure(image: "claim")
         let pulleyVC = PulleyViewController(contentViewController: utilityDetailVC, drawerViewController: bottomSheetVC)
         
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.pushViewController(pulleyVC, animated: true)
+         */
     }
     
     
