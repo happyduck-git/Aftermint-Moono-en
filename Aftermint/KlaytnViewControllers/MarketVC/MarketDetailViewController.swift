@@ -70,9 +70,9 @@ class MarketDetailViewController: UIViewController {
     
     private let onSaleLabel: UILabel = {
         let label = UILabel()
+        label.isHidden = true
         label.font = BellyGomFont.header04
         label.textColor = AftermintColor.moonoBlue
-        label.text = "에 판매 중"
         return label
     }()
     

@@ -28,7 +28,7 @@ class BenefitMenuBar: UIView {
     
     private lazy var eventButton: UIButton = {
         let button = UIButton()
-        button.setTitle("이벤트", for: .normal)
+        button.setTitle(BenefitAsset.eventTabTitle.rawValue, for: .normal)
         //font 설정하기
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(eventButtonTapped), for: .touchUpInside)
@@ -39,7 +39,7 @@ class BenefitMenuBar: UIView {
     
     private lazy var voteButton: UIButton = {
         let button = UIButton()
-        button.setTitle("투표", for: .normal)
+        button.setTitle(BenefitAsset.voteTabTitle.rawValue, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(voteButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false

@@ -34,7 +34,7 @@ class CalendarViewController: UIViewController {
     }()
     
     private lazy var leftBar: UIBarButtonItem = {
-        let image: UIImage? = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal)
+        let image: UIImage? = UIImage(named: CalendarAsset.backButton.rawValue)?.withRenderingMode(.alwaysOriginal)
         let buttonItem: UIBarButtonItem = UIBarButtonItem(image: image,
                                          style: .plain,
                                          target: self,
@@ -56,6 +56,7 @@ class CalendarViewController: UIViewController {
         calendar.appearance.headerDateFormat = "YYYY.M"
         calendar.appearance.headerTitleFont = .systemFont(ofSize: 14, weight: .heavy)
         calendar.appearance.headerTitleAlignment = .left
+        calendar.locale = Locale(identifier: "en-US")
         calendar.translatesAutoresizingMaskIntoConstraints = false
         return calendar
     }()
@@ -180,7 +181,7 @@ class CalendarViewController: UIViewController {
         /* Left bar item */
         leftBar.customView?.isUserInteractionEnabled = true
         self.parent?.tabBarController?.navigationItem.leftBarButtonItem = leftBar
-        self.parent?.tabBarController?.navigationItem.title = "캘린더"
+        self.parent?.tabBarController?.navigationItem.title = CalendarAsset.calendarTitle.rawValue
         self.parent?.tabBarController?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(ciColor: .white)]
         
         /* Right bar item */

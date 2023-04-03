@@ -37,7 +37,7 @@ class BasicTabBarController: UITabBarController, UITabBarControllerDelegate {
     private func setTabBarItems() {
         
         let marketNftViewContoller = MarketDetailViewController()
-        marketNftViewContoller.tabBarItem.image = UIImage(named: "bottom")?.withRenderingMode(.alwaysOriginal)
+        marketNftViewContoller.tabBarItem.image = UIImage(named: MarketAsset.openseaButton.rawValue)?.withRenderingMode(.alwaysOriginal)
         marketNftViewContoller.tabBarController?.tabBar.tintColor = AftermintColor.backgroundNavy
         self.viewControllers = [marketNftViewContoller]
         

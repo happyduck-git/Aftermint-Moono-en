@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "welcome_off.png",
+      "filename" : "opensea_button.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "welcome_off@2x.png",
+      "filename" : "opensea_button@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "welcome_off@3x.png",
+      "filename" : "opensea_button@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

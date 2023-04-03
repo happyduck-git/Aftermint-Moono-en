@@ -33,22 +33,12 @@ class LottieViewController: UIViewController, View {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
     //MARK: - Image & Description data
-    private let templateOnImageList: [UIImage?] = [
-        UIImage(named: "fyi_on"), UIImage(named: "welcome_on"), UIImage(named: "gallery_on"), UIImage(named: "bought_on")
-    ]
-    
-    private let templateOffImageList: [UIImage?] = [
-        UIImage(named: "fyi_off"), UIImage(named: "welcome_off"), UIImage(named: "gallery_off"), UIImage(named: "bought_off")
-    ]
-    
-    private let testCellVMList: [TemplateCellContent] = [
-        TemplateCellContent(emojiString: "🗝", title: "FYI", subTitle: "제일 가치로운"),
-        TemplateCellContent(emojiString: "🎉", title: "Welcome", subTitle: "환영합니다!"),
-        TemplateCellContent(emojiString: "🏙", title: "Gallery", subTitle: "멋진 갤러리처럼"),
-        TemplateCellContent(emojiString: "💰", title: "Just Bought", subTitle: "새로 샀어요"),
+    private let templateCellViewModelList: [TemplateCellContent] = [
+        TemplateCellContent(emojiString: "🗝", title: "FYI", subTitle: "Most valuable"),
+        TemplateCellContent(emojiString: "🎉", title: "Welcome", subTitle: "The newest"),
+        TemplateCellContent(emojiString: "🏙", title: "Gallery", subTitle: "Make your gallery"),
+        TemplateCellContent(emojiString: "💰", title: "Just Bought", subTitle: "Flex"),
     ]
     
     //MARK: - UI Elements
@@ -157,6 +147,8 @@ class LottieViewController: UIViewController, View {
         setUI()
         setLayout()
         setBarButtonItem()
+        
+        self.hilightFirstCell(templateCollectionView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -197,8 +189,8 @@ class LottieViewController: UIViewController, View {
             horizontalLine1.heightAnchor.constraint(equalToConstant: 1.0),
             
             descriptionLabel.topAnchor.constraint(equalTo: horizontalLine1.bottomAnchor, constant: 12.0),
-            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30.5),
-            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30.5),
+            descriptionLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 3),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: descriptionLabel.trailingAnchor, multiplier: 3),
             
             horizontalLine2.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 12.0),
             horizontalLine2.leadingAnchor.constraint(equalTo: horizontalLine1.leadingAnchor),
@@ -209,7 +201,6 @@ class LottieViewController: UIViewController, View {
             refreshButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 21.0),
 
             undoButton.topAnchor.constraint(equalTo: refreshButton.topAnchor),
-            undoButton.leadingAnchor.constraint(equalTo: refreshButton.trailingAnchor, constant: 230.0),
 
             redoButton.topAnchor.constraint(equalTo: refreshButton.topAnchor),
             redoButton.leadingAnchor.constraint(equalTo: undoButton.trailingAnchor, constant: 8.0),
@@ -288,6 +279,7 @@ class LottieViewController: UIViewController, View {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.hilightFirstCell(templateCollectionView)
         if !isLoadedText || !isLoadedImage {
             presentIndicator()
         } else {
@@ -299,8 +291,14 @@ class LottieViewController: UIViewController, View {
 
 extension LottieViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    private func hilightFirstCell(_ collectionView: UICollectionView) {
+        guard let firstCell = collectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? LottieTemplateCell else { return }
+        firstCell.isOff = false
+        firstCell.setGradientColor()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return templateOffImageList.count
+        return self.templateCellViewModelList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -308,8 +306,11 @@ extension LottieViewController: UICollectionViewDelegate, UICollectionViewDataSo
             fatalError("Unsupported cell")
         }
         cell.resetCell()
-        let vm = testCellVMList[indexPath.row]
-        cell.configure(emojiString: vm.emojiString, title: vm.title, subTitle: vm.subTitle)
+        
+        let vm = self.templateCellViewModelList[indexPath.row]
+        cell.configure(emojiString: vm.emojiString,
+                       title: vm.title,
+                       subTitle: vm.subTitle)
         
         return cell
     }
@@ -321,12 +322,15 @@ extension LottieViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? LottieTemplateCell else { return }
         
-        cell.isOff = !cell.isOff
+        guard let firstCell = collectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? LottieTemplateCell,
+              let cell = collectionView.cellForItem(at: indexPath) as? LottieTemplateCell else { return }
+        if !firstCell.isOff {
+            firstCell.removeGradientLayer()
+            firstCell.isOff = true
+        }
         if cell.isOff {
-            cell.removeGradientLayer()
-        } else {
+            cell.isOff = false
             cell.setGradientColor()
         }
         
@@ -335,12 +339,11 @@ extension LottieViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? LottieTemplateCell else { return }
         
-        cell.isOff = !cell.isOff
-        if cell.isOff {
+        if !cell.isOff {
+            cell.isOff = true
             cell.removeGradientLayer()
-        } else {
-            cell.setGradientColor()
         }
+
     }
 
 }

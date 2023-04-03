@@ -18,7 +18,7 @@ final class LottieTemplateCell: UICollectionViewCell, View {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.alignment = .center
-        stack.distribution = .fillEqually
+        stack.distribution = .fillProportionally
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -73,10 +73,10 @@ final class LottieTemplateCell: UICollectionViewCell, View {
     
     private func setLayout() {
         NSLayoutConstraint.activate([
-            self.stackView.topAnchor.constraint(equalToSystemSpacingBelow: self.contentView.topAnchor, multiplier: 1),
+            self.stackView.topAnchor.constraint(equalToSystemSpacingBelow: self.contentView.topAnchor, multiplier: 3),
             self.stackView.leadingAnchor.constraint(equalToSystemSpacingAfter: self.contentView.leadingAnchor, multiplier: 1),
             self.contentView.trailingAnchor.constraint(equalToSystemSpacingAfter: self.stackView.trailingAnchor, multiplier: 1),
-            self.contentView.bottomAnchor.constraint(equalToSystemSpacingBelow: self.stackView.bottomAnchor, multiplier: 1)
+            self.contentView.bottomAnchor.constraint(equalToSystemSpacingBelow: self.stackView.bottomAnchor, multiplier: 3)
         ])
     }
     
@@ -93,6 +93,7 @@ final class LottieTemplateCell: UICollectionViewCell, View {
         self.emojiLabel.text = nil
         self.titleLabel.text = nil
         self.subTitleLabel.text = nil
+//        self.isOff = true
         self.backgroundGradient.removeFromSuperlayer()
     }
     

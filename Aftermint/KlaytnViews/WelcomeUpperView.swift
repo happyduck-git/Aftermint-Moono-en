@@ -13,7 +13,7 @@ class WelcomeUpperView: UIView {
     private let welcomeStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 126.0
+        stackView.distribution = .fillProportionally
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -26,16 +26,17 @@ class WelcomeUpperView: UIView {
     private let usernameLabel: UILabel = {
         let label = UILabel()
         label.font = BellyGomFont.header03
-        label.textColor = AftermintColor.moonoBlue
-        label.text = "월요병아리"
+        label.textColor = .white
+        label.text = HomeAsset.greetings.rawValue
         return label
     }()
     
+    /// THIS UI PROPERTY IS NOT IN USE IN ENGLISH VER.
     private let courtesyTitleLabel: UILabel = {
         let label = UILabel()
         label.font = BellyGomFont.header03
+        label.isHidden = true
         label.textColor = .white
-        label.text = "님,"
         return label
     }()
     
@@ -49,15 +50,15 @@ class WelcomeUpperView: UIView {
     private let welcomeLabel: UILabel = {
         let label = UILabel()
         label.font = BellyGomFont.header03
-        label.textColor = .white
-        label.text = "환영합니다!"
+        label.textColor = AftermintColor.moonoBlue
+        label.text = HomeAsset.username.rawValue
         return label
     }()
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "moono_logo")
+        imageView.image = UIImage(named: HomeAsset.moonoLogo.rawValue)
         return imageView
     }()
     
@@ -72,14 +73,14 @@ class WelcomeUpperView: UIView {
     
     private let walletImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "kaikas_icon")
+        imageView.image = UIImage(named: HomeAsset.kaikasIcon.rawValue)
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
     private let walletNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "카이카스"
+        label.text = HomeAsset.kaikas.rawValue
         label.font = .systemFont(ofSize: 12, weight: .bold)
         label.textColor = .white
         return label
@@ -87,7 +88,8 @@ class WelcomeUpperView: UIView {
     
     private let walletLabel: UILabel = {
         let label = UILabel()
-        label.text = "NFT 지갑"
+        label.text = HomeAsset.nftWallet.rawValue
+        label.font = .systemFont(ofSize: 12, weight: .medium)
         label.textColor = AftermintColor.bellyGrey
         label.textColor = .white
         return label
@@ -95,7 +97,7 @@ class WelcomeUpperView: UIView {
     
     private let connectCheckImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "greencheck")
+        imageView.image = UIImage(named: HomeAsset.greenCheckmark.rawValue)
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()

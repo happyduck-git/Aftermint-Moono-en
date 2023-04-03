@@ -101,10 +101,10 @@ class BookmarkViewController: UIViewController {
         self.parent?.tabBarController?.navigationItem.setHidesBackButton(true, animated: false)
         
         /* Left bar item */
-        let backButtonImage: UIImage? = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal)
+        let backButtonImage: UIImage? = UIImage(named: BookmarkAsset.backButton.rawValue)?.withRenderingMode(.alwaysOriginal)
         let leftBar = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backToPreviousVC))
         self.parent?.tabBarController?.navigationItem.leftBarButtonItem = leftBar
-        self.parent?.tabBarController?.navigationItem.title = "북마크"
+        self.parent?.tabBarController?.navigationItem.title = BookmarkAsset.bookmarkTitle.rawValue
         self.parent?.tabBarController?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(ciColor: .white)]
         
         /* Right bar item */

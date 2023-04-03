@@ -18,7 +18,7 @@ final class CollectNewNFTButton: UIButton {
     
     private let collectNftLabel: UILabel = {
         let label = UILabel()
-        label.text = "새로운 NFT를 모아보세요!"
+        label.text = HomeAsset.collectButtonTitle.rawValue
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = AftermintColor.lightGrey
         return label

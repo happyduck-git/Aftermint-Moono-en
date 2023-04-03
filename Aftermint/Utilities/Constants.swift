@@ -37,21 +37,49 @@ struct K {
 /// LoginController related constants
 enum LoginAsset: String {
     case backgroundImage = "moono_login_image"
-    case loginDescription =  "멤버십 서비스 이용을 위해 NFT 지갑을 연결해주세요."
+    case loginDescription =  "Connect your NFT wallet to use the membership service"
     case favorletButton = "favorletbutton"
     case kaikasButton = "kaikasbutton"
+}
+
+/// KlaytnHomeViewController related constants
+enum HomeAsset: String {
+    case greetings = "Welcome aboard!"
+    case username = "Munchkin"
+    case moonoLogo = "moono_logo"
+    case kaikasIcon = "kaikas_icon"
+    case kaikas = "Kaikas"
+    case nftWallet = "NFT Wallet"
+    case greenCheckmark = "greencheck"
+    case moonoNftsDesc = "Moono NFTs"
+    case collectButtonTitle = "Try collecting new NFTs"
 }
 
 /// LottieController related constants
 enum LottieAsset: String {
     case description =  """
-    월요병아리님의 NFT를 가장 중요한 정보와 함께 자랑하세요!
-    모두가 주목할 거에요. 🗝️
+    Show off your NFTs with the most important information!
+    Let everyone pay attention to your NFTs.
     """
     case refreshButton = "refresh"
     case redoButton = "redo"
     case undoButton = "undo"
     case sharedButton = "share_button"
+    case backButton = "back"
+}
+
+enum BenefitAsset: String {
+    case eventTabTitle = "Event"
+    case voteTabTitle = "Vote"
+}
+
+enum BookmarkAsset: String {
+    case bookmarkTitle = "Bookmark"
+    case backButton = "back"
+}
+
+enum CalendarAsset: String {
+    case calendarTitle = "Calendar"
     case backButton = "back"
 }
 
@@ -93,4 +121,5 @@ enum TabBarAsset: String {
 enum MarketAsset: String {
     case dropDown = "dropdown_image"
     case marketVCLogo = "marketplace_logo"
+    case openseaButton = "opensea_button"
 }

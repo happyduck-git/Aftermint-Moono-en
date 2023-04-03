@@ -30,7 +30,7 @@ class NFTCardView: UIView {
         let stackView = UIStackView()
         
         stackView.axis = .horizontal
-        stackView.spacing = 1.0
+        stackView.spacing = 2.0
         stackView.accessibilityIdentifier = "nftCardStackView"
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -46,7 +46,7 @@ class NFTCardView: UIView {
     
     private let numbersOfNftDescription: UILabel = {
         let label = UILabel()
-        label.text = "개의 무너 NFT"
+        label.text = HomeAsset.moonoNftsDesc.rawValue
         label.font = BellyGomFont.header06
         label.textColor = .white
         return label
