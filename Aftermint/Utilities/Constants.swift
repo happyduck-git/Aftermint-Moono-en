@@ -53,6 +53,9 @@ enum HomeAsset: String {
     case greenCheckmark = "greencheck"
     case moonoNftsDesc = "Moono NFTs"
     case collectButtonTitle = "Try collecting new NFTs"
+    case decoButton = "front_deco_button"
+    case openseaButton = "back_opensea_button"
+    case levelLogo = "level_image"
 }
 
 /// LottieController related constants

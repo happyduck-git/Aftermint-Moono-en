@@ -31,7 +31,7 @@ final class LottieTemplateCell: UICollectionViewCell, View {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = BellyGomFont.header04
+        label.font = BellyGomFont.header05
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -40,6 +40,8 @@ final class LottieTemplateCell: UICollectionViewCell, View {
     private let subTitleLabel: UILabel = {
         let label = UILabel()
         label.font = BellyGomFont.tag
+        label.numberOfLines = 2
+        label.textAlignment = .center
         label.textColor = AftermintColor.titleGrey
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -73,10 +75,10 @@ final class LottieTemplateCell: UICollectionViewCell, View {
     
     private func setLayout() {
         NSLayoutConstraint.activate([
-            self.stackView.topAnchor.constraint(equalToSystemSpacingBelow: self.contentView.topAnchor, multiplier: 3),
+            self.stackView.topAnchor.constraint(equalToSystemSpacingBelow: self.contentView.topAnchor, multiplier: 1),
             self.stackView.leadingAnchor.constraint(equalToSystemSpacingAfter: self.contentView.leadingAnchor, multiplier: 1),
             self.contentView.trailingAnchor.constraint(equalToSystemSpacingAfter: self.stackView.trailingAnchor, multiplier: 1),
-            self.contentView.bottomAnchor.constraint(equalToSystemSpacingBelow: self.stackView.bottomAnchor, multiplier: 3)
+            self.contentView.bottomAnchor.constraint(equalToSystemSpacingBelow: self.stackView.bottomAnchor, multiplier: 1)
         ])
     }
     

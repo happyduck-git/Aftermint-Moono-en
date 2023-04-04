@@ -91,13 +91,13 @@ final class TemplateService {
                     var thumbnailData: Data?
                     self?.removeTemplate(template: remoteTemplate)
 
-                    FirebaseStorageService.shared.getFile(urlString: "/template/lottie_resources/\(remoteTemplate.lottieFileName)") { data in
+                    FirebaseStorageService.shared.getFile(urlString: "/template/file/\(remoteTemplate.lottieFileName)") { data in
                         fileData = data
                         fileSemaphore.signal()
                     }
                     fileSemaphore.wait()
                     
-                    FirebaseStorageService.shared.getFile(urlString: "/template/lottie_thumbnails/\(remoteTemplate.thumbnailImageName)") { data in
+                    FirebaseStorageService.shared.getFile(urlString: "/template/thumbnail/\(remoteTemplate.thumbnailImageName)") { data in
                         thumbnailData = data
                         thumbnailSemaphore.signal()
                     }

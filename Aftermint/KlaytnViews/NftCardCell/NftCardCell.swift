@@ -11,7 +11,7 @@ protocol NftCardCellDelegate: AnyObject {
     func didTapTemplateButton()
 }
 
-class NftCardCell: UICollectionViewCell {
+final class NftCardCell: UICollectionViewCell {
     
     weak var delegate: NftCardCellDelegate?
 
@@ -40,14 +40,6 @@ class NftCardCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    private var traitButtonImage: UIImage? {
-        if !cardFrontView.isHidden {
-            return UIImage(named: "front_deco_button")
-        } else {
-            return UIImage(named: "back_opensea_button")
-        }
-    }
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -131,10 +123,10 @@ class NftCardCell: UICollectionViewCell {
     }
     
     
-    internal func selectViewToHide(cardBackViewIsOn hideCardBackView: Bool, nftImageViewIsOn hideCardFrontView: Bool) {
+    internal func selectViewToHide(cardBackView hideCardBackView: Bool, cardFrontView hideCardFrontView: Bool) {
         self.cardBackView.isHidden = hideCardBackView
         self.cardFrontView.isHidden = hideCardFrontView
-        self.traitView.changeCardButtonImage(with: traitButtonImage)
+        self.traitView.changeCardButton(isCardFront: !hideCardFrontView)
     }
     
     internal func resetCell() {
@@ -147,9 +139,9 @@ class NftCardCell: UICollectionViewCell {
                                                  hairDesc: nil)
         self.traitView.configure(name: nil,
                                  updatedAt: nil)
-        self.traitView.cardButton.imageView?.image = UIImage(named: "front_deco_button")
-        self.cardFrontView.image = nil
+        self.traitView.changeCardButton(isCardFront: true)
         
+        self.cardFrontView.image = nil
         self.cardFrontView.isHidden = false
         self.cardBackView.isHidden = true
         

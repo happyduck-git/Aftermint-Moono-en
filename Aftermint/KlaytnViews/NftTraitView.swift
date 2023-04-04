@@ -11,7 +11,7 @@ protocol NftTraitViewDelegate: AnyObject {
     func didTapTemplateButton()
 }
 
-class NftTraitView: UIView {
+final class NftTraitView: UIView {
     
     weak var delegate: NftTraitViewDelegate?
         
@@ -42,12 +42,23 @@ class NftTraitView: UIView {
         return label
     }()
     
-    lazy var cardButton: UIButton = {
+    private lazy var frontButton: UIButton = {
         let button = UIButton()
-        let image = UIImage(named: "front_deco_button")
+        let image = UIImage(named: HomeAsset.decoButton.rawValue)
         button.setImage(image, for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(presentTemplateVC), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var backButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: HomeAsset.openseaButton.rawValue)
+        button.isHidden = true
+        button.setImage(image, for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(goToOpensea), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -95,18 +106,24 @@ class NftTraitView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    /// Change cardButtonImage
-    /// - Parameter image: Desired card button image
-    public func changeCardButtonImage(with image: UIImage?) {
-        self.cardButton.imageView?.image = image
+    /// Change cardButton
+    /// - Parameter front: Value to check if the card view is front
+    public func changeCardButton(isCardFront front: Bool) {
+        if front {
+            self.frontButton.isHidden = false
+            self.backButton.isHidden = true
+        } else {
+            self.frontButton.isHidden = true
+            self.backButton.isHidden = false
+        }
     }
-    
     
     //MARK: - Set up UI and Layout
     private func setUI() {
         
         self.addSubview(nameAndLevelStack)
-        self.addSubview(cardButton)
+        self.addSubview(frontButton)
+        self.addSubview(backButton)
         nameAndLevelStack.addArrangedSubview(levelImageView)
         nameAndLevelStack.addArrangedSubview(nftName)
 
@@ -125,10 +142,15 @@ class NftTraitView: UIView {
             nameAndLevelStack.topAnchor.constraint(equalTo: self.topAnchor),
             nameAndLevelStack.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             
-            cardButton.topAnchor.constraint(equalTo: nameAndLevelStack.topAnchor),
-            cardButton.leadingAnchor.constraint(equalTo: nameAndLevelStack.trailingAnchor, constant: 44),
-            cardButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            cardButton.bottomAnchor.constraint(equalTo: nameAndLevelStack.bottomAnchor),
+            frontButton.topAnchor.constraint(equalTo: nameAndLevelStack.topAnchor),
+            frontButton.leadingAnchor.constraint(equalTo: nameAndLevelStack.trailingAnchor, constant: 44),
+            frontButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            frontButton.bottomAnchor.constraint(equalTo: nameAndLevelStack.bottomAnchor),
+            
+            backButton.topAnchor.constraint(equalTo: frontButton.topAnchor),
+            backButton.leadingAnchor.constraint(equalTo: frontButton.leadingAnchor),
+            backButton.trailingAnchor.constraint(equalTo: frontButton.trailingAnchor),
+            backButton.bottomAnchor.constraint(equalTo: frontButton.bottomAnchor),
 
             withMeStackView.topAnchor.constraint(equalTo: nameAndLevelStack.bottomAnchor, constant: 15),
             withMeStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -151,23 +173,19 @@ class NftTraitView: UIView {
         delegate?.didTapTemplateButton()
     }
     
+    @objc private func goToOpensea() {
+        print("Add logic to open OpenSea website...")
+    }
+    
     public func configure(name: String?,
                           updatedAt: Int64?
                        ) {
         
-        self.nftName.text = name ?? "N/A"
+        self.nftName.text = name ?? "Moono #618"
         self.withMeNumLabel.text = "D+ " + String(calculateNumberOfDays(since: updatedAt ?? 0))
-        self.levelImageView.image = UIImage(named: "level_image")
+        self.levelImageView.image = UIImage(named: HomeAsset.levelLogo.rawValue)
         
     }
-    
-    @objc func changeCardButtonImage(notification: NSNotification) {
-        
-        let isBack: Bool = notification.object as! Bool
-        print("\(#function) ---- \(isBack)")
-        self.cardButton.imageView?.image = isBack ? UIImage(named: "back_opensea_button") : UIImage(named: "front_deco_button")
-    }
-    
     
     private func calculateNumberOfDays(since endDate: Int64) -> Int {
         let currentDate: Int = Int(Date().timeIntervalSince1970)
