@@ -137,6 +137,8 @@ class LottieViewController: UIViewController, View {
         return button
     }()
 
+    //MARK: - Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = AftermintColor.backgroundNavy
@@ -147,8 +149,6 @@ class LottieViewController: UIViewController, View {
         setUI()
         setLayout()
         setBarButtonItem()
-        
-        self.hilightFirstCell(templateCollectionView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -160,7 +160,16 @@ class LottieViewController: UIViewController, View {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.hilightFirstCell(templateCollectionView)
+        if !isLoadedText || !isLoadedImage {
+            presentIndicator()
+        } else {
+            dismissIndicator()
+        }
+    }
     // MARK: - Set UI & Layout
     private func setUI() {
         view.addSubview(animationFrameView)
@@ -276,16 +285,7 @@ class LottieViewController: UIViewController, View {
         $0.startAnimating()
         view.addSubview($0)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.hilightFirstCell(templateCollectionView)
-        if !isLoadedText || !isLoadedImage {
-            presentIndicator()
-        } else {
-            dismissIndicator()
-        }
-    }
+
 }
 
 

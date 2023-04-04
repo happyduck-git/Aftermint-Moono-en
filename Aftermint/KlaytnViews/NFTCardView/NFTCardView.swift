@@ -148,7 +148,7 @@ extension NFTCardView: UICollectionViewDataSource, UICollectionViewDelegate, UIC
         if nftSelected[indexPath.row] == false {
             cell.resetCell()
         } else {
-            cell.selectViewToHide(cardBackView: false, nftImageView: true)
+            cell.selectViewToHide(cardBackViewIsOn: false, nftImageViewIsOn: true)
         }
         
         cell.delegate = self
@@ -158,14 +158,11 @@ extension NFTCardView: UICollectionViewDataSource, UICollectionViewDelegate, UIC
         makeCellShadow(of: cell)
         
         DispatchQueue.main.async {
-            
             // Give fade-in animation
             UIView.animate(withDuration: 0.4) {
                 self.nftCollectionView.alpha = 1.0
             }
-            
             cell.configure(with: vm)
-            
         }
         
         return cell
@@ -182,7 +179,7 @@ extension NFTCardView: UICollectionViewDataSource, UICollectionViewDelegate, UIC
         
         if nftSelected[indexPath.row] {
             nftSelected[indexPath.row] = false
-            cell.selectViewToHide(cardBackView: true, nftImageView: false)
+            cell.selectViewToHide(cardBackViewIsOn: true, nftImageViewIsOn: false)
 
             UIView.transition(from: cell.cardBackView,
                               to: cell.cardFrontView,
@@ -190,7 +187,7 @@ extension NFTCardView: UICollectionViewDataSource, UICollectionViewDelegate, UIC
                               options: [.transitionFlipFromLeft, .showHideTransitionViews])
         } else {
             nftSelected[indexPath.row] = true
-            cell.selectViewToHide(cardBackView: false, nftImageView: true)
+            cell.selectViewToHide(cardBackViewIsOn: false, nftImageViewIsOn: true)
         
             UIView.transition(from: cell.cardFrontView,
                               to: cell.cardBackView,

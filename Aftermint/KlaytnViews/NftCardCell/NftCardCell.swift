@@ -131,9 +131,9 @@ class NftCardCell: UICollectionViewCell {
     }
     
     
-    internal func selectViewToHide(cardBackView hideCardBackView: Bool, nftImageView hideNftImageView: Bool) {
+    internal func selectViewToHide(cardBackViewIsOn hideCardBackView: Bool, nftImageViewIsOn hideCardFrontView: Bool) {
         self.cardBackView.isHidden = hideCardBackView
-        self.cardFrontView.isHidden = hideNftImageView
+        self.cardFrontView.isHidden = hideCardFrontView
         self.traitView.changeCardButtonImage(with: traitButtonImage)
     }
     
